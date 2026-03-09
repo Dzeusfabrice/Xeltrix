@@ -1,36 +1,50 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# XELTRIX - Plateforme Web Officielle
 
-## Getting Started
+Bienvenue sur le dépôt officiel de **XELTRIX**, une startup technologique spécialisée dans le développement de solutions logicielles innovantes.
 
-First, run the development server:
+## 🚀 Technologies Utilisées
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+- **Frontend** : Next.js 16 (App Router), React 19, Tailwind CSS 4
+- **Backend & BDD** : Supabase (PostgreSQL), Edge Functions
+- **Animations** : GSAP, Framer Motion
+- **Design** : Glassmorphism, Responsive Design
+- **Utilitaires** : Lucide React, Zod, React Hook Form, Swiper.js
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## 📁 Structure du Projet
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+- `/app` : Routes de l'application (Public & Admin)
+- `/components` : Composants UI réutilisables et layout
+- `/lib` : Configurations (Supabase client, utils)
+- `/types` : Définitions TypeScript pour la BDD
+- `/public` : Assets statiques (Logos, Images)
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+## 🛠️ Installation
 
-## Learn More
+1. **Cloner le projet**
+2. **Installer les dépendances** :
+   ```bash
+   npm install
+   ```
+3. **Configurer les variables d'environnement** :
+   Copiez le fichier `.env.local.example` vers `.env.local` et renseignez vos clés Supabase.
+4. **Initialiser la base de données** :
+   Utilisez le script SQL fourni dans les documents du projet pour créer les tables et les politiques RLS sur votre dashboard Supabase.
+5. **Lancer le serveur de développement** :
+   ```bash
+   npm run dev
+   ```
 
-To learn more about Next.js, take a look at the following resources:
+## 🔐 Administration
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+L'accès au Dashboard Admin se fait via `/admin/login`. 
+Assurez-vous d'avoir configuré les politiques RLS pour restreindre l'accès aux données sensibles.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+## 📈 Performance & SEO
 
-## Deploy on Vercel
+Le projet est optimisé pour les **Core Web Vitals** :
+- Scores Lighthouse cibles > 90
+- Optimisation des images (WebP)
+- SEO sémantique (JSON-LD, Meta Tags)
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+---
+© 2025 Xeltrix - Direction Technique
