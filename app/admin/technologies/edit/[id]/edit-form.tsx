@@ -120,19 +120,38 @@ export default function EditTechForm({ technology }: { technology: any }) {
                             />
                         </div>
 
-                        <div className="space-y-2">
-                            <label htmlFor="logo_url" className="text-sm font-bold text-slate-300 flex items-center gap-2">
-                                <ImageIcon size={16} className="text-cyan-400" />
-                                Logo URL
-                            </label>
-                            <input
-                                type="url"
-                                name="logo_url"
-                                id="logo_url"
-                                defaultValue={technology.logo_url}
-                                placeholder="https://cdn.worldvectorlogo.com/..."
-                                className="w-full bg-black/20 border border-white/10 rounded-2xl py-4 px-4 text-white focus:outline-none focus:ring-2 focus:ring-cyan-500/50 transition-all font-medium"
-                            />
+                        <div className="space-y-6 pt-6 border-t border-white/10">
+                            <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+                                <div className="space-y-2">
+                                    <label htmlFor="logo_file" className="text-sm font-bold text-slate-300 flex items-center gap-2">
+                                        <ImageIcon size={16} className="text-cyan-400" />
+                                        Changer le logo (Upload)
+                                    </label>
+                                    <input
+                                        type="file"
+                                        name="logo_file"
+                                        id="logo_file"
+                                        accept="image/*"
+                                        className="w-full bg-black/20 border border-white/10 rounded-2xl py-3 px-4 text-white file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-sm file:font-bold file:bg-cyan-600 file:text-white hover:file:bg-cyan-700 transition-all cursor-pointer"
+                                    />
+                                    <p className="text-[10px] text-slate-500 font-medium">Stocké sur Supabase Storage.</p>
+                                </div>
+
+                                <div className="space-y-2">
+                                    <label htmlFor="logo_url" className="text-sm font-bold text-slate-300 flex items-center gap-2">
+                                        <ImageIcon size={16} className="text-cyan-400" />
+                                        Ou modifier l'URL
+                                    </label>
+                                    <input
+                                        type="url"
+                                        name="logo_url"
+                                        id="logo_url"
+                                        defaultValue={technology.logo_url}
+                                        placeholder="https://cdn.worldvectorlogo.com/..."
+                                        className="w-full bg-black/20 border border-white/10 rounded-2xl py-4 px-4 text-white focus:outline-none focus:ring-2 focus:ring-cyan-500/50 transition-all font-medium"
+                                    />
+                                </div>
+                            </div>
                         </div>
 
                         <div className="pt-8 flex items-center justify-end gap-4 border-t border-white/10">

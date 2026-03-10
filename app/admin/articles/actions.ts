@@ -4,6 +4,8 @@ import { createClient } from '@/lib/supabase/server'
 import { revalidatePath } from 'next/cache'
 import { redirect } from 'next/navigation'
 
+import { uploadFile } from '@/lib/storage'
+
 export async function createArticle(formData: FormData) {
     const supabase = await createClient()
 
@@ -12,7 +14,19 @@ export async function createArticle(formData: FormData) {
     const excerpt = formData.get('excerpt') as string
     const content = formData.get('content') as string
     const category = formData.get('category') as string
-    const cover_url = formData.get('cover_url') as string
+
+    // Handle File Upload
+    const coverFile = formData.get('cover_file') as File
+    let cover_url = formData.get('cover_url') as string
+
+    if (coverFile && coverFile.size > 0) {
+        try {
+            const uploadedUrl = await uploadFile(coverFile, 'xeltrix', 'blog')
+            if (uploadedUrl) cover_url = uploadedUrl
+        } catch (error) {
+            console.error('Failed to upload cover image:', error)
+        }
+    }
 
     // We need to fetch the current user to get their ID for the author
     const { data: { user } } = await supabase.auth.getUser()
@@ -65,7 +79,19 @@ export async function updateArticle(id: string, formData: FormData) {
     const excerpt = formData.get('excerpt') as string
     const content = formData.get('content') as string
     const category = formData.get('category') as string
-    const cover_url = formData.get('cover_url') as string
+
+    // Handle File Upload
+    const coverFile = formData.get('cover_file') as File
+    let cover_url = formData.get('cover_url') as string
+
+    if (coverFile && coverFile.size > 0) {
+        try {
+            const uploadedUrl = await uploadFile(coverFile, 'xeltrix', 'blog')
+            if (uploadedUrl) cover_url = uploadedUrl
+        } catch (error) {
+            console.error('Failed to upload cover image:', error)
+        }
+    }
 
     const { error } = await supabase.from('articles').update({
         title,
@@ -86,4 +112,5 @@ export async function updateArticle(id: string, formData: FormData) {
     revalidatePath(`/blog/${slug}`)
     redirect('/admin/articles')
 }
+
 

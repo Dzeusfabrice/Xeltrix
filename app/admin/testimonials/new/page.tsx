@@ -113,18 +113,37 @@ export default function NewTestimonialPage() {
                             ></textarea>
                         </div>
 
-                        <div className="space-y-2">
-                            <label htmlFor="photo_url" className="text-sm font-bold text-slate-300 flex items-center gap-2">
-                                <ImageIcon size={16} className="text-pink-400" />
-                                Photo (URL)
-                            </label>
-                            <input
-                                type="url"
-                                name="photo_url"
-                                id="photo_url"
-                                placeholder="https://images.unsplash.com/..."
-                                className="w-full bg-black/20 border border-white/10 rounded-2xl py-4 px-4 text-white focus:outline-none focus:ring-2 focus:ring-pink-500/50 transition-all font-medium"
-                            />
+                        <div className="space-y-6 pt-6 border-t border-white/10">
+                            <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+                                <div className="space-y-2">
+                                    <label htmlFor="photo_file" className="text-sm font-bold text-slate-300 flex items-center gap-2">
+                                        <ImageIcon size={16} className="text-pink-400" />
+                                        Uploader une photo
+                                    </label>
+                                    <input
+                                        type="file"
+                                        name="photo_file"
+                                        id="photo_file"
+                                        accept="image/*"
+                                        className="w-full bg-black/20 border border-white/10 rounded-2xl py-3 px-4 text-white file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-sm file:font-bold file:bg-pink-600 file:text-white hover:file:bg-pink-700 transition-all cursor-pointer"
+                                    />
+                                    <p className="text-[10px] text-slate-500 font-medium">Stocké sur Supabase Storage.</p>
+                                </div>
+
+                                <div className="space-y-2">
+                                    <label htmlFor="photo_url" className="text-sm font-bold text-slate-300 flex items-center gap-2">
+                                        <ImageIcon size={16} className="text-pink-400" />
+                                        Ou utiliser une URL
+                                    </label>
+                                    <input
+                                        type="url"
+                                        name="photo_url"
+                                        id="photo_url"
+                                        placeholder="https://images.unsplash.com/..."
+                                        className="w-full bg-black/20 border border-white/10 rounded-2xl py-4 px-4 text-white focus:outline-none focus:ring-2 focus:ring-pink-500/50 transition-all font-medium"
+                                    />
+                                </div>
+                            </div>
                         </div>
 
                         <div className="p-6 bg-white/5 border border-white/10 rounded-2xl flex items-center justify-between group hover:bg-white/10 transition-all">

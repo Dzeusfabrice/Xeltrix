@@ -108,6 +108,21 @@ export default function NewTechPage() {
 
                             <div className="space-y-6">
                                 <div className="space-y-2">
+                                    <label htmlFor="logo_file" className="text-sm font-bold text-slate-300 flex items-center gap-2">
+                                        <ImageIcon size={16} className="text-orange-400" />
+                                        Uploader un logo
+                                    </label>
+                                    <input
+                                        type="file"
+                                        name="logo_file"
+                                        id="logo_file"
+                                        accept="image/*"
+                                        className="w-full bg-black/20 border border-white/10 rounded-2xl py-3 px-4 text-white file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-sm file:font-bold file:bg-orange-600 file:text-white hover:file:bg-orange-700 transition-all cursor-pointer"
+                                    />
+                                    <p className="text-[10px] text-slate-500 font-medium">Stocké sur Supabase Storage.</p>
+                                </div>
+
+                                <div className="space-y-2">
                                     <label htmlFor="logo_url" className="text-sm font-bold text-slate-300 flex items-center gap-2">
                                         <ImageIcon size={16} className="text-orange-400" />
                                         Logo (URL)

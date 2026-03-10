@@ -4,14 +4,28 @@ import { createClient } from '@/lib/supabase/server'
 import { revalidatePath } from 'next/cache'
 import { redirect } from 'next/navigation'
 
+import { uploadFile } from '@/lib/storage'
+
 export async function createTechnology(formData: FormData) {
     const supabase = await createClient()
 
     const name = formData.get('name') as string
     const category = formData.get('category') as string
-    const logo_url = formData.get('logo_url') as string
     const description = formData.get('description') as string
     const proficiency = parseInt(formData.get('proficiency') as string || '0')
+
+    // Handle File Upload
+    const logoFile = formData.get('logo_file') as File
+    let logo_url = formData.get('logo_url') as string
+
+    if (logoFile && logoFile.size > 0) {
+        try {
+            const uploadedUrl = await uploadFile(logoFile, 'xeltrix', 'technologies')
+            if (uploadedUrl) logo_url = uploadedUrl
+        } catch (error) {
+            console.error('Failed to upload logo:', error)
+        }
+    }
 
     const { error } = await supabase.from('technologies').insert({
         name,
@@ -52,7 +66,19 @@ export async function updateTechnology(id: string, formData: FormData) {
     const category = formData.get('category') as string
     const description = formData.get('description') as string
     const proficiency = parseInt(formData.get('proficiency') as string)
-    const logo_url = formData.get('logo_url') as string
+
+    // Handle File Upload
+    const logoFile = formData.get('logo_file') as File
+    let logo_url = formData.get('logo_url') as string
+
+    if (logoFile && logoFile.size > 0) {
+        try {
+            const uploadedUrl = await uploadFile(logoFile, 'xeltrix', 'technologies')
+            if (uploadedUrl) logo_url = uploadedUrl
+        } catch (error) {
+            console.error('Failed to upload logo:', error)
+        }
+    }
 
     const { error } = await supabase.from('technologies').update({
         name,
@@ -71,4 +97,5 @@ export async function updateTechnology(id: string, formData: FormData) {
     revalidatePath('/technologies')
     redirect('/admin/technologies')
 }
+
 

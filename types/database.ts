@@ -53,13 +53,14 @@ export type Technology = {
     sort_order: number
 }
 
-export type Skill = {
+export type ExperienceSkill = {
     id: string
-    domain: string
-    description?: string
-    technologies: string[]
-    years_exp: number
-    sort_order: number
+    name: string
+    domain?: string
+    tech?: string
+    level: number
+    color?: string
+    created_at: string
 }
 
 export type Message = {

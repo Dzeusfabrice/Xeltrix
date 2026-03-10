@@ -69,6 +69,17 @@ CREATE TABLE messages (
     created_at TIMESTAMP WITH TIME ZONE DEFAULT NOW()
 );
 
+-- Table: experience_skills
+CREATE TABLE experience_skills (
+    id UUID PRIMARY KEY DEFAULT uuid_generate_v4(),
+    name VARCHAR NOT NULL,
+    domain VARCHAR,
+    tech TEXT,
+    level INT DEFAULT 85,
+    color VARCHAR DEFAULT 'from-blue-500 to-cyan-400',
+    created_at TIMESTAMP WITH TIME ZONE DEFAULT NOW()
+);
+
 -- RLS (Row Level Security) - Basic setup
 -- By default, content is readable by everyone, but only admin (auth) can insert/update/delete
 
@@ -103,6 +114,12 @@ CREATE POLICY "Only read by authenticated users." ON messages FOR SELECT USING (
 CREATE POLICY "Only updated by authenticated users." ON messages FOR UPDATE USING (auth.role() = 'authenticated');
 CREATE POLICY "Only deleted by authenticated users." ON messages FOR DELETE USING (auth.role() = 'authenticated');
 
+ALTER TABLE experience_skills ENABLE ROW LEVEL SECURITY;
+CREATE POLICY "Readable by everyone." ON experience_skills FOR SELECT USING (true);
+CREATE POLICY "Insertable by authenticated users." ON experience_skills FOR INSERT WITH CHECK (auth.role() = 'authenticated');
+CREATE POLICY "Updatable by authenticated users." ON experience_skills FOR UPDATE USING (auth.role() = 'authenticated');
+CREATE POLICY "Deletable by authenticated users." ON experience_skills FOR DELETE USING (auth.role() = 'authenticated');
+
 -- Function to automatically update `updated_at` column
 CREATE OR REPLACE FUNCTION update_modified_column() 
 RETURNS TRIGGER AS $$
@@ -114,3 +131,40 @@ $$ language 'plpgsql';
 
 CREATE TRIGGER update_projects_modtime BEFORE UPDATE ON projects FOR EACH ROW EXECUTE PROCEDURE update_modified_column();
 CREATE TRIGGER update_articles_modtime BEFORE UPDATE ON articles FOR EACH ROW EXECUTE PROCEDURE update_modified_column();
+
+-- Storage Setup
+-- Note: In some Supabase versions, you might need to use the Dashboard UI
+-- to create the bucket if this SQL fails.
+
+-- Create the bucket for all site assets
+INSERT INTO storage.buckets (id, name, public) 
+VALUES ('xeltrix', 'xeltrix', true)
+ON CONFLICT (id) DO NOTHING;
+
+-- Allow public access to read files
+CREATE POLICY "Public Read Access"
+ON storage.objects FOR SELECT
+USING ( bucket_id = 'xeltrix' );
+
+-- Allow authenticated users to upload files
+CREATE POLICY "Authenticated Insert Access"
+ON storage.objects FOR INSERT
+WITH CHECK (
+  bucket_id = 'xeltrix' 
+  AND auth.role() = 'authenticated'
+);
+
+-- Allow authenticated users to update/delete their files (or any files if they are admin)
+CREATE POLICY "Authenticated Update Access"
+ON storage.objects FOR UPDATE
+USING (
+  bucket_id = 'xeltrix'
+  AND auth.role() = 'authenticated'
+);
+
+CREATE POLICY "Authenticated Delete Access"
+ON storage.objects FOR DELETE
+USING (
+  bucket_id = 'xeltrix'
+  AND auth.role() = 'authenticated'
+);

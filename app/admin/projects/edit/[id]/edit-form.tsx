@@ -109,9 +109,23 @@ export default function EditProjectForm({ project }: { project: any }) {
 
                             <div className="space-y-8">
                                 <div className="space-y-3">
+                                    <label htmlFor="image_file" className="text-[10px] font-black uppercase text-slate-500 tracking-[0.3em] ml-1 flex items-center gap-2">
+                                        <ImageIcon size={14} className="text-blue-400" />
+                                        Changer l'image (Upload)
+                                    </label>
+                                    <input
+                                        type="file"
+                                        name="image_file"
+                                        id="image_file"
+                                        accept="image/*"
+                                        className="w-full bg-black/40 border border-white/10 rounded-2xl py-3 px-6 text-white text-sm file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-xs file:font-black file:uppercase file:bg-blue-600 file:text-white hover:file:bg-blue-700 transition-all cursor-pointer"
+                                    />
+                                </div>
+
+                                <div className="space-y-3">
                                     <label htmlFor="image_url" className="text-[10px] font-black uppercase text-slate-500 tracking-[0.3em] ml-1 flex items-center gap-2">
                                         <ImageIcon size={14} className="text-blue-400" />
-                                        Visuel principal (URL)
+                                        Ou modifier l'URL actuelle
                                     </label>
                                     <input
                                         type="url"

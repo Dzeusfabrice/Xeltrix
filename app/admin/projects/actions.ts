@@ -4,6 +4,8 @@ import { createClient } from '@/lib/supabase/server'
 import { revalidatePath } from 'next/cache'
 import { redirect } from 'next/navigation'
 
+import { uploadFile } from '@/lib/storage'
+
 export async function createProject(formData: FormData) {
     const supabase = await createClient()
 
@@ -11,8 +13,20 @@ export async function createProject(formData: FormData) {
     const slug = title.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)+/g, '')
     const description = formData.get('description') as string
     const category = formData.get('category') as string
-    const image_url = formData.get('image_url') as string
     const project_url = formData.get('project_url') as string
+
+    // Handle File Upload
+    const imageFile = formData.get('image_file') as File
+    let image_url = formData.get('image_url') as string
+
+    if (imageFile && imageFile.size > 0) {
+        try {
+            const uploadedUrl = await uploadFile(imageFile, 'xeltrix', 'projects')
+            if (uploadedUrl) image_url = uploadedUrl
+        } catch (error) {
+            console.error('Failed to upload image:', error)
+        }
+    }
 
     const { error } = await supabase.from('projects').insert({
         title,
@@ -24,7 +38,6 @@ export async function createProject(formData: FormData) {
         status: 'online',
     })
 
-    // Dans un vrai projet, on gérerait mieux les erreurs, ici on simplifie
     if (error) {
         console.error('Erreur lors de la création:', error)
         throw new Error('Impossible de créer le projet')
@@ -56,8 +69,20 @@ export async function updateProject(id: string, formData: FormData) {
     const slug = title.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)+/g, '')
     const description = formData.get('description') as string
     const category = formData.get('category') as string
-    const image_url = formData.get('image_url') as string
     const project_url = formData.get('project_url') as string
+
+    // Handle File Upload
+    const imageFile = formData.get('image_file') as File
+    let image_url = formData.get('image_url') as string
+
+    if (imageFile && imageFile.size > 0) {
+        try {
+            const uploadedUrl = await uploadFile(imageFile, 'xeltrix', 'projects')
+            if (uploadedUrl) image_url = uploadedUrl
+        } catch (error) {
+            console.error('Failed to upload image:', error)
+        }
+    }
 
     const { error } = await supabase.from('projects').update({
         title,
@@ -78,4 +103,5 @@ export async function updateProject(id: string, formData: FormData) {
     revalidatePath(`/projects/${slug}`)
     redirect('/admin/projects')
 }
+
 

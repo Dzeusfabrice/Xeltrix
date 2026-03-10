@@ -4,6 +4,8 @@ import { createClient } from '@/lib/supabase/server'
 import { revalidatePath } from 'next/cache'
 import { redirect } from 'next/navigation'
 
+import { uploadFile } from '@/lib/storage'
+
 export async function createTestimonial(formData: FormData) {
     const supabase = await createClient()
 
@@ -11,8 +13,20 @@ export async function createTestimonial(formData: FormData) {
     const position = formData.get('position') as string
     const message = formData.get('message') as string
     const rating = parseInt(formData.get('rating') as string)
-    const photo_url = formData.get('photo_url') as string
     const is_featured = formData.get('is_featured') === 'on'
+
+    // Handle File Upload
+    const photoFile = formData.get('photo_file') as File
+    let photo_url = formData.get('photo_url') as string
+
+    if (photoFile && photoFile.size > 0) {
+        try {
+            const uploadedUrl = await uploadFile(photoFile, 'xeltrix', 'testimonials')
+            if (uploadedUrl) photo_url = uploadedUrl
+        } catch (error) {
+            console.error('Failed to upload photo:', error)
+        }
+    }
 
     const { error } = await supabase.from('testimonials').insert({
         name,
@@ -40,8 +54,20 @@ export async function updateTestimonial(id: string, formData: FormData) {
     const position = formData.get('position') as string
     const message = formData.get('message') as string
     const rating = parseInt(formData.get('rating') as string)
-    const photo_url = formData.get('photo_url') as string
     const is_featured = formData.get('is_featured') === 'on'
+
+    // Handle File Upload
+    const photoFile = formData.get('photo_file') as File
+    let photo_url = formData.get('photo_url') as string
+
+    if (photoFile && photoFile.size > 0) {
+        try {
+            const uploadedUrl = await uploadFile(photoFile, 'xeltrix', 'testimonials')
+            if (uploadedUrl) photo_url = uploadedUrl
+        } catch (error) {
+            console.error('Failed to upload photo:', error)
+        }
+    }
 
     const { error } = await supabase.from('testimonials').update({
         name,
@@ -61,6 +87,7 @@ export async function updateTestimonial(id: string, formData: FormData) {
     revalidatePath('/')
     redirect('/admin/testimonials')
 }
+
 
 export async function deleteTestimonial(id: string) {
     const supabase = await createClient()

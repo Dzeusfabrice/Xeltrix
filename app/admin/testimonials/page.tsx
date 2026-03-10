@@ -2,7 +2,7 @@ import { createClient } from '@/lib/supabase/server'
 import { Container, Button } from '@/components/ui'
 import Link from 'next/link'
 import { Plus, Edit2, Quote, ArrowLeft, Star, Heart } from 'lucide-react'
-import { DeleteTestimonialButton } from './delete-button'
+import { DeleteTestimonialButton } from '@/app/admin/testimonials/delete-button'
 
 export default async function AdminTestimonialsPage() {
     const supabase = await createClient()

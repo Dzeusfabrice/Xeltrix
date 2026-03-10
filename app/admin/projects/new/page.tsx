@@ -120,20 +120,36 @@ export default function NewProjectPage() {
                             </div>
                         </div>
 
-                        <div className="space-y-4 pt-4 border-t border-white/10">
-                            <div className="space-y-2">
-                                <label className="text-sm font-bold text-slate-300 flex items-center gap-2">
-                                    <ImageIcon size={16} className="text-blue-400" />
-                                    Image de Couverture (URL)
-                                </label>
-                                <input
-                                    type="url"
-                                    name="image_url"
-                                    id="image_url"
-                                    placeholder="https://images.unsplash.com/photo-..."
-                                    className="w-full bg-black/20 border border-white/10 rounded-2xl py-4 px-4 text-white focus:outline-none focus:ring-2 focus:ring-blue-500/50 transition-all font-medium placeholder:text-slate-600"
-                                />
-                                <p className="text-xs text-slate-500">Pour l'instant, collez directement une URL d'image valide (ex: Cloudinary, Imgur, ou Unsplash).</p>
+                        <div className="space-y-6 pt-6 border-t border-white/10">
+                            <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+                                <div className="space-y-2">
+                                    <label htmlFor="image_file" className="text-sm font-bold text-slate-300 flex items-center gap-2">
+                                        <ImageIcon size={16} className="text-blue-400" />
+                                        Uploader une image
+                                    </label>
+                                    <input
+                                        type="file"
+                                        name="image_file"
+                                        id="image_file"
+                                        accept="image/*"
+                                        className="w-full bg-black/20 border border-white/10 rounded-2xl py-3 px-4 text-white file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-sm file:font-bold file:bg-blue-600 file:text-white hover:file:bg-blue-700 transition-all cursor-pointer"
+                                    />
+                                    <p className="text-[10px] text-slate-500 font-medium">L'image sera stockée sur Supabase Storage.</p>
+                                </div>
+
+                                <div className="space-y-2">
+                                    <label htmlFor="image_url" className="text-sm font-bold text-slate-300 flex items-center gap-2">
+                                        <ImageIcon size={16} className="text-blue-400" />
+                                        Ou utiliser une URL
+                                    </label>
+                                    <input
+                                        type="url"
+                                        name="image_url"
+                                        id="image_url"
+                                        placeholder="https://images.unsplash.com/photo-..."
+                                        className="w-full bg-black/20 border border-white/10 rounded-2xl py-4 px-4 text-white focus:outline-none focus:ring-2 focus:ring-blue-500/50 transition-all font-medium placeholder:text-slate-600"
+                                    />
+                                </div>
                             </div>
                         </div>
 
