@@ -2,7 +2,7 @@ import { createClient } from '@/lib/supabase/server'
 import { redirect } from 'next/navigation'
 import { Container, Button } from '@/components/ui'
 import { logout } from './actions'
-import { LayoutDashboard, Users, MessageSquare, Layers, Power, Cpu } from 'lucide-react'
+import { LayoutDashboard, Users, MessageSquare, Layers, Power, Cpu, Quote, BookOpen } from 'lucide-react'
 import Link from 'next/link'
 
 export default async function AdminDashboardPage() {
@@ -19,12 +19,16 @@ export default async function AdminDashboardPage() {
         { count: projectsCount },
         { count: articlesCount },
         { count: messagesCount },
-        { count: techCount }
+        { count: techCount },
+        { count: testimonialsCount },
+        { count: experienceCount }
     ] = await Promise.all([
         supabase.from('projects').select('*', { count: 'exact', head: true }),
         supabase.from('articles').select('*', { count: 'exact', head: true }),
         supabase.from('messages').select('*', { count: 'exact', head: true }),
-        supabase.from('technologies').select('*', { count: 'exact', head: true })
+        supabase.from('technologies').select('*', { count: 'exact', head: true }),
+        supabase.from('testimonials').select('*', { count: 'exact', head: true }),
+        supabase.from('experience_skills').select('*', { count: 'exact', head: true })
     ])
 
     return (
@@ -59,9 +63,9 @@ export default async function AdminDashboardPage() {
                 <h1 className="text-4xl font-black text-white mb-2 tracking-tight">Tableau de bord</h1>
                 <p className="text-slate-400 mb-10 font-medium">Gestion centralisée de votre écosystème numérique.</p>
 
-                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
                     {/* Projets Card */}
-                    <div className="p-6 bg-slate-900/40 border border-white/10 rounded-3xl hover:border-blue-500/30 transition-all group relative overflow-hidden flex flex-col h-full">
+                    <div className="p-6 bg-slate-900/40 border border-white/10 rounded-3xl hover:border-blue-500/30 transition-all group relative overflow-hidden flex flex-col h-full h-72">
                         <div className="absolute top-0 right-0 w-32 h-32 bg-blue-600/10 rounded-full blur-3xl -translate-y-1/2 translate-x-1/2 group-hover:bg-blue-600/20 transition-all" />
                         <div className="flex items-center justify-between mb-6 relative z-10">
                             <div className="w-12 h-12 bg-blue-500/10 text-blue-400 rounded-2xl flex items-center justify-center border border-blue-500/20">
@@ -72,12 +76,12 @@ export default async function AdminDashboardPage() {
                         <h2 className="text-xl font-black text-white mb-2 relative z-10">Projets</h2>
                         <p className="text-slate-400 text-sm mb-8 line-clamp-2 relative z-10 flex-grow">Gérez vos réalisations et votre portfolio.</p>
                         <Link href="/admin/projects" className="block relative z-10 mt-auto">
-                            <Button className="w-full bg-white/5 hover:bg-white/10 text-white border border-white/10 rounded-xl">Gérer</Button>
+                            <Button className="w-full bg-white/5 hover:bg-white/10 text-white border border-white/10 rounded-xl">Gérer les projets</Button>
                         </Link>
                     </div>
 
                     {/* Blog Card */}
-                    <div className="p-6 bg-slate-900/40 border border-white/10 rounded-3xl hover:border-purple-500/30 transition-all group relative overflow-hidden flex flex-col h-full">
+                    <div className="p-6 bg-slate-900/40 border border-white/10 rounded-3xl hover:border-purple-500/30 transition-all group relative overflow-hidden flex flex-col h-full h-72">
                         <div className="absolute top-0 right-0 w-32 h-32 bg-purple-600/10 rounded-full blur-3xl -translate-y-1/2 translate-x-1/2 group-hover:bg-purple-600/20 transition-all" />
                         <div className="flex items-center justify-between mb-6 relative z-10">
                             <div className="w-12 h-12 bg-purple-500/10 text-purple-400 rounded-2xl flex items-center justify-center border border-purple-500/20">
@@ -85,15 +89,31 @@ export default async function AdminDashboardPage() {
                             </div>
                             <span className="text-3xl font-black text-white">{articlesCount || 0}</span>
                         </div>
-                        <h2 className="text-xl font-black text-white mb-2 relative z-10">Blog</h2>
-                        <p className="text-slate-400 text-sm mb-8 line-clamp-2 relative z-10 flex-grow">Rédigez vos articles et actualités.</p>
+                        <h2 className="text-xl font-black text-white mb-2 relative z-10">Blog & Actualités</h2>
+                        <p className="text-slate-400 text-sm mb-8 line-clamp-2 relative z-10 flex-grow">Rédigez vos articles et partagez votre savoir.</p>
                         <Link href="/admin/articles" className="block relative z-10 mt-auto">
-                            <Button className="w-full bg-white/5 hover:bg-white/10 text-white border border-white/10 rounded-xl">Rédiger</Button>
+                            <Button className="w-full bg-white/5 hover:bg-white/10 text-white border border-white/10 rounded-xl">Rédiger un article</Button>
+                        </Link>
+                    </div>
+
+                    {/* Experience Card */}
+                    <div className="p-6 bg-slate-900/40 border border-white/10 rounded-3xl hover:border-blue-500/30 transition-all group relative overflow-hidden flex flex-col h-full h-72">
+                        <div className="absolute top-0 right-0 w-32 h-32 bg-blue-600/10 rounded-full blur-3xl -translate-y-1/2 translate-x-1/2 group-hover:bg-blue-600/20 transition-all" />
+                        <div className="flex items-center justify-between mb-6 relative z-10">
+                            <div className="w-12 h-12 bg-blue-500/10 text-blue-400 rounded-2xl flex items-center justify-center border border-blue-500/20">
+                                <BookOpen size={24} />
+                            </div>
+                            <span className="text-3xl font-black text-white">{experienceCount || 0}</span>
+                        </div>
+                        <h2 className="text-xl font-black text-white mb-2 relative z-10">Expérience</h2>
+                        <p className="text-slate-400 text-sm mb-8 line-clamp-2 relative z-10 flex-grow">Gérez vos domaines d'expertise et compétences.</p>
+                        <Link href="/admin/experience" className="block relative z-10 mt-auto">
+                            <Button className="w-full bg-white/5 hover:bg-white/10 text-blue-400 border border-blue-500/20 rounded-xl">Gérer l'expertise</Button>
                         </Link>
                     </div>
 
                     {/* Technologies Card */}
-                    <div className="p-6 bg-slate-900/40 border border-white/10 rounded-3xl hover:border-orange-500/30 transition-all group relative overflow-hidden flex flex-col h-full">
+                    <div className="p-6 bg-slate-900/40 border border-white/10 rounded-3xl hover:border-orange-500/30 transition-all group relative overflow-hidden flex flex-col h-full h-72">
                         <div className="absolute top-0 right-0 w-32 h-32 bg-orange-600/10 rounded-full blur-3xl -translate-y-1/2 translate-x-1/2 group-hover:bg-orange-600/20 transition-all" />
                         <div className="flex items-center justify-between mb-6 relative z-10">
                             <div className="w-12 h-12 bg-orange-500/10 text-orange-400 rounded-2xl flex items-center justify-center border border-orange-500/20">
@@ -101,15 +121,15 @@ export default async function AdminDashboardPage() {
                             </div>
                             <span className="text-3xl font-black text-white">{techCount || 0}</span>
                         </div>
-                        <h2 className="text-xl font-black text-white mb-2 relative z-10">Stack</h2>
-                        <p className="text-slate-400 text-sm mb-8 line-clamp-2 relative z-10 flex-grow">Gérez vos compétences techniques.</p>
+                        <h2 className="text-xl font-black text-white mb-2 relative z-10">Tech Stack</h2>
+                        <p className="text-slate-400 text-sm mb-8 line-clamp-2 relative z-10 flex-grow">Indexez vos outils et technologies maîtrisés.</p>
                         <Link href="/admin/technologies" className="block relative z-10 mt-auto">
-                            <Button className="w-full bg-white/5 hover:bg-white/10 text-white border border-white/10 rounded-xl">Gérer</Button>
+                            <Button className="w-full bg-white/5 hover:bg-white/10 text-white border border-white/10 rounded-xl">Gérer la stack</Button>
                         </Link>
                     </div>
 
                     {/* Messages Card */}
-                    <div className="p-6 bg-slate-900/40 border border-white/10 rounded-3xl hover:border-emerald-500/30 transition-all group relative overflow-hidden flex flex-col h-full">
+                    <div className="p-6 bg-slate-900/40 border border-white/10 rounded-3xl hover:border-emerald-500/30 transition-all group relative overflow-hidden flex flex-col h-full h-72">
                         <div className="absolute top-0 right-0 w-32 h-32 bg-emerald-600/10 rounded-full blur-3xl -translate-y-1/2 translate-x-1/2 group-hover:bg-emerald-600/20 transition-all" />
                         <div className="flex items-center justify-between mb-6 relative z-10">
                             <div className="w-12 h-12 bg-emerald-500/10 text-emerald-400 rounded-2xl flex items-center justify-center border border-emerald-500/20">
@@ -117,10 +137,26 @@ export default async function AdminDashboardPage() {
                             </div>
                             <span className="text-3xl font-black text-white">{messagesCount || 0}</span>
                         </div>
-                        <h2 className="text-xl font-black text-white mb-2 relative z-10">Messages</h2>
-                        <p className="text-slate-400 text-sm mb-8 line-clamp-2 relative z-10 flex-grow">Consultez les demandes entrantes.</p>
+                        <h2 className="text-xl font-black text-white mb-2 relative z-10">Inbox</h2>
+                        <p className="text-slate-400 text-sm mb-8 line-clamp-2 relative z-10 flex-grow">Consultez et répondez aux messages clients.</p>
                         <Link href="/admin/messages" className="block relative z-10 mt-auto">
                             <Button className="w-full bg-white/5 hover:bg-white/10 text-emerald-400 border border-emerald-500/20 rounded-xl">Voir Inbox</Button>
+                        </Link>
+                    </div>
+
+                    {/* Testimonials Card */}
+                    <div className="p-6 bg-slate-900/40 border border-white/10 rounded-3xl hover:border-pink-500/30 transition-all group relative overflow-hidden flex flex-col h-full h-72">
+                        <div className="absolute top-0 right-0 w-32 h-32 bg-pink-600/10 rounded-full blur-3xl -translate-y-1/2 translate-x-1/2 group-hover:bg-pink-600/20 transition-all" />
+                        <div className="flex items-center justify-between mb-6 relative z-10">
+                            <div className="w-12 h-12 bg-pink-500/10 text-pink-400 rounded-2xl flex items-center justify-center border border-pink-500/20">
+                                <Quote size={24} />
+                            </div>
+                            <span className="text-3xl font-black text-white">{testimonialsCount || 0}</span>
+                        </div>
+                        <h2 className="text-xl font-black text-white mb-2 relative z-10">Témoignages</h2>
+                        <p className="text-slate-400 text-sm mb-8 line-clamp-2 relative z-10 flex-grow">Rassurez vos futurs clients avec des avis réels.</p>
+                        <Link href="/admin/testimonials" className="block relative z-10 mt-auto">
+                            <Button className="w-full bg-white/5 hover:bg-white/10 text-pink-400 border border-pink-500/20 rounded-xl">Gérer les avis</Button>
                         </Link>
                     </div>
                 </div>

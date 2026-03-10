@@ -56,3 +56,34 @@ export async function deleteArticle(id: string) {
     revalidatePath('/admin/articles')
     revalidatePath('/blog')
 }
+
+export async function updateArticle(id: string, formData: FormData) {
+    const supabase = await createClient()
+
+    const title = formData.get('title') as string
+    const slug = title.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)+/g, '')
+    const excerpt = formData.get('excerpt') as string
+    const content = formData.get('content') as string
+    const category = formData.get('category') as string
+    const cover_url = formData.get('cover_url') as string
+
+    const { error } = await supabase.from('articles').update({
+        title,
+        slug,
+        excerpt,
+        content,
+        category,
+        cover_url,
+    }).eq('id', id)
+
+    if (error) {
+        console.error('Erreur lors de la mise à jour de l\'article:', error)
+        throw new Error('Impossible de mettre à jour l\'article')
+    }
+
+    revalidatePath('/admin/articles')
+    revalidatePath('/blog')
+    revalidatePath(`/blog/${slug}`)
+    redirect('/admin/articles')
+}
+

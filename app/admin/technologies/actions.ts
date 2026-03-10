@@ -44,3 +44,31 @@ export async function deleteTechnology(id: string) {
     revalidatePath('/admin/technologies')
     revalidatePath('/technologies')
 }
+
+export async function updateTechnology(id: string, formData: FormData) {
+    const supabase = await createClient()
+
+    const name = formData.get('name') as string
+    const category = formData.get('category') as string
+    const description = formData.get('description') as string
+    const proficiency = parseInt(formData.get('proficiency') as string)
+    const logo_url = formData.get('logo_url') as string
+
+    const { error } = await supabase.from('technologies').update({
+        name,
+        category,
+        description,
+        proficiency,
+        logo_url,
+    }).eq('id', id)
+
+    if (error) {
+        console.error('Erreur lors de la mise à jour:', error)
+        throw new Error('Impossible de mettre à jour la technologie')
+    }
+
+    revalidatePath('/admin/technologies')
+    revalidatePath('/technologies')
+    redirect('/admin/technologies')
+}
+

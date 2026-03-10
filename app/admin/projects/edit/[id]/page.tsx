@@ -1,6 +1,6 @@
 import { createClient } from '@/lib/supabase/server'
 import { notFound } from 'next/navigation'
-import EditProjectForm from './edit-form'
+import EditProjectForm from '@/app/admin/projects/edit/[id]/edit-form'
 
 export default async function EditProjectPage({ params }: { params: { id: string } }) {
     const supabase = await createClient()

@@ -101,9 +101,11 @@ export default async function AdminArticlesPage() {
                                             </td>
                                             <td className="px-6 py-4">
                                                 <div className="flex items-center justify-end gap-2">
-                                                    <button disabled className="p-2 text-slate-400 hover:text-white bg-white/5 hover:bg-white/10 rounded-lg transition-colors border border-white/10 opacity-50 cursor-not-allowed" title="Pas encore disponible">
-                                                        <Edit2 size={16} />
-                                                    </button>
+                                                    <Link href={`/admin/articles/edit/${article.id}`}>
+                                                        <button className="p-2 text-slate-400 hover:text-white bg-white/5 hover:bg-white/10 rounded-lg transition-colors border border-white/10" title="Modifier l'article">
+                                                            <Edit2 size={16} />
+                                                        </button>
+                                                    </Link>
                                                     <DeleteArticleButton id={article.id} />
                                                 </div>
                                             </td>

@@ -11,10 +11,10 @@ export const Stats = ({ counts }: { counts: { projects: number, clients: number,
     const isInView = useInView(ref, { once: true })
 
     const stats = [
-        { label: 'Projets livrés', value: counts.projects || 45, suffix: '+' },
-        { label: 'Clients satisfaits', value: counts.clients || 30, suffix: '+' },
-        { label: "Techno Stack", value: counts.tech || 15, suffix: '' },
-        { label: 'Articles Blog', value: counts.articles || 12, suffix: '+' },
+        { label: 'Projets livrés', value: counts?.projects || 0, suffix: '+' },
+        { label: 'Clients satisfaits', value: counts?.clients || 0, suffix: '+' },
+        { label: "Techno Stack", value: counts?.tech || 0, suffix: '' },
+        { label: 'Articles Blog', value: counts?.articles || 0, suffix: '+' },
     ]
 
     return (
