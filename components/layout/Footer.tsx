@@ -54,7 +54,7 @@ export const Footer = () => {
                                 <div className="w-10 h-10 rounded-xl bg-white/5 flex items-center justify-center">
                                     <MapPin className="text-purple-500" size={18} />
                                 </div>
-                                <span className="font-medium">Abidjan, Côte d'Ivoire</span>
+                                <span className="font-medium">Ngaoundere, Cameroun</span>
                             </li>
                         </ul>
                     </div>

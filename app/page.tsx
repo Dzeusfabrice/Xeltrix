@@ -2,6 +2,7 @@ import { Hero } from "@/components/shared/Hero";
 import { Stats } from "@/components/shared/Stats";
 import { FeaturedProjects } from "@/components/shared/FeaturedProjects";
 import { Features } from "@/components/shared/Features";
+import { Testimonials } from "@/components/shared/Testimonials";
 import { Container, Button } from "@/components/ui";
 import Link from "next/link";
 import { ArrowRight } from "lucide-react";
@@ -12,17 +13,19 @@ export const revalidate = 3600; // Revalidate every hour
 export default async function Home() {
   const supabase = await createClient();
 
-  // Fetch some stats and featured projects
+  // Fetch some stats, featured projects and testimonials
   const [
     { data: projects },
     { count: projectsCount },
     { count: techCount },
-    { count: articlesCount }
+    { count: articlesCount },
+    { data: testimonials }
   ] = await Promise.all([
     supabase.from('projects').select('*').limit(3).order('created_at', { ascending: false }),
     supabase.from('projects').select('*', { count: 'exact', head: true }),
     supabase.from('technologies').select('*', { count: 'exact', head: true }),
-    supabase.from('articles').select('*', { count: 'exact', head: true })
+    supabase.from('articles').select('*', { count: 'exact', head: true }),
+    supabase.from('testimonials').select('*').order('created_at', { ascending: false })
   ]);
 
   const statsCounts = {
@@ -38,6 +41,7 @@ export default async function Home() {
       <Stats counts={statsCounts} />
       <Features />
       <FeaturedProjects projects={projects || []} />
+      <Testimonials testimonials={testimonials || []} />
 
       {/* CTA Final */}
       <section className="py-32 bg-background overflow-hidden relative">

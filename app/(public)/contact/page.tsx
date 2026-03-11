@@ -141,15 +141,15 @@ export default function ContactPage() {
                                 <ContactInfoItem
                                     icon={<Phone />}
                                     title="Ligne Téléphonique"
-                                    value="+225 00 00 00 00 00"
+                                    value="+237 6 95 72 11 72"
                                     sub="Lun - Ven, 09:00 - 18:00"
                                     delay={0.2}
                                 />
                                 <ContactInfoItem
                                     icon={<MapPin />}
                                     title="Siège Social"
-                                    value="Abidjan, Côte d'Ivoire"
-                                    sub="Cocody, Riviera 3"
+                                    value="Ngaoundere, Cameroun"
+                                    sub="Ngaoundere, Cameroun"
                                     delay={0.3}
                                 />
                             </div>
