@@ -1,52 +1,69 @@
 import React from 'react'
-import { Container } from '../ui'
-import { Shield, Zap, Layout, Rocket } from 'lucide-react'
+import { Container, SectionHeader, Card } from '../ui'
+import { Shield, Zap, Layers, Rocket, Code2, RefreshCw } from 'lucide-react'
 
 const features = [
     {
-        icon: <Zap className="w-8 h-8 text-purple-500" />,
-        title: "Performance",
-        description: "Des applications ultra-rapides optimisées pour le SEO et l'expérience utilisateur."
+        icon: Zap,
+        title: "Performance & Optimisation SEO",
+        description: "Temps de chargement sub-seconde, Server Components Next.js et Core Web Vitals supérieurs à 90 pour un référencement maximal."
     },
     {
-        icon: <Shield className="w-8 h-8 text-purple-500" />,
-        title: "Sécurité",
-        description: "Protection des données et architecture robuste pour une tranquillité totale."
+        icon: Shield,
+        title: "Sécurité & Conformité de bout en bout",
+        description: "Chiffrement des flux, authentification multifacteur (MFA), gestion granulaire des rôles (RBAC) et conformité RGPD."
     },
     {
-        icon: <Layout className="w-8 h-8 text-purple-500" />,
-        title: "Design Premium",
-        description: "Nous proposons des produits professionnels et design, alliant esthétique et ergonomie."
+        icon: Code2,
+        title: "Code Propriétaire & Maintenabilité",
+        description: "Architectures typées de bout en bout en TypeScript, documentation technique exhaustive et tests automatisés réguliers."
     },
     {
-        icon: <Rocket className="w-8 h-8 text-purple-500" />,
-        title: "Scalabilité",
-        description: "Des solutions qui grandissent avec votre entreprise sans compromis."
+        icon: Rocket,
+        title: "Livraison Agile & Transparence",
+        description: "Itérations hebdomadaires, environnements de prévisualisation en temps réel et communication fluide avec vos équipes."
+    },
+    {
+        icon: Layers,
+        title: "Scalabilité Horizontale",
+        description: "Bases de données optimisées, requêtes indexées et conteneurisation pour supporter des montées en charge sans friction."
+    },
+    {
+        icon: RefreshCw,
+        title: "Accompagnement & Évolutivité",
+        description: "Support post-déploiement proactif et capacité à intégrer continuellement de nouveaux modules et fonctionnalités."
     }
 ]
 
 export const Features = () => {
     return (
-        <section className="py-24 bg-background">
+        <section className="py-20 bg-slate-50/50 dark:bg-slate-950/80 border-t border-slate-200 dark:border-white/[0.08] relative transition-colors duration-300">
             <Container>
-                <div className="text-center max-w-3xl mx-auto mb-16 space-y-4">
-                    <h2 className="text-sm font-black text-purple-500 uppercase tracking-[0.2em]">Pourquoi Xeltrix ?</h2>
-                    <h3 className="text-4xl md:text-5xl font-black text-white line-height-tight">L'excellence technique au service de votre vision</h3>
-                    <p className="text-slate-400 text-lg">Nous ne nous contentons pas de coder, nous concevons des produits qui font la différence.</p>
-                </div>
+                <SectionHeader
+                    badge="Méthodologie & Exigences"
+                    title={
+                        <>
+                            Pourquoi confier votre produit à <span className="text-gradient-primary">XELTRIX</span> ?
+                        </>
+                    }
+                    description="Nous appliquons les standards d'ingénierie des meilleures startups technologiques pour concevoir des produits fiables, rapides et pérennes."
+                />
 
-                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
-                    {features.map((f, i) => (
-                        <div key={i} className="p-8 rounded-[2.5rem] bg-slate-900/40 border border-white/5 hover:border-purple-500/50 transition-all group flex flex-col items-center text-center lg:items-start lg:text-left glass-card">
-                            <div className="mb-6 p-4 rounded-2xl bg-white/5 border border-white/10 w-16 h-16 flex items-center justify-center group-hover:scale-110 group-hover:bg-purple-600 transition-all duration-500">
-                                {f.icon}
-                            </div>
-                            <h4 className="text-xl font-bold mb-3 text-white transition-colors group-hover:text-purple-400">{f.title}</h4>
-                            <p className="text-slate-400 leading-relaxed font-medium">
-                                {f.description}
-                            </p>
-                        </div>
-                    ))}
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                    {features.map((f, i) => {
+                        const Icon = f.icon
+                        return (
+                            <Card key={i} className="p-7 space-y-3.5">
+                                <div className="w-10 h-10 rounded-xl bg-blue-50 dark:bg-blue-500/10 border border-blue-200 dark:border-blue-500/20 flex items-center justify-center text-blue-600 dark:text-blue-400">
+                                    <Icon size={20} />
+                                </div>
+                                <h3 className="text-lg font-bold text-slate-900 dark:text-white tracking-tight">{f.title}</h3>
+                                <p className="text-slate-600 dark:text-slate-400 text-sm leading-relaxed">
+                                    {f.description}
+                                </p>
+                            </Card>
+                        )
+                    })}
                 </div>
             </Container>
         </section>

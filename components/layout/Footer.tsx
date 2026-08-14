@@ -1,88 +1,121 @@
 import React from 'react'
 import Link from 'next/link'
 import { Logo } from '../shared/Logo'
-import { Github, Linkedin, Twitter, Instagram, Mail, MapPin } from 'lucide-react'
+import { Github, Linkedin, Twitter, Mail, MapPin, ArrowUpRight } from 'lucide-react'
 
 export const Footer = () => {
     const currentYear = new Date().getFullYear()
 
     return (
-        <footer className="bg-slate-950 text-white border-t border-white/5 pt-20 pb-10 px-6">
+        <footer className="bg-slate-50 dark:bg-slate-950 text-slate-600 dark:text-slate-400 border-t border-slate-200 dark:border-white/[0.08] pt-20 pb-12 px-4 sm:px-6 lg:px-8 relative overflow-hidden transition-colors duration-300">
+            {/* Ambient subtle glow in footer */}
+            <div className="absolute top-0 left-1/2 -translate-x-1/2 w-3/4 h-24 bg-gradient-to-b from-blue-500/5 to-transparent pointer-events-none" />
+
             <div className="max-w-7xl mx-auto">
-                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 mb-16">
-                    {/* Brand Info */}
-                    <div className="space-y-6">
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-10 lg:gap-12 mb-16">
+                    {/* Brand Info & Mission */}
+                    <div className="lg:col-span-2 space-y-6">
                         <Logo />
-                        <p className="text-slate-400 leading-relaxed italic">
-                            Xeltrix est une startup technologique spécialisée dans le développement de solutions logicielles innovantes. Nous transformons vos idées en produits numériques d'exception.
+                        <p className="text-slate-600 dark:text-slate-400 text-sm leading-relaxed max-w-sm">
+                            Startup technologique et pôle d&apos;ingénierie logicielle. Nous concevons, développons et déployons des solutions sur mesure (Web, Mobile, Cloud, SaaS, ERP & IA) pour propulser les entreprises modernes.
                         </p>
-                        <div className="flex gap-4">
-                            <a href="#" className="w-12 h-12 rounded-2xl bg-white/5 border border-white/10 flex items-center justify-center text-white hover:bg-purple-600 hover:border-purple-600 transition-all shadow-xl">
-                                <Linkedin size={20} />
+                        
+                        <div className="flex items-center gap-3">
+                            <a
+                                href="https://linkedin.com"
+                                target="_blank"
+                                rel="noreferrer"
+                                aria-label="LinkedIn"
+                                className="w-9 h-9 rounded-lg bg-white dark:bg-slate-900 border border-slate-200 dark:border-white/10 flex items-center justify-center text-slate-600 dark:text-slate-400 hover:text-blue-600 dark:hover:text-white hover:border-blue-500/40 transition-all shadow-sm"
+                            >
+                                <Linkedin size={16} />
                             </a>
-                            <a href="#" className="w-12 h-12 rounded-2xl bg-white/5 border border-white/10 flex items-center justify-center text-white hover:bg-purple-600 hover:border-purple-600 transition-all shadow-xl">
-                                <Github size={20} />
+                            <a
+                                href="https://github.com"
+                                target="_blank"
+                                rel="noreferrer"
+                                aria-label="GitHub"
+                                className="w-9 h-9 rounded-lg bg-white dark:bg-slate-900 border border-slate-200 dark:border-white/10 flex items-center justify-center text-slate-600 dark:text-slate-400 hover:text-slate-950 dark:hover:text-white hover:border-blue-500/40 transition-all shadow-sm"
+                            >
+                                <Github size={16} />
                             </a>
-                            <a href="#" className="w-12 h-12 rounded-2xl bg-white/5 border border-white/10 flex items-center justify-center text-white hover:bg-purple-600 hover:border-purple-600 transition-all shadow-xl">
-                                <Twitter size={20} />
+                            <a
+                                href="https://twitter.com"
+                                target="_blank"
+                                rel="noreferrer"
+                                aria-label="Twitter"
+                                className="w-9 h-9 rounded-lg bg-white dark:bg-slate-900 border border-slate-200 dark:border-white/10 flex items-center justify-center text-slate-600 dark:text-slate-400 hover:text-blue-400 hover:border-blue-500/40 transition-all shadow-sm"
+                            >
+                                <Twitter size={16} />
                             </a>
                         </div>
                     </div>
 
+                    {/* Services */}
                     <div>
-                        <h4 className="font-black text-lg mb-8 uppercase tracking-widest text-purple-500">Navigation</h4>
-                        <ul className="space-y-4">
-                            <li><Link href="/" className="text-slate-400 hover:text-white transition-colors font-medium">Accueil</Link></li>
-                            <li><Link href="/about" className="text-slate-400 hover:text-white transition-colors font-medium">À propos</Link></li>
-                            <li><Link href="/projects" className="text-slate-400 hover:text-white transition-colors font-medium">Nos Projets</Link></li>
-                            <li><Link href="/blog" className="text-slate-400 hover:text-white transition-colors font-medium">Blog & Actualités</Link></li>
-                            <li><Link href="/technologies" className="text-slate-400 hover:text-white transition-colors font-medium">Stack Tech</Link></li>
+                        <h4 className="font-bold text-xs text-slate-900 dark:text-white uppercase tracking-wider mb-5">
+                            Expertises & Services
+                        </h4>
+                        <ul className="space-y-3 text-sm">
+                            <li><Link href="/services#web" className="hover:text-blue-600 dark:hover:text-white transition-colors">Développement Web & SaaS</Link></li>
+                            <li><Link href="/services#mobile" className="hover:text-blue-600 dark:hover:text-white transition-colors">Applications Mobiles</Link></li>
+                            <li><Link href="/services#desktop" className="hover:text-blue-600 dark:hover:text-white transition-colors">Logiciels Desktop</Link></li>
+                            <li><Link href="/services#erp" className="hover:text-blue-600 dark:hover:text-white transition-colors">ERP & Systèmes Métiers</Link></li>
+                            <li><Link href="/services#ai" className="hover:text-blue-600 dark:hover:text-white transition-colors">Intelligence Artificielle</Link></li>
+                            <li><Link href="/services#devops" className="hover:text-blue-600 dark:hover:text-white transition-colors">Cloud & DevOps</Link></li>
                         </ul>
                     </div>
 
-                    {/* Contact Info */}
+                    {/* Products & Resources */}
                     <div>
-                        <h4 className="font-black text-lg mb-8 uppercase tracking-widest text-purple-500">Contact</h4>
-                        <ul className="space-y-5">
-                            <li className="flex items-center gap-4 text-slate-400">
-                                <div className="w-10 h-10 rounded-xl bg-white/5 flex items-center justify-center">
-                                    <Mail className="text-purple-500" size={18} />
-                                </div>
-                                <span className="font-medium">contact@xeltrix.com</span>
-                            </li>
-                            <li className="flex items-center gap-4 text-slate-400">
-                                <div className="w-10 h-10 rounded-xl bg-white/5 flex items-center justify-center">
-                                    <MapPin className="text-purple-500" size={18} />
-                                </div>
-                                <span className="font-medium">Ngaoundere, Cameroun</span>
-                            </li>
+                        <h4 className="font-bold text-xs text-slate-900 dark:text-white uppercase tracking-wider mb-5">
+                            Produits & Solutions
+                        </h4>
+                        <ul className="space-y-3 text-sm">
+                            <li><Link href="/products#erp" className="hover:text-blue-600 dark:hover:text-white transition-colors">Xeltrix ERP</Link></li>
+                            <li><Link href="/products#crm" className="hover:text-blue-600 dark:hover:text-white transition-colors">Xeltrix CRM</Link></li>
+                            <li><Link href="/products#chatsdk" className="hover:text-blue-600 dark:hover:text-white transition-colors">Xeltrix Chat SDK</Link></li>
+                            <li><Link href="/products#kiosk" className="hover:text-blue-600 dark:hover:text-white transition-colors">Xeltrix Kiosk</Link></li>
+                            <li><Link href="/products#analytics" className="hover:text-blue-600 dark:hover:text-white transition-colors">Xeltrix Analytics</Link></li>
+                            <li><Link href="/quote" className="text-blue-600 dark:text-blue-400 font-semibold inline-flex items-center gap-1">Simulateur de Devis <ArrowUpRight size={12} /></Link></li>
                         </ul>
                     </div>
 
-                    {/* Newsletter / CTA */}
+                    {/* Company & Contact */}
                     <div>
-                        <h4 className="font-black text-lg mb-8 uppercase tracking-widest text-purple-500">Newsletter</h4>
-                        <p className="text-slate-400 mb-6 text-sm italic">Restez informé de nos dernières innovations.</p>
-                        <div className="flex gap-2">
-                            <input
-                                type="email"
-                                placeholder="Votre email"
-                                className="bg-white/5 border border-white/10 rounded-xl px-5 py-3 text-sm w-full focus:outline-none focus:ring-2 focus:ring-purple-500/50 text-white"
-                            />
-                            <button className="bg-purple-600 text-white px-6 py-3 rounded-xl text-sm font-black hover:bg-purple-700 transition-all shadow-lg shadow-purple-600/20">
-                                OK
-                            </button>
+                        <h4 className="font-bold text-xs text-slate-900 dark:text-white uppercase tracking-wider mb-5">
+                            Entreprise
+                        </h4>
+                        <ul className="space-y-3 text-sm">
+                            <li><Link href="/about" className="hover:text-blue-600 dark:hover:text-white transition-colors">À propos de Xeltrix</Link></li>
+                            <li><Link href="/projects" className="hover:text-blue-600 dark:hover:text-white transition-colors">Portfolio & Réalisations</Link></li>
+                            <li><Link href="/case-studies" className="hover:text-blue-600 dark:hover:text-white transition-colors">Études de cas</Link></li>
+                            <li><Link href="/blog" className="hover:text-blue-600 dark:hover:text-white transition-colors">Blog & Insights Tech</Link></li>
+                            <li><Link href="/contact" className="hover:text-blue-600 dark:hover:text-white transition-colors">Contact & Support</Link></li>
+                        </ul>
+
+                        <div className="mt-6 pt-5 border-t border-slate-200 dark:border-white/5 space-y-2 text-xs">
+                            <div className="flex items-center gap-2 text-slate-600 dark:text-slate-400">
+                                <Mail size={13} className="text-blue-600 dark:text-blue-400" />
+                                <span>contact@xeltrix.com</span>
+                            </div>
+                            <div className="flex items-center gap-2 text-slate-600 dark:text-slate-400">
+                                <MapPin size={13} className="text-blue-600 dark:text-blue-400" />
+                                <span>Ngaoundéré, Cameroun / International</span>
+                            </div>
                         </div>
                     </div>
                 </div>
 
-                <div className="border-t border-white/5 pt-10 flex flex-col md:flex-row justify-between items-center gap-6">
-                    <p className="text-sm text-slate-500 font-medium">
-                        © {currentYear} Xeltrix International - Tous droits réservés.
+                {/* Bottom Bar */}
+                <div className="border-t border-slate-200 dark:border-white/[0.08] pt-8 flex flex-col sm:flex-row justify-between items-center gap-4 text-xs text-slate-500">
+                    <p>
+                        © {currentYear} XELTRIX Technologies. Tous droits réservés.
                     </p>
-                    <div className="flex gap-8 text-sm text-slate-500 font-medium">
-                        <Link href="/legal" className="hover:text-white transition-colors">Mentions Légales</Link>
-                        <Link href="/privacy" className="hover:text-white transition-colors">Confidentialité</Link>
+                    <div className="flex items-center gap-6">
+                        <Link href="/privacy" className="hover:text-slate-700 dark:hover:text-slate-300 transition-colors">Confidentialité</Link>
+                        <Link href="/legal" className="hover:text-slate-700 dark:hover:text-slate-300 transition-colors">Mentions légales</Link>
+                        <Link href="/admin" className="text-blue-600 dark:text-slate-500 hover:text-blue-700 dark:hover:text-slate-300 font-medium transition-colors">Espace Administration</Link>
                     </div>
                 </div>
             </div>

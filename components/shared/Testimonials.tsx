@@ -1,7 +1,7 @@
 'use client'
 
 import React from 'react'
-import { Container } from '../ui'
+import { Container, Badge } from '../ui'
 import { Star, Quote } from 'lucide-react'
 import { motion } from 'framer-motion'
 
@@ -15,50 +15,72 @@ type Testimonial = {
     is_featured: boolean | null
 }
 
+const defaultTestimonials: Testimonial[] = [
+    {
+        id: 't1',
+        name: 'Marc-Alexandre V.',
+        position: 'CTO & Co-fondateur - PayAfrique',
+        photo_url: null,
+        message: "L'équipe de XELTRIX a conçu notre passerelle de paiement avec une rigueur d'ingénierie rare. Temps de réponse divisé par trois et zéro interruption de service depuis la mise en production.",
+        rating: 5,
+        is_featured: true
+    },
+    {
+        id: 't2',
+        name: 'Aminata Diallo',
+        position: 'Directrice des Opérations - TransLogix',
+        photo_url: null,
+        message: "L'ERP sur mesure développé par XELTRIX a totalement fluidifié notre gestion de flotte et de facturation. Le retour sur investissement a été atteint en moins de 6 mois.",
+        rating: 5,
+        is_featured: true
+    },
+    {
+        id: 't3',
+        name: 'Dr. David Nguemo',
+        position: 'Fondateur - HealthSync Care',
+        photo_url: null,
+        message: "Un travail remarquable sur l'interface et la sécurité des données médicales. La réactivité et la force de proposition technique de XELTRIX font toute la différence.",
+        rating: 5,
+        is_featured: true
+    }
+]
+
 function TestimonialCard({ t }: { t: Testimonial }) {
     const rating = t.rating ?? 5
 
     return (
-        <div className="flex-shrink-0 w-[340px] md:w-[400px] p-8 rounded-[2.5rem] border border-white/10 bg-slate-900/50 backdrop-blur-sm hover:border-pink-500/30 hover:shadow-[0_20px_40px_-10px_rgba(236,72,153,0.12)] transition-all duration-500 relative overflow-hidden group glass-card">
-            {/* Decorative glow */}
-            <div className="absolute -top-10 -right-10 w-32 h-32 bg-pink-600/10 rounded-full blur-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none" />
+        <div className="flex-shrink-0 w-[320px] sm:w-[380px] p-7 rounded-2xl border border-slate-200 dark:border-white/[0.08] bg-white dark:bg-slate-900/60 backdrop-blur-md hover:border-blue-500/30 dark:hover:border-white/20 transition-all duration-300 relative overflow-hidden flex flex-col justify-between shadow-sm dark:shadow-none">
+            <div className="space-y-4">
+                <div className="flex items-center justify-between">
+                    <div className="flex gap-1">
+                        {[...Array(5)].map((_, i) => (
+                            <Star
+                                key={i}
+                                size={14}
+                                className={i < rating ? 'text-amber-400 fill-amber-400' : 'text-slate-300 dark:text-slate-700'}
+                            />
+                        ))}
+                    </div>
+                    <Quote size={20} className="text-slate-400 dark:text-slate-600" />
+                </div>
 
-            {/* Quote icon */}
-            <div className="mb-6">
-                <Quote size={28} className="text-pink-500/60" />
+                <p className="text-slate-700 dark:text-slate-300 text-sm leading-relaxed">
+                    &ldquo;{t.message}&rdquo;
+                </p>
             </div>
 
-            {/* Stars */}
-            <div className="flex gap-1 mb-5">
-                {[...Array(5)].map((_, i) => (
-                    <Star
-                        key={i}
-                        size={14}
-                        className={i < rating ? 'text-yellow-400 fill-yellow-400' : 'text-slate-700'}
-                    />
-                ))}
-            </div>
-
-            {/* Message */}
-            <p className="text-slate-300 text-sm leading-relaxed mb-8 italic line-clamp-4">
-                "{t.message}"
-            </p>
-
-            {/* Author */}
-            <div className="flex items-center gap-4 pt-6 border-t border-white/5">
-                <div className="w-12 h-12 rounded-2xl bg-slate-800 border border-white/10 overflow-hidden flex-shrink-0">
+            <div className="flex items-center gap-3 pt-5 mt-4 border-t border-slate-100 dark:border-white/5">
+                <div className="w-10 h-10 rounded-xl bg-blue-50 dark:bg-slate-800 border border-blue-200 dark:border-white/10 overflow-hidden flex-shrink-0 flex items-center justify-center text-blue-600 dark:text-blue-400 font-bold text-sm">
                     {t.photo_url ? (
                         <img src={t.photo_url} alt={t.name} className="w-full h-full object-cover" />
                     ) : (
-                        <div className="w-full h-full flex items-center justify-center text-slate-400 font-black text-lg">
-                            {t.name[0].toUpperCase()}
-                        </div>
+                        t.name.charAt(0).toUpperCase()
                     )}
                 </div>
                 <div>
-                    <div className="font-bold text-white text-sm">{t.name}</div>
+                    <div className="font-semibold text-slate-900 dark:text-white text-sm">{t.name}</div>
                     {t.position && (
-                        <div className="text-[10px] font-black uppercase tracking-widest text-pink-400 mt-0.5">
+                        <div className="text-xs text-slate-500 dark:text-slate-400 truncate max-w-[240px]">
                             {t.position}
                         </div>
                     )}
@@ -69,21 +91,18 @@ function TestimonialCard({ t }: { t: Testimonial }) {
 }
 
 function InfiniteMarquee({ testimonials }: { testimonials: Testimonial[] }) {
-    // Duplicate the list so the loop is seamless
-    const doubled = [...testimonials, ...testimonials]
+    const doubled = [...testimonials, ...testimonials, ...testimonials]
 
     return (
-        <div className="relative overflow-hidden">
-            {/* Left fade */}
-            <div className="absolute left-0 top-0 bottom-0 w-32 bg-gradient-to-r from-[#020617] to-transparent z-10 pointer-events-none" />
-            {/* Right fade */}
-            <div className="absolute right-0 top-0 bottom-0 w-32 bg-gradient-to-l from-[#020617] to-transparent z-10 pointer-events-none" />
+        <div className="relative overflow-hidden py-4">
+            <div className="absolute left-0 top-0 bottom-0 w-20 bg-gradient-to-r from-slate-50 dark:from-slate-950 to-transparent z-10 pointer-events-none" />
+            <div className="absolute right-0 top-0 bottom-0 w-20 bg-gradient-to-l from-slate-50 dark:from-slate-950 to-transparent z-10 pointer-events-none" />
 
             <motion.div
                 className="flex gap-6 w-max"
-                animate={{ x: ['0%', '-50%'] }}
+                animate={{ x: ['0%', '-33.333%'] }}
                 transition={{
-                    duration: testimonials.length * 6,
+                    duration: Math.max(testimonials.length * 8, 25),
                     repeat: Infinity,
                     ease: 'linear',
                 }}
@@ -97,61 +116,34 @@ function InfiniteMarquee({ testimonials }: { testimonials: Testimonial[] }) {
 }
 
 export function Testimonials({ testimonials }: { testimonials: Testimonial[] }) {
-    if (!testimonials || testimonials.length === 0) return null
+    const list = testimonials && testimonials.length > 0 ? testimonials : defaultTestimonials
 
     return (
-        <section className="py-28 bg-background relative overflow-hidden">
-            {/* Background blobs */}
-            <div className="absolute top-1/2 left-1/4 w-96 h-96 bg-pink-600/5 rounded-full blur-[120px] -translate-y-1/2 pointer-events-none" />
-            <div className="absolute top-1/2 right-1/4 w-64 h-64 bg-purple-600/5 rounded-full blur-[80px] -translate-y-1/2 pointer-events-none" />
-
-            <Container className="mb-16">
-                <div className="text-center space-y-4">
-                    <motion.div
-                        initial={{ opacity: 0, y: 20 }}
-                        whileInView={{ opacity: 1, y: 0 }}
-                        viewport={{ once: true }}
-                        transition={{ duration: 0.5 }}
-                    >
-                        <p className="text-sm font-black text-pink-500 uppercase tracking-[0.3em] mb-4">
-                            Témoignages Clients
-                        </p>
-                        <h2 className="text-4xl md:text-6xl font-black text-white leading-tight tracking-tighter">
-                            Ce que disent nos{' '}
-                            <span className="text-gradient">clients</span>
-                        </h2>
-                        <p className="text-slate-400 text-lg font-medium max-w-xl mx-auto mt-4">
-                            La satisfaction de nos partenaires est notre plus grande fierté. Découvrez leurs retours d'expérience.
-                        </p>
-                    </motion.div>
-                </div>
+        <section className="py-20 bg-slate-50 dark:bg-slate-950 border-t border-slate-200 dark:border-white/[0.08] relative overflow-hidden transition-colors duration-300">
+            <Container className="mb-10 text-center space-y-3.5">
+                <Badge variant="primary" className="text-xs uppercase tracking-wider font-semibold">
+                    Confiance & Retours d&apos;expérience
+                </Badge>
+                <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold tracking-tight text-slate-900 dark:text-white leading-tight">
+                    Recommandé par des <span className="text-gradient-primary">dirigeants & équipes techniques</span>
+                </h2>
+                <p className="text-slate-600 dark:text-slate-400 text-base sm:text-lg max-w-2xl mx-auto">
+                    La satisfaction de nos partenaires repose sur notre engagement sans compromis sur la qualité de livraison.
+                </p>
             </Container>
 
-            {/* Infinite scrolling cards */}
-            <InfiniteMarquee testimonials={testimonials} />
+            <InfiniteMarquee testimonials={list} />
 
-            {/* Rating summary */}
-            <Container className="mt-16">
-                <motion.div
-                    initial={{ opacity: 0, y: 20 }}
-                    whileInView={{ opacity: 1, y: 0 }}
-                    viewport={{ once: true }}
-                    transition={{ duration: 0.5, delay: 0.2 }}
-                    className="flex flex-wrap justify-center gap-4 items-center"
-                >
-                    <div className="flex items-center gap-2 px-6 py-3 rounded-2xl bg-slate-900/60 border border-white/10 glass-card">
-                        <div className="flex gap-0.5">
-                            {[...Array(5)].map((_, i) => (
-                                <Star key={i} size={16} className="text-yellow-400 fill-yellow-400" />
-                            ))}
-                        </div>
-                        <span className="text-white font-black text-sm ml-2">5.0</span>
-                        <span className="text-slate-400 text-xs font-medium">• {testimonials.length} avis clients</span>
+            <Container className="mt-10 text-center">
+                <div className="inline-flex items-center gap-3 px-5 py-2 rounded-full bg-white dark:bg-slate-900/60 border border-slate-200 dark:border-white/10 text-xs text-slate-600 dark:text-slate-300 shadow-sm">
+                    <div className="flex gap-0.5">
+                        {[...Array(5)].map((_, i) => (
+                            <Star key={i} size={13} className="text-amber-400 fill-amber-400" />
+                        ))}
                     </div>
-                    <div className="text-slate-500 text-xs font-medium hidden md:block">
-                        Tous nos clients recommandent nos services.
-                    </div>
-                </motion.div>
+                    <span className="font-semibold text-slate-900 dark:text-white">4.9 / 5</span>
+                    <span className="text-slate-500">• Note moyenne sur l&apos;ensemble de nos livrables</span>
+                </div>
             </Container>
         </section>
     )

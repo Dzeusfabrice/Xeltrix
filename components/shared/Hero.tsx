@@ -1,169 +1,161 @@
 'use client'
 
-import React, { useState, useEffect } from 'react'
-import { Container, Button } from '../ui'
-import { motion, AnimatePresence } from 'framer-motion'
-import { ArrowRight, Sparkles } from 'lucide-react'
+import React from 'react'
+import { Container, Button, Badge } from '../ui'
+import { motion } from 'framer-motion'
+import { ArrowRight, ShieldCheck, Terminal, Cpu, Sparkles, CheckCircle2, ChevronRight } from 'lucide-react'
 import Link from 'next/link'
 
-const backgroundImages = [
-    '/assets/carrousel/slide1.jpg',
-    '/assets/carrousel/slide2.jpg',
-    '/assets/carrousel/slide3.jpg',
-    '/assets/carrousel/slide4.jpg',
-    '/assets/carrousel/slide5.jpg',
-    '/assets/carrousel/slide6.jpg',
-]
-
 export const Hero = () => {
-    const [currentImage, setCurrentImage] = useState(0)
-
-    useEffect(() => {
-        const timer = setInterval(() => {
-            setCurrentImage((prev) => (prev + 1) % backgroundImages.length)
-        }, 6000)
-        return () => clearInterval(timer)
-    }, [])
-
     return (
-        <section className="relative min-h-[90vh] md:min-h-[95vh] flex items-center pt-24 md:pt-32 pb-12 md:pb-16 overflow-hidden">
-            {/* Background Carousel */}
-            <div className="absolute inset-0 z-0">
-                <AnimatePresence mode="wait">
-                    <motion.div
-                        key={currentImage}
-                        initial={{ opacity: 0, scale: 1.2 }}
-                        animate={{ opacity: 1, scale: 1 }}
-                        exit={{ opacity: 0, scale: 1.1 }}
-                        transition={{ duration: 2.5, ease: "easeInOut" }}
-                        className="absolute inset-0 bg-cover bg-center transition-all duration-1000"
-                        style={{ backgroundImage: `url(${backgroundImages[currentImage]})` }}
-                    />
-                </AnimatePresence>
-
-                {/* Overlay Gradients & Blur - Optimized for visibility */}
-                <div className="absolute inset-0 bg-slate-950/40 backdrop-blur-[0.5px]" />
-                <div className="absolute inset-0 bg-gradient-to-t from-slate-950 via-slate-950/20 to-transparent opacity-80" />
-                <div className="absolute inset-0 bg-gradient-to-r from-slate-950 via-slate-950/40 to-transparent opacity-90 lg:block hidden" />
-                <div className="absolute inset-0 bg-slate-950/20 md:hidden block" />
-            </div>
-
-            {/* Background blobs (kept for extra depth) */}
-            <div className="absolute top-0 right-0 -translate-y-1/4 translate-x-1/4 w-[600px] h-[600px] bg-secondary/20 rounded-full blur-3xl opacity-30" />
-            <div className="absolute bottom-0 left-0 translate-y-1/4 -translate-x-1/4 w-[500px] h-[500px] bg-accent/20 rounded-full blur-3xl opacity-30" />
+        <section className="relative min-h-[85vh] flex items-center pt-20 pb-16 overflow-hidden bg-grid-pattern transition-colors duration-300">
+            {/* Subtle ambient lighting */}
+            <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[800px] h-[350px] bg-gradient-to-b from-blue-500/10 via-indigo-500/5 to-transparent rounded-full blur-[120px] pointer-events-none" />
 
             <Container className="relative z-10">
-                <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20 items-center">
+                <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-8 items-center">
+                    
+                    {/* Left Column: Value Proposition & CTAs */}
                     <motion.div
-                        initial={{ opacity: 0, x: -50 }}
-                        animate={{ opacity: 1, x: 0 }}
-                        transition={{ duration: 0.8, delay: 0.2 }}
-                        className="space-y-6 md:space-y-10 text-center lg:text-left"
+                        initial={{ opacity: 0, y: 20 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
+                        className="lg:col-span-7 space-y-7 text-center lg:text-left"
                     >
-                        <div className="inline-flex items-center gap-2 px-6 py-2 rounded-full bg-secondary/10 border border-secondary/20 text-secondary text-sm font-black uppercase tracking-widest shadow-sm">
-                            <Sparkles className="w-4 h-4 animate-pulse" />
-                            <span>Innovation Digitale</span>
+                        {/* Innovation Badge */}
+                        <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-blue-50 dark:bg-blue-500/10 border border-blue-200 dark:border-blue-500/20 text-blue-600 dark:text-blue-400 text-xs font-semibold">
+                            <span className="flex h-2 w-2 rounded-full bg-blue-500 animate-ping" />
+                            <span>Pôle d&apos;ingénierie logicielle & SaaS sur mesure</span>
+                            <ChevronRight size={14} className="text-blue-400/70" />
                         </div>
 
-                        <h1 className="text-4xl sm:text-5xl md:text-7xl lg:text-8xl font-black leading-[1.05] tracking-tight text-white transition-all duration-300">
-                            Imaginez le futur,<br />
-                            <span className="text-gradient">Xeltrix</span> le réalise.
+                        {/* Main Headline */}
+                        <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-[60px] font-bold leading-[1.08] tracking-tight text-slate-900 dark:text-white">
+                            L&apos;ingénierie logicielle <br className="hidden sm:inline" />
+                            pour les entreprises <br className="hidden sm:inline" />
+                            <span className="text-gradient-primary">hautement exigeantes</span>.
                         </h1>
 
-                        <p className="text-lg sm:text-xl md:text-2xl text-muted leading-relaxed max-w-xl mx-auto lg:mx-0 font-medium">
-                            Spécialistes du développement sur-mesure, nous créons des solutions web, mobiles et cloud de haute performance pour propulser votre entreprise.
+                        {/* Subtitle */}
+                        <p className="text-slate-600 dark:text-slate-300 text-base sm:text-lg md:text-xl leading-relaxed max-w-2xl mx-auto lg:mx-0 font-normal">
+                            De la conception d&apos;architectures complexes (Web, Mobile, Cloud) au déploiement d&apos;ERP et d&apos;IA sur mesure, XELTRIX accélère votre compétitivité technologique avec une rigueur de production sans compromis.
                         </p>
 
-                        <div className="flex flex-col sm:flex-row flex-wrap justify-center lg:justify-start gap-4 sm:gap-6 pt-6">
+                        {/* CTA Actions */}
+                        <div className="flex flex-col sm:flex-row items-center justify-center lg:justify-start gap-4 pt-1">
+                            <Link href="/quote" className="w-full sm:w-auto">
+                                <Button variant="primary" size="lg" className="w-full sm:w-auto shadow-lg shadow-blue-600/20 group">
+                                    <span>Estimer mon projet</span>
+                                    <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+                                </Button>
+                            </Link>
                             <Link href="/projects" className="w-full sm:w-auto">
-                                <Button size="lg" className="group h-16 px-10 text-lg w-full sm:w-auto">
-                                    Voir nos réalisations
-                                    <ArrowRight className="w-6 h-6 group-hover:translate-x-2 transition-transform" />
-                                </Button>
-                            </Link>
-                            <Link href="/contact" className="w-full sm:w-auto">
-                                <Button variant="outline" size="lg" className="h-16 px-10 text-lg hover:bg-primary hover:text-white border-2 w-full sm:w-auto">
-                                    Nous contacter
+                                <Button variant="outline" size="lg" className="w-full sm:w-auto">
+                                    Explorer les réalisations
                                 </Button>
                             </Link>
                         </div>
 
-                        <div className="flex flex-col sm:flex-row items-center justify-center lg:justify-start gap-6 sm:gap-10 pt-10 border-t border-slate-200/50 dark:border-slate-800/50">
-                            <div className="flex -space-x-4">
-                                {[1, 2, 3, 4].map((i) => (
-                                    <div key={i} className="w-10 h-10 md:w-12 md:h-12 rounded-full border-[3px] border-background bg-slate-300 shadow-xl overflow-hidden">
-                                        <img src={`https://i.pravatar.cc/100?img=${i + 10}`} alt="User" />
-                                    </div>
-                                ))}
+                        {/* Key Trust Signals */}
+                        <div className="grid grid-cols-3 gap-4 pt-5 border-t border-slate-200 dark:border-white/[0.08] max-w-lg mx-auto lg:mx-0">
+                            <div>
+                                <div className="text-xl sm:text-2xl font-bold text-slate-900 dark:text-white tracking-tight">100%</div>
+                                <div className="text-xs text-slate-500 dark:text-slate-400">Code propriétaire</div>
                             </div>
-                            <p className="text-sm md:text-base text-muted font-bold">
-                                <span className="text-white">+50 clients</span> satisfaits dans le monde entier.
-                            </p>
+                            <div>
+                                <div className="text-xl sm:text-2xl font-bold text-slate-900 dark:text-white tracking-tight">99.9%</div>
+                                <div className="text-xs text-slate-500 dark:text-slate-400">SLA & Disponibilité</div>
+                            </div>
+                            <div>
+                                <div className="text-xl sm:text-2xl font-bold text-slate-900 dark:text-white tracking-tight">&lt; 24h</div>
+                                <div className="text-xs text-slate-500 dark:text-slate-400">Délai de cadrage</div>
+                            </div>
                         </div>
                     </motion.div>
 
+                    {/* Right Column: Code & Tech Architecture Preview */}
                     <motion.div
-                        initial={{ opacity: 0, scale: 0.9, rotate: -2 }}
-                        animate={{ opacity: 1, scale: 1, rotate: 0 }}
-                        transition={{ duration: 1, delay: 0.4 }}
-                        className="relative hidden lg:block"
+                        initial={{ opacity: 0, scale: 0.96 }}
+                        animate={{ opacity: 1, scale: 1 }}
+                        transition={{ duration: 0.6, delay: 0.15 }}
+                        className="lg:col-span-5 relative"
                     >
-                        <div className="relative z-10 rounded-[3rem] overflow-hidden shadow-[0_32px_64px_-16px_rgba(0,0,0,0.3)] border border-white/20 glass p-5">
-                            {/* Animated Mockup */}
-                            <div className="aspect-[4/3] bg-gradient-to-br from-slate-900 via-primary to-secondary rounded-[2.5rem] flex items-center justify-center p-12 relative group overflow-hidden">
-                                <div className="absolute inset-0 bg-[url('https://www.transparenttextures.com/patterns/carbon-fibre.png')] opacity-20" />
-                                <motion.div
-                                    animate={{ y: [0, -10, 0] }}
-                                    transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
-                                    className="w-full h-full bg-white/10 rounded-3xl border border-white/20 backdrop-blur-xl flex flex-col items-center justify-center space-y-6 shadow-2xl"
-                                >
-                                    <Logo className="scale-150 rotate-0" />
-                                    <div className="flex gap-4">
-                                        <div className="w-12 h-2 bg-secondary/50 rounded-full" />
-                                        <div className="w-20 h-2 bg-white/20 rounded-full" />
-                                    </div>
-                                </motion.div>
+                        <div className="rounded-2xl border border-slate-200 dark:border-white/[0.1] bg-white dark:bg-slate-950/90 shadow-xl dark:shadow-2xl overflow-hidden">
+                            {/* Window Header */}
+                            <div className="flex items-center justify-between px-4 py-3 border-b border-slate-200 dark:border-white/[0.08] bg-slate-50 dark:bg-slate-900/60">
+                                <div className="flex items-center gap-2">
+                                    <div className="w-3 h-3 rounded-full bg-red-500/80" />
+                                    <div className="w-3 h-3 rounded-full bg-amber-500/80" />
+                                    <div className="w-3 h-3 rounded-full bg-emerald-500/80" />
+                                </div>
+                                <div className="flex items-center gap-1.5 text-xs text-slate-600 dark:text-slate-400 font-mono">
+                                    <Terminal size={13} className="text-blue-500" />
+                                    <span>xeltrix-core-engine.ts</span>
+                                </div>
+                                <div className="text-[10px] font-mono text-emerald-600 dark:text-emerald-400 bg-emerald-50 dark:bg-emerald-950/60 border border-emerald-300 dark:border-emerald-500/30 px-2 py-0.5 rounded font-semibold">
+                                    ONLINE
+                                </div>
+                            </div>
 
-                                {/* Floating decorative rings */}
-                                <div className="absolute -top-10 -right-10 w-40 h-40 border-2 border-white/5 rounded-full" />
-                                <div className="absolute -bottom-20 -left-20 w-80 h-80 border-2 border-white/5 rounded-full" />
+                            {/* Window Code Content */}
+                            <div className="p-5 font-mono text-xs text-slate-800 dark:text-slate-300 space-y-3 leading-relaxed bg-slate-950 text-slate-200">
+                                <div className="text-slate-500">// Déploiement d&apos;architecture d&apos;entreprise</div>
+                                <div>
+                                    <span className="text-purple-400">const</span>{" "}
+                                    <span className="text-blue-300">platform</span> ={" "}
+                                    <span className="text-purple-400">await</span>{" "}
+                                    <span className="text-amber-300">Xeltrix</span>.
+                                    <span className="text-blue-400">deploySolution</span>({"{"}
+                                </div>
+                                <div className="pl-4 space-y-1 text-slate-300">
+                                    <div><span className="text-slate-400">stack:</span> <span className="text-emerald-300">[&apos;Next.js&apos;, &apos;FastAPI&apos;, &apos;PostgreSQL&apos;]</span>,</div>
+                                    <div><span className="text-slate-400">infrastructure:</span> <span className="text-emerald-300">&apos;High-Availability Cloud&apos;</span>,</div>
+                                    <div><span className="text-slate-400">security:</span> <span className="text-emerald-300">&apos;Enterprise-Grade Auth & RBAC&apos;</span>,</div>
+                                    <div><span className="text-slate-400">aiIntegration:</span> <span className="text-blue-400">true</span>,</div>
+                                </div>
+                                <div>{"});"}</div>
+
+                                <div className="pt-2 border-t border-white/[0.06] flex items-center justify-between text-[11px]">
+                                    <span className="text-slate-400">Status: Production Ready</span>
+                                    <span className="text-emerald-400 font-semibold flex items-center gap-1">
+                                        <CheckCircle2 size={13} /> Prêt au déploiement
+                                    </span>
+                                </div>
+                            </div>
+
+                            {/* Live Modules Cards */}
+                            <div className="p-4 bg-slate-50 dark:bg-slate-900/40 border-t border-slate-200 dark:border-white/[0.08] grid grid-cols-2 gap-3">
+                                <div className="p-3 rounded-xl bg-white dark:bg-slate-900/60 border border-slate-200 dark:border-white/[0.06] space-y-1 shadow-sm">
+                                    <div className="text-[11px] font-semibold text-slate-900 dark:text-white flex items-center gap-1.5">
+                                        <Cpu size={13} className="text-blue-600 dark:text-blue-400" />
+                                        Modèles IA & NLP
+                                    </div>
+                                    <div className="text-[10px] text-slate-500 dark:text-slate-400">Automatisation des workflows</div>
+                                </div>
+                                <div className="p-3 rounded-xl bg-white dark:bg-slate-900/60 border border-slate-200 dark:border-white/[0.06] space-y-1 shadow-sm">
+                                    <div className="text-[11px] font-semibold text-slate-900 dark:text-white flex items-center gap-1.5">
+                                        <ShieldCheck size={13} className="text-emerald-600 dark:text-emerald-400" />
+                                        Souveraineté des données
+                                    </div>
+                                    <div className="text-[10px] text-slate-500 dark:text-slate-400">Conformité RGPD & Chiffrement</div>
+                                </div>
                             </div>
                         </div>
 
-                        {/* Impactful decorative elements */}
-                        <div className="absolute -top-12 -right-12 w-48 h-48 bg-secondary/30 rounded-full blur-[80px] animate-pulse" />
-                        <div className="absolute -bottom-20 -left-20 w-64 h-64 bg-accent/30 rounded-full blur-[100px] animate-pulse delay-1000" />
-
-                        {/* Floating Tech Badge */}
-                        <motion.div
-                            animate={{ y: [0, 20, 0] }}
-                            transition={{ duration: 5, repeat: Infinity }}
-                            className="absolute -right-8 top-1/4 glass px-6 py-4 rounded-3xl shadow-2xl border border-white/20 z-20 flex items-center gap-4"
-                        >
-                            <div className="w-10 h-10 bg-success rounded-full flex items-center justify-center text-white">
-                                <ArrowRight className="-rotate-45" size={20} />
+                        {/* Floating Highlight Badge */}
+                        <div className="absolute -bottom-4 -left-4 bg-white dark:bg-slate-900/90 border border-slate-200 dark:border-white/15 px-4 py-2.5 rounded-xl shadow-lg dark:shadow-xl backdrop-blur-md hidden sm:flex items-center gap-3">
+                            <div className="w-8 h-8 rounded-lg bg-blue-50 dark:bg-blue-500/10 flex items-center justify-center text-blue-600 dark:text-blue-400">
+                                <Sparkles size={16} />
                             </div>
-                            <div className="text-left">
-                                <p className="text-[10px] font-black uppercase text-slate-400">Uptime</p>
-                                <p className="text-xl font-black text-white">99.9%</p>
+                            <div>
+                                <div className="text-xs font-semibold text-slate-900 dark:text-white">Prise en charge complète</div>
+                                <div className="text-[10px] text-slate-500 dark:text-slate-400">De l&apos;architecture à la maintenance</div>
                             </div>
-                        </motion.div>
+                        </div>
                     </motion.div>
+
                 </div>
             </Container>
         </section>
     )
 }
-
-const Logo = ({ className = "" }: { className?: string }) => (
-    <div className={`flex items-center gap-4 ${className}`}>
-        <div className="relative w-16 h-16 flex items-center justify-center bg-slate-900 rounded-[1.25rem] overflow-hidden shadow-[0_12px_30px_-10px_rgba(124,58,237,0.5)] transform -rotate-6 hover:rotate-0 transition-all duration-500 group border border-white/10">
-            <div className="absolute inset-0 bg-gradient-to-tr from-blue-600 via-purple-600 to-pink-500 opacity-90" />
-            <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_left,rgba(255,255,255,0.4),transparent)]" />
-            <span className="relative text-white font-black text-4xl tracking-tighter italic">X</span>
-        </div>
-        <span className="font-black text-4xl tracking-tighter text-white drop-shadow-md">
-            ELTRIX<span className="text-purple-500 animate-pulse">.</span>
-        </span>
-    </div>
-)

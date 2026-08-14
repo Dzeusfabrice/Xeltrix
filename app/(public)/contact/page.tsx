@@ -1,51 +1,39 @@
 'use client'
 
-import React from 'react'
-import { Container, Button } from '@/components/ui'
-import { Mail, Phone, MapPin, Send, MessageSquare, Globe, Linkedin, Twitter, Github, Zap } from 'lucide-react'
+import React, { useState } from 'react'
+import { Container, Button, Card, Badge } from '@/components/ui'
+import { Mail, MapPin, Send, Clock, CheckCircle2, Sparkles } from 'lucide-react'
 import { useForm } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
 import * as z from 'zod'
-import { motion } from 'framer-motion'
+import { submitContactMessage } from './actions'
+import Link from 'next/link'
 
 const contactSchema = z.object({
     name: z.string().min(2, "Le nom doit contenir au moins 2 caractères"),
-    email: z.string().email("Adresse email invalide"),
-    subject: z.string().min(1, "Veuillez choisir un sujet"),
+    email: z.string().email("Adresse email professionnelle invalide"),
+    subject: z.string().min(1, "Veuillez préciser le motif de votre message"),
     message: z.string().min(10, "Le message doit contenir au moins 10 caractères"),
     phone: z.string().optional()
 })
 
 type ContactFormData = z.infer<typeof contactSchema>
 
-const ContactInfoItem = ({ icon, title, value, sub, delay }: { icon: any, title: string, value: string, sub: string, delay: number }) => (
-    <motion.div
-        initial={{ opacity: 0, x: -20 }}
-        whileInView={{ opacity: 1, x: 0 }}
-        transition={{ delay }}
-        className="flex gap-6 items-center p-6 rounded-[2rem] bg-white/5 border border-white/5 hover:border-purple-500/30 transition-all group"
-    >
-        <div className="w-14 h-14 rounded-2xl bg-purple-600/10 border border-purple-500/20 flex items-center justify-center shrink-0 group-hover:bg-purple-600 group-hover:text-white transition-all duration-500 text-purple-400">
-            {React.cloneElement(icon, { size: 24 })}
-        </div>
-        <div>
-            <h4 className="text-xs font-black text-purple-500 uppercase tracking-widest mb-1">{title}</h4>
-            <p className="text-white text-lg font-bold tracking-tight">{value}</p>
-            <p className="text-slate-500 text-sm font-medium italic">{sub}</p>
-        </div>
-    </motion.div>
-)
-
-import { submitContactMessage } from './actions'
-
-// ... (keep contactSchema and info items) ...
-
 export default function ContactPage() {
-    const { register, handleSubmit, formState: { errors, isSubmitting }, reset } = useForm<ContactFormData>({
+    const [isSubmitted, setIsSubmitted] = useState(false)
+    const [submitError, setSubmitError] = useState('')
+
+    const {
+        register,
+        handleSubmit,
+        formState: { errors, isSubmitting },
+        reset
+    } = useForm<ContactFormData>({
         resolver: zodResolver(contactSchema)
     })
 
     const onSubmit = async (data: ContactFormData) => {
+        setSubmitError('')
         try {
             const formData = new FormData()
             formData.append('name', data.name)
@@ -57,228 +45,215 @@ export default function ContactPage() {
             const result = await submitContactMessage(formData)
 
             if (result.error) {
-                alert(`Erreur: ${result.error}`)
+                setSubmitError(result.error)
             } else {
-                alert("Message envoyé avec succès ! Notre équipe technique vous recontactera sous peu.")
+                setIsSubmitted(true)
                 reset()
             }
         } catch (error) {
-            alert("Une erreur inattendue s'est produite.")
-            console.error(error)
+            setSubmitError("Une erreur inattendue s'est produite lors de l'envoi.")
         }
     }
 
     return (
-        <div className="min-h-screen bg-[#020617] pb-24">
-            {/* Ultra-Modern Hero Section */}
-            <section className="relative py-32 overflow-hidden border-b border-white/5">
-                <div className="absolute inset-0 bg-gradient-to-br from-purple-600/5 via-transparent to-blue-600/5" />
-                <div className="absolute top-0 right-0 w-[600px] h-[600px] bg-purple-600/10 rounded-full blur-[120px] -translate-y-1/2 translate-x-1/2 opacity-50" />
-                <div className="absolute -bottom-20 -left-20 w-[400px] h-[400px] bg-blue-600/10 rounded-full blur-[100px] opacity-30" />
+        <div className="min-h-screen bg-background text-foreground pb-24 transition-colors duration-300">
+            {/* Header Hero */}
+            <section className="relative py-14 md:py-20 overflow-hidden border-b border-slate-200 dark:border-white/[0.08] bg-grid-pattern">
+                <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[700px] h-[250px] bg-blue-500/10 rounded-full blur-[130px] pointer-events-none" />
 
-                <motion.div
-                    initial={{ opacity: 0 }}
-                    animate={{ opacity: 1 }}
-                    transition={{ duration: 2 }}
-                    className="absolute inset-y-0 right-0 w-full lg:w-3/4 pointer-events-none select-none z-0"
-                >
-                    {/* Mobile specific gradient to protect text visibility */}
-                    <div className="absolute inset-0 bg-[#020617]/80 lg:hidden z-10" />
-                    <div className="absolute inset-0 bg-[#020617] [mask-image:radial-gradient(ellipse_at_center,transparent_20%,#020617_80%)] z-10" />
-                    <div className="absolute inset-0 bg-gradient-to-r from-[#020617] via-[#020617]/40 to-transparent z-10" />
-                    <div className="absolute inset-0 bg-gradient-to-t from-[#020617] via-transparent to-[#020617] z-10" />
-
-                    <img
-                        src="https://images.unsplash.com/photo-1516321318423-f06f85e504b3?q=80&w=1600&auto=format&fit=crop"
-                        alt="Contact Symbiosis"
-                        className="w-full h-full object-cover"
-                    />
-                </motion.div>
-
-                <Container className="relative z-10">
-                    <motion.div
-                        initial={{ opacity: 0, x: -30 }}
-                        animate={{ opacity: 1, x: 0 }}
-                        transition={{ duration: 0.8 }}
-                        className="max-w-4xl mx-auto space-y-8 text-center lg:text-left"
-                    >
-                        <motion.div
-                            initial={{ opacity: 0, scale: 0.9 }}
-                            animate={{ opacity: 1, scale: 1 }}
-                            className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/5 border border-white/10 text-purple-400 text-[10px] font-black uppercase tracking-[0.2em]"
-                        >
-                            <Zap size={14} className="animate-pulse" />
-                            Disponible pour de nouveaux défis
-                        </motion.div>
-                        <h1 className="text-6xl md:text-9xl font-black text-white leading-[0.85] tracking-tighter">
-                            Parlons de votre <br /> <span className="text-gradient">PROJET</span>.
-                        </h1>
-                        <p className="text-xl md:text-3xl text-slate-400 leading-relaxed font-medium max-w-2xl">
-                            Une idée visionnaire ? Un besoin de transformation numérique ? Notre expertise est à votre service.
-                        </p>
-                    </motion.div>
+                <Container className="relative z-10 text-center space-y-3.5 max-w-3xl">
+                    <Badge variant="primary" className="text-xs uppercase tracking-wider font-semibold">
+                        Échange Technique & Cadrage
+                    </Badge>
+                    <h1 className="text-3xl sm:text-4xl md:text-5xl font-bold tracking-tight text-slate-900 dark:text-white leading-[1.15]">
+                        Parlons de votre prochain <span className="text-gradient-primary">défi logiciel</span>
+                    </h1>
+                    <p className="text-slate-600 dark:text-slate-300 text-sm sm:text-base leading-relaxed max-w-xl mx-auto">
+                        Notre équipe d&apos;ingénieurs et d&apos;architectes logiciels est à votre disposition pour analyser votre cahier des charges et vous conseiller.
+                    </p>
                 </Container>
             </section>
 
-            <section className="py-24 relative">
+            <section className="py-14">
                 <Container>
-                    <div className="grid grid-cols-1 lg:grid-cols-12 gap-16 items-start">
-                        {/* Info Panel - High Tech Style */}
-                        <div className="lg:col-span-5 space-y-10 group">
-                            <div className="space-y-4">
-                                <h3 className="text-3xl font-black text-white tracking-tight">Canaux de communication</h3>
-                                <div className="h-1 w-20 bg-purple-600 rounded-full group-hover:w-40 transition-all duration-700" />
+                    <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-10 items-start max-w-6xl mx-auto">
+                        {/* Left: Contact Info & Value props */}
+                        <div className="lg:col-span-5 space-y-5">
+                            <div className="space-y-2">
+                                <h3 className="text-xl font-bold text-slate-900 dark:text-white tracking-tight">
+                                    Une réponse rapide & engagée
+                                </h3>
+                                <p className="text-slate-600 dark:text-slate-400 text-sm leading-relaxed">
+                                    Nous nous engageons à répondre sous 24h avec une première analyse de faisabilité technique.
+                                </p>
                             </div>
 
-                            <div className="space-y-6">
-                                <ContactInfoItem
-                                    icon={<Mail />}
-                                    title="Email Direct"
-                                    value="contact@xeltrix.com"
-                                    sub="Réponse garantie sous 24h"
-                                    delay={0.1}
-                                />
-                                <ContactInfoItem
-                                    icon={<Phone />}
-                                    title="Ligne Téléphonique"
-                                    value="+237 6 95 72 11 72"
-                                    sub="Lun - Ven, 09:00 - 18:00"
-                                    delay={0.2}
-                                />
-                                <ContactInfoItem
-                                    icon={<MapPin />}
-                                    title="Siège Social"
-                                    value="Ngaoundere, Cameroun"
-                                    sub="Ngaoundere, Cameroun"
-                                    delay={0.3}
-                                />
-                            </div>
-
-                            {/* Social Presence */}
-                            <motion.div
-                                initial={{ opacity: 0, y: 20 }}
-                                whileInView={{ opacity: 1, y: 0 }}
-                                className="p-10 rounded-[3rem] bg-gradient-to-br from-slate-900 via-slate-950 to-purple-900/20 border border-white/5 relative overflow-hidden glass-card"
-                            >
-                                <div className="absolute -top-10 -right-10 w-32 h-32 bg-purple-600/10 rounded-full blur-3xl" />
-                                <h4 className="text-xl font-black text-white mb-6 tracking-tight">Suivez notre aventure</h4>
-                                <div className="flex gap-4">
-                                    {[<Linkedin />, <Github />, <Twitter />, <Globe />].map((icon, i) => (
-                                        <a key={i} href="#" className="w-14 h-14 rounded-2xl bg-white/5 border border-white/10 flex items-center justify-center text-white hover:bg-purple-600 hover:border-purple-600 hover:-translate-y-2 transition-all duration-500 shadow-xl">
-                                            {React.cloneElement(icon as any, { size: 22 })}
-                                        </a>
-                                    ))}
+                            {/* Direct Contact Cards */}
+                            <div className="space-y-2.5">
+                                <div className="p-4 rounded-2xl bg-slate-50 dark:bg-slate-900/60 border border-slate-200 dark:border-white/[0.08] flex items-center gap-3.5">
+                                    <div className="w-10 h-10 rounded-xl bg-blue-50 dark:bg-blue-500/10 border border-blue-200 dark:border-blue-500/20 flex items-center justify-center text-blue-600 dark:text-blue-400 shrink-0">
+                                        <Mail size={18} />
+                                    </div>
+                                    <div>
+                                        <div className="text-xs text-slate-500 dark:text-slate-400 font-medium">Email direct</div>
+                                        <div className="text-sm font-semibold text-slate-900 dark:text-white font-mono">contact@xeltrix.com</div>
+                                    </div>
                                 </div>
-                            </motion.div>
+
+                                <div className="p-4 rounded-2xl bg-slate-50 dark:bg-slate-900/60 border border-slate-200 dark:border-white/[0.08] flex items-center gap-3.5">
+                                    <div className="w-10 h-10 rounded-xl bg-blue-50 dark:bg-blue-500/10 border border-blue-200 dark:border-blue-500/20 flex items-center justify-center text-blue-600 dark:text-blue-400 shrink-0">
+                                        <MapPin size={18} />
+                                    </div>
+                                    <div>
+                                        <div className="text-xs text-slate-500 dark:text-slate-400 font-medium">Localisation</div>
+                                        <div className="text-sm font-semibold text-slate-900 dark:text-white">Ngaoundéré, Cameroun / International</div>
+                                    </div>
+                                </div>
+
+                                <div className="p-4 rounded-2xl bg-slate-50 dark:bg-slate-900/60 border border-slate-200 dark:border-white/[0.08] flex items-center gap-3.5">
+                                    <div className="w-10 h-10 rounded-xl bg-blue-50 dark:bg-blue-500/10 border border-blue-200 dark:border-blue-500/20 flex items-center justify-center text-blue-600 dark:text-blue-400 shrink-0">
+                                        <Clock size={18} />
+                                    </div>
+                                    <div>
+                                        <div className="text-xs text-slate-500 dark:text-slate-400 font-medium">Délai moyen de prise en charge</div>
+                                        <div className="text-sm font-semibold text-emerald-600 dark:text-emerald-400">&lt; 24h ouvrées</div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            {/* Simulation shortcut */}
+                            <div className="p-5 rounded-2xl bg-gradient-to-br from-blue-50 to-indigo-50 dark:from-blue-900/20 dark:to-slate-900 border border-blue-200 dark:border-blue-500/20 space-y-2.5 shadow-sm">
+                                <div className="flex items-center gap-2 text-xs font-semibold text-blue-600 dark:text-blue-400">
+                                    <Sparkles size={14} />
+                                    <span>Besoin d&apos;une estimation budgétaire immédiate ?</span>
+                                </div>
+                                <p className="text-xs text-slate-600 dark:text-slate-300 leading-relaxed">
+                                    Utilisez notre simulateur de devis pour obtenir une fourchette tarifaire et un planning prévisionnel en 2 minutes.
+                                </p>
+                                <Link href="/quote" className="inline-block pt-0.5">
+                                    <Button variant="outline" size="sm">
+                                        Accéder au simulateur
+                                    </Button>
+                                </Link>
+                            </div>
                         </div>
 
-                        {/* Modern Glass Form */}
-                        <motion.div
-                            initial={{ opacity: 0, x: 30 }}
-                            whileInView={{ opacity: 1, x: 0 }}
-                            className="lg:col-span-7 bg-slate-900/30 p-8 md:p-16 rounded-[4rem] border border-white/5 shadow-[0_0_50px_-10px_rgba(0,0,0,0.5)] backdrop-blur-2xl relative overflow-hidden glass-card"
-                        >
-                            <div className="absolute top-0 right-0 w-64 h-64 bg-purple-600/5 rounded-full blur-[100px]" />
-
-                            <form onSubmit={handleSubmit(onSubmit)} className="space-y-10 relative z-10">
-                                <div className="grid grid-cols-1 md:grid-cols-2 gap-10">
-                                    <div className="space-y-4">
-                                        <label className="text-[10px] font-black text-slate-500 uppercase tracking-[0.3em] ml-1">Nom complet</label>
-                                        <div className="relative">
-                                            <input
-                                                {...register('name')}
-                                                placeholder="Ex: Fabrice Dzeudjio"
-                                                className={`w-full px-8 py-5 bg-white/5 border border-white/10 rounded-[1.5rem] outline-none text-white focus:ring-2 transition-all font-medium placeholder:text-slate-700 ${errors.name ? 'ring-2 ring-red-500/50' : 'focus:ring-purple-500/50'}`}
-                                            />
+                        {/* Right: Contact Form */}
+                        <div className="lg:col-span-7">
+                            <Card className="p-6 sm:p-9">
+                                {isSubmitted ? (
+                                    <div className="text-center py-10 space-y-3.5">
+                                        <div className="w-14 h-14 rounded-full bg-emerald-50 dark:bg-emerald-500/20 text-emerald-600 dark:text-emerald-400 flex items-center justify-center mx-auto">
+                                            <CheckCircle2 size={32} />
                                         </div>
-                                        {errors.name && <p className="text-[10px] text-red-500 font-black uppercase tracking-widest ml-1">{errors.name.message}</p>}
+                                        <h3 className="text-2xl font-bold text-slate-900 dark:text-white">Message transmis avec succès</h3>
+                                        <p className="text-slate-600 dark:text-slate-300 text-sm max-w-sm mx-auto">
+                                            Merci pour votre prise de contact. Notre équipe d&apos;ingénierie revient vers vous sous 24h avec un retour qualifié.
+                                        </p>
+                                        <div className="pt-3">
+                                            <Button variant="outline" size="sm" onClick={() => setIsSubmitted(false)}>
+                                                Envoyer un autre message
+                                            </Button>
+                                        </div>
                                     </div>
-                                    <div className="space-y-4">
-                                        <label className="text-[10px] font-black text-slate-500 uppercase tracking-[0.3em] ml-1">Email Professionnel</label>
-                                        <input
-                                            {...register('email')}
-                                            placeholder="Ex: contact@votre-startup.com"
-                                            className={`w-full px-8 py-5 bg-white/5 border border-white/10 rounded-[1.5rem] outline-none text-white focus:ring-2 transition-all font-medium placeholder:text-slate-700 ${errors.email ? 'ring-2 ring-red-500/50' : 'focus:ring-purple-500/50'}`}
-                                        />
-                                        {errors.email && <p className="text-[10px] text-red-500 font-black uppercase tracking-widest ml-1">{errors.email.message}</p>}
-                                    </div>
-                                </div>
+                                ) : (
+                                    <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
+                                        <div>
+                                            <h3 className="text-xl font-bold text-slate-900 dark:text-white">Formulaire de contact</h3>
+                                            <p className="text-xs text-slate-500 dark:text-slate-400 mt-0.5">Tous les champs marqués d&apos;une astérisque (*) sont requis.</p>
+                                        </div>
 
-                                <div className="grid grid-cols-1 md:grid-cols-2 gap-10">
-                                    <div className="space-y-4">
-                                        <label className="text-[10px] font-black text-slate-500 uppercase tracking-[0.3em] ml-1">Téléphone</label>
-                                        <input
-                                            {...register('phone')}
-                                            placeholder="+225 07 45..."
-                                            className="w-full px-8 py-5 bg-white/5 border border-white/10 rounded-[1.5rem] outline-none text-white focus:ring-2 focus:ring-purple-500/50 transition-all font-medium placeholder:text-slate-700"
-                                        />
-                                    </div>
-                                    <div className="space-y-4">
-                                        <label className="text-[10px] font-black text-slate-500 uppercase tracking-[0.3em] ml-1">Objet de la demande</label>
-                                        <select
-                                            {...register('subject')}
-                                            className={`w-full px-8 py-5 bg-white/5 border border-white/10 rounded-[1.5rem] outline-none text-white focus:ring-2 transition-all font-medium appearance-none cursor-pointer ${errors.subject ? 'ring-2 ring-red-500/50' : 'focus:ring-purple-500/50'}`}
-                                        >
-                                            <option value="" className="bg-[#020617]">Choisir un service</option>
-                                            <option value="web" className="bg-[#020617]">Développement Web Premium</option>
-                                            <option value="mobile" className="bg-[#020617]">Application Mobile Native</option>
-                                            <option value="cloud" className="bg-[#020617]">Architecture Cloud & DevOps</option>
-                                            <option value="other" className="bg-[#020617]">Autre Défi Technique</option>
-                                        </select>
-                                        {errors.subject && <p className="text-[10px] text-red-500 font-black uppercase tracking-widest ml-1">{errors.subject.message}</p>}
-                                    </div>
-                                </div>
-
-                                <div className="space-y-4">
-                                    <label className="text-[10px] font-black text-slate-500 uppercase tracking-[0.3em] ml-1">Votre Message</label>
-                                    <textarea
-                                        {...register('message')}
-                                        rows={5}
-                                        placeholder="Décrivez votre vision en quelques mots..."
-                                        className={`w-full px-8 py-6 bg-white/5 border border-white/10 rounded-[2rem] outline-none text-white focus:ring-2 transition-all resize-none font-medium placeholder:text-slate-700 ${errors.message ? 'ring-2 ring-red-500/50' : 'focus:ring-purple-500/50'}`}
-                                    />
-                                    {errors.message && <p className="text-[10px] text-red-500 font-black uppercase tracking-widest ml-1">{errors.message.message}</p>}
-                                </div>
-
-                                <motion.div whileHover={{ scale: 1.02 }} whileTap={{ scale: 0.98 }}>
-                                    <Button
-                                        type="submit"
-                                        className="w-full h-20 rounded-[2rem] bg-purple-600 hover:bg-purple-700 text-white flex items-center justify-center gap-4 text-sm font-black uppercase tracking-[0.3em] shadow-2xl shadow-purple-600/20 group transition-all"
-                                        disabled={isSubmitting}
-                                    >
-                                        {isSubmitting ? (
-                                            "Transmission en cours..."
-                                        ) : (
-                                            <>
-                                                Lancer la conversation
-                                                <Send size={20} className="group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform" />
-                                            </>
+                                        {submitError && (
+                                            <div className="p-3 rounded-xl bg-red-50 dark:bg-red-500/10 border border-red-200 dark:border-red-500/20 text-red-600 dark:text-red-400 text-xs">
+                                                {submitError}
+                                            </div>
                                         )}
-                                    </Button>
-                                </motion.div>
-                            </form>
-                        </motion.div>
+
+                                        <div className="grid grid-cols-1 sm:grid-cols-2 gap-3.5">
+                                            <div className="space-y-1">
+                                                <label className="text-xs font-semibold text-slate-700 dark:text-slate-300">
+                                                    Nom et prénom *
+                                                </label>
+                                                <input
+                                                    type="text"
+                                                    {...register('name')}
+                                                    placeholder="Alexandre Dupont"
+                                                    className="w-full bg-slate-50 dark:bg-slate-950 border border-slate-200 dark:border-white/10 rounded-xl px-4 py-2.5 text-sm text-slate-900 dark:text-white placeholder:text-slate-400 focus:outline-none focus:border-blue-500"
+                                                />
+                                                {errors.name && <p className="text-xs text-red-500">{errors.name.message}</p>}
+                                            </div>
+
+                                            <div className="space-y-1">
+                                                <label className="text-xs font-semibold text-slate-700 dark:text-slate-300">
+                                                    Email professionnel *
+                                                </label>
+                                                <input
+                                                    type="email"
+                                                    {...register('email')}
+                                                    placeholder="a.dupont@entreprise.com"
+                                                    className="w-full bg-slate-50 dark:bg-slate-950 border border-slate-200 dark:border-white/10 rounded-xl px-4 py-2.5 text-sm text-slate-900 dark:text-white placeholder:text-slate-400 focus:outline-none focus:border-blue-500"
+                                                />
+                                                {errors.email && <p className="text-xs text-red-500">{errors.email.message}</p>}
+                                            </div>
+                                        </div>
+
+                                        <div className="grid grid-cols-1 sm:grid-cols-2 gap-3.5">
+                                            <div className="space-y-1">
+                                                <label className="text-xs font-semibold text-slate-700 dark:text-slate-300">
+                                                    Téléphone / WhatsApp
+                                                </label>
+                                                <input
+                                                    type="tel"
+                                                    {...register('phone')}
+                                                    placeholder="+33 6 00 00 00 00"
+                                                    className="w-full bg-slate-50 dark:bg-slate-950 border border-slate-200 dark:border-white/10 rounded-xl px-4 py-2.5 text-sm text-slate-900 dark:text-white placeholder:text-slate-400 focus:outline-none focus:border-blue-500"
+                                                />
+                                            </div>
+
+                                            <div className="space-y-1">
+                                                <label className="text-xs font-semibold text-slate-700 dark:text-slate-300">
+                                                    Sujet *
+                                                </label>
+                                                <select
+                                                    {...register('subject')}
+                                                    className="w-full bg-slate-50 dark:bg-slate-950 border border-slate-200 dark:border-white/10 rounded-xl px-4 py-2.5 text-sm text-slate-900 dark:text-white focus:outline-none focus:border-blue-500"
+                                                >
+                                                    <option value="">Sélectionnez un sujet</option>
+                                                    <option value="Nouveau projet logiciel">Nouveau projet logiciel</option>
+                                                    <option value="Demande de démo produit">Demande de démo produit (ERP/CRM/SDK)</option>
+                                                    <option value="Audit technique ou Cloud DevOps">Audit technique ou Cloud DevOps</option>
+                                                    <option value="Partenariat ou autre">Partenariat ou autre</option>
+                                                </select>
+                                                {errors.subject && <p className="text-xs text-red-500">{errors.subject.message}</p>}
+                                            </div>
+                                        </div>
+
+                                        <div className="space-y-1">
+                                            <label className="text-xs font-semibold text-slate-700 dark:text-slate-300">
+                                                Description de votre projet ou question *
+                                            </label>
+                                            <textarea
+                                                rows={4}
+                                                {...register('message')}
+                                                placeholder="Expliquez brièvement votre contexte, vos objectifs et vos éventuelles contraintes..."
+                                                className="w-full bg-slate-50 dark:bg-slate-950 border border-slate-200 dark:border-white/10 rounded-xl p-3.5 text-sm text-slate-900 dark:text-white placeholder:text-slate-400 focus:outline-none focus:border-blue-500 resize-none"
+                                            />
+                                            {errors.message && <p className="text-xs text-red-500">{errors.message.message}</p>}
+                                        </div>
+
+                                        <div className="pt-1">
+                                            <Button type="submit" variant="primary" size="lg" className="w-full" disabled={isSubmitting}>
+                                                <Send size={15} />
+                                                <span>{isSubmitting ? 'Envoi en cours...' : 'Envoyer le message'}</span>
+                                            </Button>
+                                        </div>
+                                    </form>
+                                )}
+                            </Card>
+                        </div>
                     </div>
                 </Container>
             </section>
-
-            {/* Final Touch: Trust Badges */}
-            <Container className="pt-20">
-                <div className="flex flex-wrap justify-center gap-12 md:gap-24 opacity-30 grayscale hover:grayscale-0 transition-all duration-700">
-                    <div className="flex items-center gap-3">
-                        <Zap size={24} className="text-white" />
-                        <span className="font-black text-white italic tracking-tighter text-xl">FAST RESPONSE</span>
-                    </div>
-                    <div className="flex items-center gap-3">
-                        <MessageSquare size={24} className="text-white" />
-                        <span className="font-black text-white italic tracking-tighter text-xl">TECH ADVISORY</span>
-                    </div>
-                    <div className="flex items-center gap-3">
-                        <Globe size={24} className="text-white" />
-                        <span className="font-black text-white italic tracking-tighter text-xl">GLOBAL REACH</span>
-                    </div>
-                </div>
-            </Container>
         </div>
     )
 }

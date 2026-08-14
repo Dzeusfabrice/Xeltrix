@@ -1,10 +1,10 @@
 import { createClient } from '@/lib/supabase/server'
-import { Container, Button } from '@/components/ui'
-import Link from 'next/link'
-import { ArrowLeft, Users, Mail, User, Tag, Calendar, MessageSquare } from 'lucide-react'
+import { Card, Button, Badge } from '@/components/ui'
+import { Mail, User, Phone, Clock, MessageSquare, ArrowLeft } from 'lucide-react'
 import { MessageActions } from './message-actions'
 import { format } from 'date-fns'
 import { fr } from 'date-fns/locale'
+import Link from 'next/link'
 
 export default async function AdminMessagesPage() {
     const supabase = await createClient()
@@ -14,102 +14,112 @@ export default async function AdminMessagesPage() {
         .select('*')
         .order('created_at', { ascending: false })
 
-    return (
-        <div className="min-h-screen bg-[#020617] pb-24">
-            {/* Top Navigation */}
-            <nav className="border-b border-white/10 bg-slate-900/50 backdrop-blur-xl sticky top-0 z-50">
-                <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-                    <div className="flex items-center justify-between h-20">
-                        <div className="flex items-center gap-4">
-                            <Link href="/admin" className="p-2 hover:bg-white/5 rounded-full transition-colors">
-                                <ArrowLeft size={20} className="text-slate-400" />
-                            </Link>
-                            <div className="flex flex-col">
-                                <span className="font-black text-xl tracking-tight text-white flex items-center gap-2">
-                                    <Users size={18} className="text-emerald-500" />
-                                    Messages reçus
-                                </span>
-                                <span className="text-xs text-slate-400">Canal de contact direct</span>
-                            </div>
-                        </div>
+    const unreadCount = messages?.filter(m => m.status === 'unread').length || 0
 
-                        <div className="flex items-center gap-3">
-                            <div className="px-4 py-2 bg-emerald-500/10 border border-emerald-500/20 rounded-xl text-emerald-400 text-xs font-black uppercase tracking-widest">
-                                {messages?.filter(m => m.status === 'unread').length || 0} Non Lus
-                            </div>
-                        </div>
+    return (
+        <div className="space-y-8">
+            {/* Header */}
+            <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 pb-6 border-b border-slate-200 dark:border-white/10">
+                <div className="flex items-center gap-3">
+                    <Link href="/admin" className="p-2 rounded-xl border border-slate-200 dark:border-white/10 hover:bg-slate-100 dark:hover:bg-white/5 transition-colors">
+                        <ArrowLeft size={18} className="text-slate-600 dark:text-slate-400" />
+                    </Link>
+                    <div>
+                        <h1 className="text-2xl sm:text-3xl font-bold tracking-tight text-slate-900 dark:text-white flex items-center gap-2.5">
+                            <MessageSquare size={24} className="text-purple-600 dark:text-purple-400" />
+                            <span>Messages & Demandes de Devis</span>
+                        </h1>
+                        <p className="text-xs sm:text-sm text-slate-500 dark:text-slate-400 mt-0.5">
+                            Boîte de réception centralisée des leads et messages entrants.
+                        </p>
                     </div>
                 </div>
-            </nav>
 
-            {/* Main Content */}
-            <Container className="pt-12">
-                {error ? (
-                    <div className="p-4 bg-red-500/10 border border-red-500/20 text-red-400 rounded-xl">
-                        Erreur lors du chargement des messages: {error.message}
+                <div className="flex items-center gap-2">
+                    <Badge variant={unreadCount > 0 ? "warning" : "default"} className="text-xs">
+                        {unreadCount} non lu(s) / {messages?.length || 0} total
+                    </Badge>
+                </div>
+            </div>
+
+            {/* Error state */}
+            {error && (
+                <div className="p-4 rounded-xl bg-red-50 dark:bg-red-500/10 border border-red-200 dark:border-red-500/20 text-red-600 dark:text-red-400 text-xs">
+                    Erreur lors du chargement des messages : {error.message}
+                </div>
+            )}
+
+            {/* Empty state */}
+            {messages?.length === 0 ? (
+                <div className="text-center py-20 bg-white dark:bg-slate-900/20 rounded-2xl border border-dashed border-slate-300 dark:border-white/10">
+                    <div className="w-14 h-14 rounded-2xl bg-purple-50 dark:bg-purple-500/10 text-purple-600 dark:text-purple-400 flex items-center justify-center mx-auto mb-3">
+                        <Mail size={26} />
                     </div>
-                ) : messages?.length === 0 ? (
-                    <div className="text-center py-24 border border-white/10 border-dashed rounded-3xl bg-slate-900/30">
-                        <div className="w-16 h-16 bg-emerald-500/10 text-emerald-400 rounded-2xl flex items-center justify-center mx-auto mb-6">
-                            <Mail size={32} />
-                        </div>
-                        <h3 className="text-xl font-bold text-white mb-2">Aucun message reçu</h3>
-                        <p className="text-slate-400">Votre boîte de réception est vide pour le moment.</p>
-                    </div>
-                ) : (
-                    <div className="space-y-6">
-                        {messages?.map((msg) => (
-                            <div
-                                key={msg.id}
-                                className={`p-8 bg-slate-900/40 border ${msg.status === 'unread' ? 'border-emerald-500/30 shadow-[0_0_20px_rgba(16,185,129,0.05)]' : 'border-white/10'} rounded-3xl relative overflow-hidden group hover:border-white/20 transition-all`}
-                            >
-                                {msg.status === 'unread' && (
-                                    <div className="absolute top-0 right-0 p-1 bg-emerald-500 rounded-bl-xl text-[8px] font-black uppercase text-white px-3 py-1 animate-pulse">
-                                        NOUVEAU
+                    <h3 className="text-lg font-bold text-slate-900 dark:text-white mb-1">Aucun message reçu</h3>
+                    <p className="text-xs text-slate-500 dark:text-slate-400">Votre boîte de réception est vide pour le moment.</p>
+                </div>
+            ) : (
+                <div className="space-y-4">
+                    {messages?.map((msg) => (
+                        <Card
+                            key={msg.id}
+                            className={`p-6 space-y-4 transition-all ${
+                                msg.status === 'unread'
+                                    ? 'border-purple-300 dark:border-purple-500/30 shadow-md shadow-purple-500/5'
+                                    : ''
+                            }`}
+                        >
+                            <div className="flex flex-col lg:flex-row justify-between items-start lg:items-center gap-4">
+                                <div className="flex flex-wrap items-center gap-2.5">
+                                    <div className="flex items-center gap-1.5 px-3 py-1 bg-slate-100 dark:bg-white/5 rounded-lg border border-slate-200 dark:border-white/10 text-xs font-semibold text-slate-900 dark:text-white">
+                                        <User size={13} className="text-blue-500" />
+                                        <span>{msg.name}</span>
                                     </div>
-                                )}
-
-                                <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-8">
-                                    <div className="space-y-4 max-w-2xl">
-                                        <div className="flex flex-wrap items-center gap-4">
-                                            <div className="flex items-center gap-2 px-3 py-1.5 bg-white/5 rounded-xl border border-white/10">
-                                                <User size={14} className="text-slate-500" />
-                                                <span className="text-sm font-bold text-white tracking-tight">{msg.name}</span>
-                                            </div>
-                                            <div className="flex items-center gap-2 px-3 py-1.5 bg-white/5 rounded-xl border border-white/10">
-                                                <Mail size={14} className="text-slate-500" />
-                                                <span className="text-sm font-medium text-slate-300">{msg.email}</span>
-                                            </div>
-                                            {msg.phone && (
-                                                <div className="flex items-center gap-2 px-3 py-1.5 bg-white/5 rounded-xl border border-white/10 text-slate-400 text-xs font-medium">
-                                                    {msg.phone}
-                                                </div>
-                                            )}
-                                        </div>
-
-                                        <div className="space-y-2">
-                                            <h3 className="text-xl font-black text-white group-hover:text-emerald-400 transition-colors">
-                                                {msg.subject || 'Aucun objet'}
-                                            </h3>
-                                            <p className="text-slate-400 leading-relaxed font-medium whitespace-pre-wrap italic bg-black/20 p-4 rounded-2xl border border-white/5">
-                                                "{msg.message}"
-                                            </p>
-                                        </div>
+                                    <div className="flex items-center gap-1.5 px-3 py-1 bg-slate-100 dark:bg-white/5 rounded-lg border border-slate-200 dark:border-white/10 text-xs text-slate-600 dark:text-slate-300">
+                                        <Mail size={13} className="text-purple-500" />
+                                        <span>{msg.email}</span>
                                     </div>
-
-                                    <div className="flex flex-col items-start lg:items-end gap-6 shrink-0">
-                                        <div className="flex items-center gap-2 text-slate-500 text-xs font-bold uppercase tracking-widest">
-                                            <Calendar size={14} />
-                                            {format(new Date(msg.created_at), 'dd MMM yyyy, HH:mm', { locale: fr })}
+                                    {msg.phone && (
+                                        <div className="flex items-center gap-1.5 px-3 py-1 bg-slate-100 dark:bg-white/5 rounded-lg border border-slate-200 dark:border-white/10 text-xs text-slate-600 dark:text-slate-400 font-mono">
+                                            <Phone size={13} className="text-emerald-500" />
+                                            <span>{msg.phone}</span>
                                         </div>
-                                        <MessageActions id={msg.id} status={msg.status} />
-                                    </div>
+                                    )}
+                                </div>
+
+                                <div className="flex items-center gap-3">
+                                    <span className="text-xs text-slate-500 dark:text-slate-400 flex items-center gap-1 font-mono">
+                                        <Clock size={12} />
+                                        {format(new Date(msg.created_at), 'dd MMM yyyy à HH:mm', { locale: fr })}
+                                    </span>
+                                    {msg.status === 'unread' ? (
+                                        <Badge variant="warning" className="text-[10px]">
+                                            Non lu
+                                        </Badge>
+                                    ) : (
+                                        <Badge variant="default" className="text-[10px]">
+                                            Traité
+                                        </Badge>
+                                    )}
                                 </div>
                             </div>
-                        ))}
-                    </div>
-                )}
-            </Container>
+
+                            <div className="space-y-2 pt-1">
+                                <h3 className="text-base font-bold text-slate-900 dark:text-white">
+                                    {msg.subject || 'Sans objet'}
+                                </h3>
+                                <div className="p-4 rounded-xl bg-slate-50 dark:bg-slate-950/70 border border-slate-200 dark:border-white/5 text-xs sm:text-sm text-slate-700 dark:text-slate-300 whitespace-pre-wrap leading-relaxed">
+                                    {msg.message}
+                                </div>
+                            </div>
+
+                            <div className="pt-2 flex justify-end">
+                                <MessageActions id={msg.id} status={msg.status} email={msg.email} />
+                            </div>
+                        </Card>
+                    ))}
+                </div>
+            )}
         </div>
     )
 }

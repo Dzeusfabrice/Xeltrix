@@ -1,0 +1,29 @@
+Always use TypeScript.
+
+Always use Next.js App Router.
+
+Prefer Server Components.
+
+Prefer reusable components.
+
+Use TailwindCSS.
+
+Use responsive design.
+
+Use accessibility best practices.
+
+Avoid duplicated code.
+
+Avoid inline styles.
+
+Use clean architecture.
+
+Optimize SEO.
+
+Optimize performance.
+
+Optimize Core Web Vitals.
+
+Follow the design system.
+
+Generate production-ready code.
