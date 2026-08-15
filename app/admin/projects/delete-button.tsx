@@ -4,13 +4,13 @@ import { deleteProject } from './actions'
 import { Trash2 } from 'lucide-react'
 import { useTransition } from 'react'
 
-export function DeleteProjectButton({ id }: { id: string }) {
+export function DeleteProjectButton({ id, title }: { id: string; title: string }) {
     const [isPending, startTransition] = useTransition()
 
     return (
         <button
             onClick={() => {
-                if (confirm('Voulez-vous vraiment supprimer ce projet ?')) {
+                if (confirm(`Voulez-vous vraiment supprimer le projet « ${title} » ?`)) {
                     startTransition(() => {
                         deleteProject(id)
                     })

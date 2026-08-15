@@ -4,13 +4,13 @@ import { deleteTechnology } from './actions'
 import { Trash2 } from 'lucide-react'
 import { useTransition } from 'react'
 
-export function DeleteTechButton({ id }: { id: string }) {
+export function DeleteTechButton({ id, name }: { id: string; name: string }) {
     const [isPending, startTransition] = useTransition()
 
     return (
         <button
             onClick={() => {
-                if (confirm('Voulez-vous vraiment supprimer cette technologie ?')) {
+                if (confirm(`Voulez-vous vraiment supprimer la technologie « ${name} » ?`)) {
                     startTransition(() => {
                         deleteTechnology(id)
                     })

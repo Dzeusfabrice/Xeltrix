@@ -4,13 +4,13 @@ import { deleteArticle } from './actions'
 import { Trash2 } from 'lucide-react'
 import { useTransition } from 'react'
 
-export function DeleteArticleButton({ id }: { id: string }) {
+export function DeleteArticleButton({ id, title }: { id: string; title: string }) {
     const [isPending, startTransition] = useTransition()
 
     return (
         <button
             onClick={() => {
-                if (confirm('Voulez-vous vraiment supprimer cet article ?')) {
+                if (confirm(`Voulez-vous vraiment supprimer l'article « ${title} » ?`)) {
                     startTransition(() => {
                         deleteArticle(id)
                     })

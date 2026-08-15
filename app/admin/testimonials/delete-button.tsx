@@ -4,11 +4,11 @@ import React, { useTransition } from 'react'
 import { Trash2 } from 'lucide-react'
 import { deleteTestimonial } from './actions'
 
-export const DeleteTestimonialButton = ({ id }: { id: string }) => {
+export const DeleteTestimonialButton = ({ id, name }: { id: string; name: string }) => {
     const [isPending, startTransition] = useTransition()
 
     const handleDelete = async () => {
-        if (confirm('Voulez-vous vraiment supprimer ce témoignage ?')) {
+        if (confirm(`Voulez-vous vraiment supprimer le témoignage de « ${name} » ?`)) {
             startTransition(async () => {
                 try {
                     await deleteTestimonial(id)

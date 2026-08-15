@@ -4,7 +4,7 @@ import { deleteMessage, markAsRead } from './actions'
 import { Trash2, CheckCircle, MailOpen } from 'lucide-react'
 import { useTransition } from 'react'
 
-export function MessageActions({ id, status }: { id: string, status: string }) {
+export function MessageActions({ id, status, email }: { id: string; status: string; email: string }) {
     const [isPending, startTransition] = useTransition()
 
     return (
@@ -25,7 +25,7 @@ export function MessageActions({ id, status }: { id: string, status: string }) {
             )}
             <button
                 onClick={() => {
-                    if (confirm('Voulez-vous vraiment supprimer ce message ?')) {
+                    if (confirm(`Voulez-vous vraiment supprimer le message de « ${email} » ?`)) {
                         startTransition(() => {
                             deleteMessage(id)
                         })
