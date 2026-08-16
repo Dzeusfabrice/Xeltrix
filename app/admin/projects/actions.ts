@@ -14,6 +14,10 @@ export async function createProject(formData: FormData) {
     const description = formData.get('description') as string
     const category = formData.get('category') as string
     const project_url = formData.get('project_url') as string
+    const technologies = String(formData.get('technologies') || '')
+        .split(/[\n,]/)
+        .map((t) => t.trim())
+        .filter(Boolean)
 
     // Handle File Upload
     const imageFile = formData.get('image_file') as File
@@ -35,6 +39,7 @@ export async function createProject(formData: FormData) {
         category,
         image_url,
         project_url,
+        technologies,
         status: 'online',
     })
 
@@ -70,6 +75,10 @@ export async function updateProject(id: string, formData: FormData) {
     const description = formData.get('description') as string
     const category = formData.get('category') as string
     const project_url = formData.get('project_url') as string
+    const technologies = String(formData.get('technologies') || '')
+        .split(/[\n,]/)
+        .map((t) => t.trim())
+        .filter(Boolean)
 
     // Handle File Upload
     const imageFile = formData.get('image_file') as File
@@ -91,6 +100,7 @@ export async function updateProject(id: string, formData: FormData) {
         category,
         image_url,
         project_url,
+        technologies,
     }).eq('id', id)
 
     if (error) {

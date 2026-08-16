@@ -53,6 +53,8 @@ CREATE TABLE technologies (
     name VARCHAR NOT NULL,
     logo_url TEXT,
     category VARCHAR,
+    description TEXT,
+    proficiency INT DEFAULT 85,
     level VARCHAR DEFAULT 'Intermediaire',
     sort_order INT DEFAULT 0
 );
@@ -78,6 +80,45 @@ CREATE TABLE experience_skills (
     level INT DEFAULT 85,
     color VARCHAR DEFAULT 'from-blue-500 to-cyan-400',
     created_at TIMESTAMP WITH TIME ZONE DEFAULT NOW()
+);
+
+-- Table: services
+CREATE TABLE services (
+    id UUID PRIMARY KEY DEFAULT uuid_generate_v4(),
+    slug VARCHAR UNIQUE NOT NULL,
+    title VARCHAR NOT NULL,
+    tagline TEXT,
+    description TEXT,
+    icon_name VARCHAR DEFAULT 'Wrench',
+    image_url TEXT,
+    features TEXT[] DEFAULT '{}',
+    deliverables TEXT[] DEFAULT '{}',
+    stack TEXT[] DEFAULT '{}',
+    timeline VARCHAR,
+    sort_order INT DEFAULT 0,
+    status VARCHAR DEFAULT 'published',
+    created_at TIMESTAMP WITH TIME ZONE DEFAULT NOW(),
+    updated_at TIMESTAMP WITH TIME ZONE DEFAULT NOW()
+);
+
+-- Table: products
+CREATE TABLE products (
+    id UUID PRIMARY KEY DEFAULT uuid_generate_v4(),
+    slug VARCHAR UNIQUE NOT NULL,
+    name VARCHAR NOT NULL,
+    badge VARCHAR,
+    tagline TEXT,
+    description TEXT,
+    icon_name VARCHAR DEFAULT 'Package',
+    modules TEXT[] DEFAULT '{}',
+    specs JSONB DEFAULT '{}'::jsonb,
+    target VARCHAR,
+    highlight_metric VARCHAR,
+    highlight_label VARCHAR,
+    sort_order INT DEFAULT 0,
+    status VARCHAR DEFAULT 'published',
+    created_at TIMESTAMP WITH TIME ZONE DEFAULT NOW(),
+    updated_at TIMESTAMP WITH TIME ZONE DEFAULT NOW()
 );
 
 -- RLS (Row Level Security) - Basic setup
@@ -120,6 +161,18 @@ CREATE POLICY "Insertable by authenticated users." ON experience_skills FOR INSE
 CREATE POLICY "Updatable by authenticated users." ON experience_skills FOR UPDATE USING (auth.role() = 'authenticated');
 CREATE POLICY "Deletable by authenticated users." ON experience_skills FOR DELETE USING (auth.role() = 'authenticated');
 
+ALTER TABLE services ENABLE ROW LEVEL SECURITY;
+CREATE POLICY "Readable by everyone." ON services FOR SELECT USING (true);
+CREATE POLICY "Insertable by authenticated users." ON services FOR INSERT WITH CHECK (auth.role() = 'authenticated');
+CREATE POLICY "Updatable by authenticated users." ON services FOR UPDATE USING (auth.role() = 'authenticated');
+CREATE POLICY "Deletable by authenticated users." ON services FOR DELETE USING (auth.role() = 'authenticated');
+
+ALTER TABLE products ENABLE ROW LEVEL SECURITY;
+CREATE POLICY "Readable by everyone." ON products FOR SELECT USING (true);
+CREATE POLICY "Insertable by authenticated users." ON products FOR INSERT WITH CHECK (auth.role() = 'authenticated');
+CREATE POLICY "Updatable by authenticated users." ON products FOR UPDATE USING (auth.role() = 'authenticated');
+CREATE POLICY "Deletable by authenticated users." ON products FOR DELETE USING (auth.role() = 'authenticated');
+
 -- Function to automatically update `updated_at` column
 CREATE OR REPLACE FUNCTION update_modified_column() 
 RETURNS TRIGGER AS $$
@@ -131,6 +184,8 @@ $$ language 'plpgsql';
 
 CREATE TRIGGER update_projects_modtime BEFORE UPDATE ON projects FOR EACH ROW EXECUTE PROCEDURE update_modified_column();
 CREATE TRIGGER update_articles_modtime BEFORE UPDATE ON articles FOR EACH ROW EXECUTE PROCEDURE update_modified_column();
+CREATE TRIGGER update_services_modtime BEFORE UPDATE ON services FOR EACH ROW EXECUTE PROCEDURE update_modified_column();
+CREATE TRIGGER update_products_modtime BEFORE UPDATE ON products FOR EACH ROW EXECUTE PROCEDURE update_modified_column();
 
 -- Storage Setup
 -- Note: In some Supabase versions, you might need to use the Dashboard UI

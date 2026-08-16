@@ -26,9 +26,9 @@ export default function ExperienceClient({ skills }: { skills: Skill[] }) {
     ]
 
     return (
-        <div className="min-h-screen bg-[#020617] pb-24">
+        <div className="min-h-screen bg-white dark:bg-[#020617] pb-24">
             {/* Header section with perspective and glow */}
-            <section className="relative py-32 overflow-hidden border-b border-white/5">
+            <section className="relative py-32 overflow-hidden border-b border-slate-200 dark:border-white/5">
                 <div className="absolute inset-0 bg-gradient-to-r from-purple-600/5 via-transparent to-blue-600/5" />
                 <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[400px] bg-purple-600/10 rounded-full blur-[120px] pointer-events-none" />
 
@@ -81,7 +81,7 @@ export default function ExperienceClient({ skills }: { skills: Skill[] }) {
                                 whileInView={{ opacity: 1, x: 0 }}
                                 transition={{ duration: 0.6, delay: i * 0.1 }}
                                 key={skill.id}
-                                className="space-y-8 p-8 rounded-[2.5rem] bg-white/5 border border-white/5 hover:border-white/10 transition-all duration-500 glass-card group"
+                                className="space-y-8 p-8 rounded-[2.5rem] bg-slate-50 dark:bg-white/5 border border-slate-200 dark:border-white/5 hover:border-slate-300 dark:hover:border-white/10 transition-all duration-500 glass-card group"
                             >
                                 <div className="flex items-center justify-between">
                                     <div className="flex items-center gap-6">
@@ -89,15 +89,15 @@ export default function ExperienceClient({ skills }: { skills: Skill[] }) {
                                             <BookOpen size={28} />
                                         </div>
                                         <div>
-                                            <h3 className="text-2xl font-black text-white tracking-tight">{skill.name}</h3>
-                                            <p className="text-sm font-bold text-slate-500 italic uppercase tracking-wider">{skill.tech}</p>
+                                            <h3 className="text-2xl font-black text-slate-900 dark:text-white tracking-tight">{skill.name}</h3>
+                                            <p className="text-sm font-bold text-slate-500 dark:text-slate-400 italic uppercase tracking-wider">{skill.tech}</p>
                                         </div>
                                     </div>
-                                    <div className="text-3xl font-black text-white/20 group-hover:text-purple-500/50 transition-colors">{skill.level}%</div>
+                                    <div className="text-3xl font-black text-slate-900/20 dark:text-white/20 group-hover:text-purple-500/50 transition-colors">{skill.level}%</div>
                                 </div>
 
                                 <div className="space-y-3">
-                                    <div className="h-4 w-full bg-slate-900 rounded-full overflow-hidden border border-white/5 p-1">
+                                    <div className="h-4 w-full bg-slate-50 dark:bg-slate-900 rounded-full overflow-hidden border border-slate-200 dark:border-white/5 p-1">
                                         <motion.div
                                             initial={{ width: 0 }}
                                             whileInView={{ width: `${skill.level}%` }}
@@ -105,7 +105,7 @@ export default function ExperienceClient({ skills }: { skills: Skill[] }) {
                                             className={`h-full bg-gradient-to-r ${skill.color || 'from-blue-500 to-cyan-400'} rounded-full`}
                                         />
                                     </div>
-                                    <div className="flex justify-between text-[10px] font-black uppercase tracking-[0.2em] text-slate-600">
+                                    <div className="flex justify-between text-[10px] font-black uppercase tracking-[0.2em] text-slate-500 dark:text-slate-400">
                                         <span>Débutant</span>
                                         <span>Expert</span>
                                     </div>
@@ -121,7 +121,7 @@ export default function ExperienceClient({ skills }: { skills: Skill[] }) {
                 <Container>
                     <div className="grid grid-cols-1 lg:grid-cols-2 gap-20 items-center">
                         <div className="space-y-12">
-                            <h2 className="text-4xl md:text-5xl font-black text-white leading-tight">Pourquoi choisir notre <span className="text-purple-500">Architecture</span> ?</h2>
+                            <h2 className="text-4xl md:text-5xl font-black text-slate-900 dark:text-white leading-tight">Pourquoi choisir notre <span className="text-purple-600 dark:text-purple-500">Architecture</span> ?</h2>
                             <div className="space-y-10">
                                 {[
                                     { icon: <Cpu />, t: "Vitesse de développement", d: "Nous utilisons des frameworks modernes comme Next.js et Flutter pour livrer rapidement vos projets sans sacrifier la qualité." },
@@ -135,14 +135,14 @@ export default function ExperienceClient({ skills }: { skills: Skill[] }) {
                                         key={i}
                                         className="flex gap-8 group"
                                     >
-                                        <div className="w-12 h-12 rounded-2xl bg-white/5 border border-white/10 flex items-center justify-center flex-shrink-0 text-purple-400 group-hover:bg-purple-600 group-hover:text-white transition-all duration-500 shadow-xl shadow-purple-600/5">
+                                        <div className="w-12 h-12 rounded-2xl bg-slate-50 dark:bg-white/5 border border-slate-200 dark:border-white/10 flex items-center justify-center flex-shrink-0 text-purple-600 dark:text-purple-400 group-hover:bg-purple-600 group-hover:text-white transition-all duration-500 shadow-xl shadow-purple-600/5">
                                             {React.cloneElement(item.icon as any, { size: 24 })}
                                         </div>
                                         <div className="space-y-3">
-                                            <h4 className="font-black text-xl text-white">
+                                            <h4 className="font-black text-xl text-slate-900 dark:text-white">
                                                 {item.t}
                                             </h4>
-                                            <p className="text-slate-400 leading-relaxed font-medium">
+                                            <p className="text-slate-500 dark:text-slate-400 leading-relaxed font-medium">
                                                 {item.d}
                                             </p>
                                         </div>
@@ -155,19 +155,19 @@ export default function ExperienceClient({ skills }: { skills: Skill[] }) {
                             <motion.div
                                 initial={{ opacity: 0, rotate: 5, scale: 0.9 }}
                                 whileInView={{ opacity: 1, rotate: 0, scale: 1 }}
-                                className="bg-gradient-to-br from-slate-900 via-slate-950 to-purple-900/40 p-16 md:p-24 rounded-[4rem] shadow-full border border-white/10 relative overflow-hidden group glass-card"
+                                className="bg-gradient-to-br from-slate-100 via-white to-purple-100 dark:from-slate-900 dark:via-slate-950 dark:to-purple-900/40 p-16 md:p-24 rounded-[4rem] shadow-full border border-slate-200 dark:border-white/10 relative overflow-hidden group glass-card"
                             >
                                 <div className="absolute top-0 right-0 w-80 h-80 bg-purple-600/20 rounded-full blur-[100px] -translate-y-1/2 translate-x-1/2 group-hover:scale-125 transition-transform duration-1000" />
                                 <div className="absolute -bottom-20 -left-20 w-64 h-64 bg-blue-600/10 rounded-full blur-[80px]" />
 
                                 <blockquote className="relative z-10 space-y-10">
-                                    <div className="text-6xl text-purple-500 opacity-30 font-serif leading-none">"</div>
-                                    <p className="text-3xl md:text-4xl font-black text-slate-100 italic leading-snug tracking-tight">
+                                    <div className="text-6xl text-purple-600 dark:text-purple-500 opacity-30 font-serif leading-none">"</div>
+                                    <p className="text-3xl md:text-4xl font-black text-slate-800 dark:text-slate-100 italic leading-snug tracking-tight">
                                         La technologie n'est qu'un outil. Notre métier est de l'utiliser pour résoudre des problèmes concrets et créer de la valeur réelle.
                                     </p>
                                     <footer className="flex items-center gap-4">
                                         <div className="h-1px w-10 bg-purple-500" />
-                                        <p className="font-black text-sm italic uppercase tracking-[0.3em] text-purple-500">Xeltrix Engineering</p>
+                                        <p className="font-black text-sm italic uppercase tracking-[0.3em] text-purple-600 dark:text-purple-500">Xeltrix Engineering</p>
                                     </footer>
                                 </blockquote>
                             </motion.div>

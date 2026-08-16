@@ -1,13 +1,21 @@
-import type { Metadata } from "next";
-import { Inter } from "next/font/google";
+import type { Metadata, Viewport } from "next";
+import { Inter, Cormorant_Garamond } from "next/font/google";
 import "./globals.css";
 import { Navbar } from "@/components/layout/Navbar";
 import { Footer } from "@/components/layout/Footer";
+import { SiteChrome } from "@/components/layout/SiteChrome";
 import { ThemeProvider } from "@/components/theme/ThemeProvider";
 
 const inter = Inter({
   variable: "--font-inter",
   subsets: ["latin"],
+  display: "swap",
+});
+
+const cormorant = Cormorant_Garamond({
+  variable: "--font-cormorant",
+  subsets: ["latin"],
+  weight: ["300", "400", "500", "600", "700"],
   display: "swap",
 });
 
@@ -60,6 +68,19 @@ export const metadata: Metadata = {
   },
 };
 
+export const viewport: Viewport = {
+  themeColor: [
+    { media: "(prefers-color-scheme: light)", color: "#FFFFFF" },
+    { media: "(prefers-color-scheme: dark)", color: "#050811" },
+  ],
+};
+
+/**
+ * Applique le thème avant le premier rendu peint pour éviter tout flash de
+ * thème clair et garder <html> synchronisé avec la préférence enregistrée.
+ */
+const themeInitScript = `(function(){try{var s=localStorage.getItem('xeltrix-theme');var t=(s==='dark'||s==='light')?s:(window.matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light');var r=document.documentElement;r.classList.remove('light','dark');r.classList.add(t);r.style.colorScheme=t;}catch(e){}})();`;
+
 export default function RootLayout({
   children,
 }: Readonly<{
@@ -88,18 +109,17 @@ export default function RootLayout({
   return (
     <html lang="fr" className="light scroll-smooth" suppressHydrationWarning>
       <head>
+        <script dangerouslySetInnerHTML={{ __html: themeInitScript }} />
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
         />
       </head>
-      <body className={`${inter.variable} font-sans antialiased bg-background text-foreground selection:bg-blue-600 selection:text-white`}>
+      <body className={`${inter.variable} ${cormorant.variable} font-sans antialiased bg-background text-foreground selection:bg-blue-600 selection:text-white`}>
         <ThemeProvider>
-          <Navbar />
-          <main className="min-h-screen pt-16">
+          <SiteChrome navbar={<Navbar />} footer={<Footer />}>
             {children}
-          </main>
-          <Footer />
+          </SiteChrome>
         </ThemeProvider>
       </body>
     </html>

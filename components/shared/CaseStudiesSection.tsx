@@ -79,7 +79,7 @@ export const CaseStudiesSection = () => {
                                     <span className="text-xs font-semibold text-blue-600 dark:text-blue-400 uppercase tracking-wider">
                                         {study.sector}
                                     </span>
-                                    <span className="text-xs text-slate-500 font-medium">
+                                    <span className="text-xs text-slate-500 dark:text-slate-400 font-medium">
                                         {study.client}
                                     </span>
                                 </div>

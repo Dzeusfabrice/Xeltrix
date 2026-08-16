@@ -114,7 +114,7 @@ export default async function AdminMessagesPage() {
                             </div>
 
                             <div className="pt-2 flex justify-end">
-                                <MessageActions id={msg.id} status={msg.status} email={msg.email} />
+                                <MessageActions id={String(msg.id)} status={String(msg.status ?? 'unread')} email={String(msg.email ?? '')} />
                             </div>
                         </Card>
                     ))}

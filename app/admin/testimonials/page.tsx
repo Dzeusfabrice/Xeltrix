@@ -95,7 +95,7 @@ export default async function AdminTestimonialsPage() {
                                     <Link href={`/admin/testimonials/edit/${t.id}`} className="p-1.5 hover:bg-slate-100 dark:hover:bg-white/10 rounded-lg text-slate-600 dark:text-slate-300 hover:text-emerald-600 dark:hover:text-white transition-colors">
                                         <Edit2 size={14} />
                                     </Link>
-                                    <DeleteTestimonialButton id={t.id} name={t.name} />
+                                    <DeleteTestimonialButton id={String(t.id)} name={String(t.name ?? '')} />
                                 </div>
                             </div>
                         </Card>

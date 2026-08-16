@@ -107,7 +107,7 @@ export default async function AdminArticlesPage() {
                                                 <Link href={`/admin/articles/edit/${a.id}`} className="p-2 hover:bg-slate-100 dark:hover:bg-white/10 rounded-lg text-slate-600 dark:text-slate-300 hover:text-indigo-600 dark:hover:text-white transition-colors">
                                                     <Edit2 size={16} />
                                                 </Link>
-                                                <DeleteArticleButton id={a.id} title={a.title} />
+                                                <DeleteArticleButton id={String(a.id)} title={String(a.title ?? '')} />
                                             </div>
                                         </td>
                                     </tr>

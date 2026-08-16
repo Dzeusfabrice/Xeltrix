@@ -112,7 +112,7 @@ export default async function AdminProjectsPage() {
                                                 <Link href={`/admin/projects/edit/${p.id}`} className="p-2 hover:bg-slate-100 dark:hover:bg-white/10 rounded-lg text-slate-600 dark:text-slate-300 hover:text-blue-600 dark:hover:text-white transition-colors">
                                                     <Edit2 size={16} />
                                                 </Link>
-                                                <DeleteProjectButton id={p.id} title={p.title} />
+                                                <DeleteProjectButton id={String(p.id)} title={String(p.title ?? '')} />
                                             </div>
                                         </td>
                                     </tr>

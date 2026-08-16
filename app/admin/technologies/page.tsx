@@ -91,7 +91,7 @@ export default async function AdminTechnologiesPage() {
                                         </td>
                                         <td className="px-6 py-4">
                                             <Badge variant="warning" className="text-[10px]">
-                                                {tech.level}
+                                                {tech.proficiency ?? 0}%
                                             </Badge>
                                         </td>
                                         <td className="px-6 py-4 text-right">
@@ -99,7 +99,7 @@ export default async function AdminTechnologiesPage() {
                                                 <Link href={`/admin/technologies/edit/${tech.id}`} className="p-2 hover:bg-slate-100 dark:hover:bg-white/10 rounded-lg text-slate-600 dark:text-slate-300 hover:text-amber-600 dark:hover:text-white transition-colors">
                                                     <Edit2 size={16} />
                                                 </Link>
-                                                <DeleteTechButton id={tech.id} name={tech.name} />
+                                                <DeleteTechButton id={String(tech.id)} name={String(tech.name ?? '')} />
                                             </div>
                                         </td>
                                     </tr>

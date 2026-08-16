@@ -2,6 +2,7 @@
 
 import React from 'react'
 import { Container, Button, Badge } from '../ui'
+import Image from 'next/image'
 import Link from 'next/link'
 import { ArrowRight, Smartphone, Globe, Monitor, ArrowUpRight } from 'lucide-react'
 import { motion } from 'framer-motion'
@@ -38,8 +39,21 @@ export const FeaturedProjects = ({ projects }: { projects: any[] }) => {
     ]
 
     return (
-        <section className="py-20 bg-white dark:bg-slate-950/60 border-t border-slate-200 dark:border-white/[0.08] relative transition-colors duration-300">
-            <Container>
+        <section className="py-20 bg-white dark:bg-slate-950 border-t border-slate-200 dark:border-white/[0.08] relative overflow-hidden transition-colors duration-300">
+            {/* Décor de section : image d'ambiance atténuée pour préserver la lisibilité */}
+            <div className="absolute inset-0 z-0" aria-hidden="true">
+                <Image
+                    src="/assets/backgroundsectionexpertise.jpg"
+                    alt=""
+                    fill
+                    sizes="100vw"
+                    className="object-cover"
+                />
+                <div className="absolute inset-0 bg-white/90 dark:bg-slate-950/90" />
+                <div className="absolute inset-0 bg-gradient-to-b from-white via-white/40 to-white dark:from-slate-950 dark:via-slate-950/40 dark:to-slate-950" />
+            </div>
+
+            <Container className="relative z-10">
                 <div className="flex flex-col md:flex-row justify-between items-start md:items-end mb-14 gap-6">
                     <div className="space-y-2.5">
                         <Badge variant="primary" className="text-xs uppercase tracking-wider font-semibold">
@@ -68,7 +82,7 @@ export const FeaturedProjects = ({ projects }: { projects: any[] }) => {
                             viewport={{ once: true }}
                             transition={{ delay: i * 0.1 }}
                             key={p.id}
-                            className="group flex flex-col h-full bg-slate-50 dark:bg-slate-900/50 rounded-2xl overflow-hidden border border-slate-200 dark:border-white/[0.08] hover:border-blue-500/30 dark:hover:border-white/20 transition-all duration-300 shadow-sm dark:shadow-lg"
+                            className="group flex flex-col h-full bg-white/85 dark:bg-slate-900/70 backdrop-blur-sm rounded-2xl overflow-hidden border border-slate-200 dark:border-white/[0.08] hover:border-blue-500/30 dark:hover:border-white/20 transition-all duration-300 shadow-sm dark:shadow-lg"
                         >
                             {/* Project Thumbnail */}
                             <div className="relative aspect-[16/10] overflow-hidden bg-slate-200 dark:bg-slate-900">

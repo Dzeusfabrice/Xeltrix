@@ -142,7 +142,7 @@ export function Testimonials({ testimonials }: { testimonials: Testimonial[] }) 
                         ))}
                     </div>
                     <span className="font-semibold text-slate-900 dark:text-white">4.9 / 5</span>
-                    <span className="text-slate-500">• Note moyenne sur l&apos;ensemble de nos livrables</span>
+                    <span className="text-slate-500 dark:text-slate-400">• Note moyenne sur l&apos;ensemble de nos livrables</span>
                 </div>
             </Container>
         </section>

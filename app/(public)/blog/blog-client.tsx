@@ -20,9 +20,9 @@ export default function BlogClient({ articles }: { articles: any[] }) {
     }
 
     return (
-        <div className="min-h-screen bg-[#020617] pb-24">
+        <div className="min-h-screen bg-white dark:bg-[#020617] pb-24 transition-colors duration-300">
             {/* Minimalist Dark Header */}
-            <section className="relative py-32 overflow-hidden border-b border-white/5">
+            <section className="relative py-32 overflow-hidden border-b border-slate-200 dark:border-white/5">
                 <div className="absolute inset-0 bg-gradient-to-t from-purple-600/5 to-transparent" />
                 <motion.div
                     initial={{ opacity: 0 }}
@@ -75,7 +75,7 @@ export default function BlogClient({ articles }: { articles: any[] }) {
                                     whileInView={{ opacity: 1, scale: 1 }}
                                     transition={{ delay: i * 0.1 }}
                                     key={a.id}
-                                    className="group flex flex-col bg-slate-900/30 rounded-[3rem] overflow-hidden border border-white/5 shadow-2xl transition-all duration-500 hover:border-purple-500/40 glass-card"
+                                    className="group flex flex-col bg-slate-50 dark:bg-slate-900/30 rounded-[3rem] overflow-hidden border border-slate-200 dark:border-white/5 shadow-2xl transition-all duration-500 hover:border-purple-500/40 glass-card"
                                 >
                                     <Link href={`/blog/${a.slug}`} className="block relative aspect-[16/10] overflow-hidden">
                                         <img
@@ -89,7 +89,7 @@ export default function BlogClient({ articles }: { articles: any[] }) {
                                     </Link>
 
                                     <div className="p-10 flex flex-col flex-grow">
-                                        <div className="flex items-center gap-6 text-[10px] font-black uppercase tracking-[0.2em] text-slate-500 mb-8">
+                                        <div className="flex items-center gap-6 text-[10px] font-black uppercase tracking-[0.2em] text-slate-500 dark:text-slate-400 mb-8">
                                             <div className="flex items-center gap-2">
                                                 <Calendar size={14} className="text-purple-500" />
                                                 {format(new Date(a.published_at || a.created_at), 'dd MMMM yyyy', { locale: fr })}
@@ -101,17 +101,17 @@ export default function BlogClient({ articles }: { articles: any[] }) {
                                         </div>
 
                                         <Link href={`/blog/${a.slug}`}>
-                                            <h2 className="text-2xl md:text-3xl font-black text-white mb-6 group-hover:text-purple-400 transition-colors leading-tight">
+                                            <h2 className="text-2xl md:text-3xl font-black text-slate-900 dark:text-white mb-6 group-hover:text-purple-600 dark:group-hover:text-purple-400 transition-colors leading-tight">
                                                 {a.title}
                                             </h2>
                                         </Link>
 
-                                        <p className="text-slate-400 leading-relaxed mb-10 line-clamp-3 font-medium">
+                                        <p className="text-slate-500 dark:text-slate-400 leading-relaxed mb-10 line-clamp-3 font-medium">
                                             {a.excerpt}
                                         </p>
 
-                                        <div className="mt-auto pt-8 border-t border-white/5">
-                                            <Link href={`/blog/${a.slug}`} className="inline-flex items-center gap-2 text-white font-black hover:text-purple-400 transition-all group/link text-xs uppercase tracking-widest">
+                                        <div className="mt-auto pt-8 border-t border-slate-200 dark:border-white/5">
+                                            <Link href={`/blog/${a.slug}`} className="inline-flex items-center gap-2 text-slate-900 dark:text-white font-black hover:text-purple-600 dark:hover:text-purple-400 transition-all group/link text-xs uppercase tracking-widest">
                                                 Lire la suite
                                                 <ArrowRight size={16} className="group-hover/link:translate-x-1 transition-transform" />
                                             </Link>
@@ -121,12 +121,12 @@ export default function BlogClient({ articles }: { articles: any[] }) {
                             ))}
                         </div>
                     ) : (
-                        <div className="text-center py-24 border border-white/10 border-dashed rounded-3xl bg-slate-900/30">
-                            <div className="w-16 h-16 bg-purple-500/10 text-purple-400 rounded-2xl flex items-center justify-center mx-auto mb-6">
+                        <div className="text-center py-24 border border-slate-200 dark:border-white/10 border-dashed rounded-3xl bg-slate-50 dark:bg-slate-900/30">
+                            <div className="w-16 h-16 bg-purple-500/10 text-purple-600 dark:text-purple-400 rounded-2xl flex items-center justify-center mx-auto mb-6">
                                 <MessageSquare size={32} />
                             </div>
-                            <h3 className="text-xl font-bold text-white mb-2">Le blog est encore vide</h3>
-                            <p className="text-slate-400">Revenez bientôt pour découvrir nos premiers articles passionnants.</p>
+                            <h3 className="text-xl font-bold text-slate-900 dark:text-white mb-2">Le blog est encore vide</h3>
+                            <p className="text-slate-500 dark:text-slate-400">Revenez bientôt pour découvrir nos premiers articles passionnants.</p>
                         </div>
                     )}
                 </Container>

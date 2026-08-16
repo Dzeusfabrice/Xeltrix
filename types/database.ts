@@ -49,8 +49,47 @@ export type Technology = {
     name: string
     logo_url?: string
     category: string
-    level: 'Debutant' | 'Intermediaire' | 'Expert'
+    description?: string
+    proficiency: number
+    level?: 'Debutant' | 'Intermediaire' | 'Expert'
     sort_order: number
+}
+
+export type Service = {
+    id: string
+    slug: string
+    title: string
+    tagline?: string
+    description?: string
+    icon_name: string
+    image_url?: string
+    features: string[]
+    deliverables: string[]
+    stack: string[]
+    timeline?: string
+    sort_order: number
+    status: 'draft' | 'published'
+    created_at: string
+    updated_at: string
+}
+
+export type Product = {
+    id: string
+    slug: string
+    name: string
+    badge?: string
+    tagline?: string
+    description?: string
+    icon_name: string
+    modules: string[]
+    specs: Record<string, string>
+    target?: string
+    highlight_metric?: string
+    highlight_label?: string
+    sort_order: number
+    status: 'draft' | 'published'
+    created_at: string
+    updated_at: string
 }
 
 export type ExperienceSkill = {

@@ -5,12 +5,18 @@ import { Container, Button, Badge } from '../ui'
 import { motion } from 'framer-motion'
 import { ArrowRight, ShieldCheck, Terminal, Cpu, Sparkles, CheckCircle2, ChevronRight } from 'lucide-react'
 import Link from 'next/link'
+import { VideoBackground } from './VideoBackground'
 
 export const Hero = () => {
     return (
         <section className="relative min-h-[85vh] flex items-center pt-20 pb-16 overflow-hidden bg-grid-pattern transition-colors duration-300">
+            <VideoBackground
+                sources="/videos/hero.mp4"
+                overlayClassName="bg-gradient-to-r from-white via-white/85 to-white/55 dark:from-slate-950 dark:via-slate-950/85 dark:to-slate-950/60"
+            />
+
             {/* Subtle ambient lighting */}
-            <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[800px] h-[350px] bg-gradient-to-b from-blue-500/10 via-indigo-500/5 to-transparent rounded-full blur-[120px] pointer-events-none" />
+            <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[800px] h-[350px] bg-gradient-to-b from-blue-500/10 via-indigo-500/5 to-transparent rounded-full blur-[120px] pointer-events-none z-0" />
 
             <Container className="relative z-10">
                 <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-8 items-center">
@@ -98,7 +104,7 @@ export const Hero = () => {
                             </div>
 
                             {/* Window Code Content */}
-                            <div className="p-5 font-mono text-xs text-slate-800 dark:text-slate-300 space-y-3 leading-relaxed bg-slate-950 text-slate-200">
+                            <div className="p-5 font-mono text-xs space-y-3 leading-relaxed bg-slate-950 text-slate-200">
                                 <div className="text-slate-500">// Déploiement d&apos;architecture d&apos;entreprise</div>
                                 <div>
                                     <span className="text-purple-400">const</span>{" "}

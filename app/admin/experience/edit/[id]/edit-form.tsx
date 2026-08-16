@@ -35,30 +35,30 @@ export default function EditSkillForm({ skill }: { skill: any }) {
     }
 
     return (
-        <div className="min-h-screen bg-[#020617] pb-24">
-            <nav className="border-b border-white/10 bg-slate-900/50 backdrop-blur-xl sticky top-0 z-50">
+        <div className="min-h-screen bg-white dark:bg-[#020617] pb-24">
+            <nav className="border-b border-slate-200 dark:border-white/10 bg-white dark:bg-slate-900/50 backdrop-blur-xl sticky top-0 z-50">
                 <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                     <div className="flex items-center gap-4 h-20">
-                        <Link href="/admin/experience" className="p-2 hover:bg-white/5 rounded-full transition-colors">
-                            <ArrowLeft size={20} className="text-slate-400" />
+                        <Link href="/admin/experience" className="p-2 hover:bg-slate-100 dark:hover:bg-white/5 rounded-full transition-colors">
+                            <ArrowLeft size={20} className="text-slate-500 dark:text-slate-400" />
                         </Link>
                         <div className="flex flex-col">
-                            <span className="font-black text-xl tracking-tight text-white flex items-center gap-2">
+                            <span className="font-black text-xl tracking-tight text-slate-900 dark:text-white flex items-center gap-2">
                                 Modifier le Domaine
                             </span>
-                            <span className="text-xs text-slate-400 font-medium tracking-wide">Édition de "{skill.name}"</span>
+                            <span className="text-xs text-slate-500 dark:text-slate-400 font-medium tracking-wide">Édition de "{skill.name}"</span>
                         </div>
                     </div>
                 </div>
             </nav>
 
             <Container className="pt-12 max-w-2xl">
-                <div className="p-8 bg-slate-900/40 border border-white/10 rounded-[3rem] shadow-2xl relative overflow-hidden glass-card">
+                <div className="p-8 bg-white dark:bg-slate-900/40 border border-slate-200 dark:border-white/10 rounded-[3rem] shadow-2xl relative overflow-hidden glass-card">
                     <div className="absolute top-0 right-0 w-64 h-64 bg-blue-600/10 rounded-full blur-[80px] -translate-y-1/2 translate-x-1/2 pointer-events-none" />
 
                     <form onSubmit={handleSubmit} className="space-y-8 relative z-10">
                         {error && (
-                            <div className="p-4 bg-red-500/10 border border-red-500/20 rounded-2xl flex items-center gap-3 text-red-400 text-sm font-bold">
+                            <div className="p-4 bg-red-500/10 border border-red-500/20 rounded-2xl flex items-center gap-3 text-red-600 dark:text-red-400 text-sm font-bold">
                                 <AlertCircle size={18} className="shrink-0" />
                                 <p>{error}</p>
                             </div>
@@ -66,7 +66,7 @@ export default function EditSkillForm({ skill }: { skill: any }) {
 
                         <div className="space-y-6">
                             <div className="space-y-2">
-                                <label htmlFor="name" className="text-sm font-bold text-slate-300">Titre de l'expertise *</label>
+                                <label htmlFor="name" className="text-sm font-bold text-slate-600 dark:text-slate-300">Titre de l'expertise *</label>
                                 <input
                                     type="text"
                                     name="name"
@@ -74,12 +74,12 @@ export default function EditSkillForm({ skill }: { skill: any }) {
                                     defaultValue={skill.name}
                                     placeholder="ex: Mobile Development"
                                     required
-                                    className="w-full bg-black/20 border border-white/10 rounded-2xl py-4 px-4 text-white focus:outline-none focus:ring-2 focus:ring-blue-500/50 transition-all font-medium"
+                                    className="w-full bg-slate-50 dark:bg-black/20 border border-slate-200 dark:border-white/10 rounded-2xl py-4 px-4 text-slate-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-blue-500/50 transition-all font-medium"
                                 />
                             </div>
 
                             <div className="space-y-2">
-                                <label htmlFor="tech" className="text-sm font-bold text-slate-300">Stack Technique (Texte libre) *</label>
+                                <label htmlFor="tech" className="text-sm font-bold text-slate-600 dark:text-slate-300">Stack Technique (Texte libre) *</label>
                                 <input
                                     type="text"
                                     name="tech"
@@ -87,15 +87,15 @@ export default function EditSkillForm({ skill }: { skill: any }) {
                                     defaultValue={skill.tech}
                                     placeholder="ex: Flutter, React Native, Kotlin, Swift"
                                     required
-                                    className="w-full bg-black/20 border border-white/10 rounded-2xl py-4 px-4 text-white focus:outline-none focus:ring-2 focus:ring-blue-500/50 transition-all font-medium"
+                                    className="w-full bg-slate-50 dark:bg-black/20 border border-slate-200 dark:border-white/10 rounded-2xl py-4 px-4 text-slate-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-blue-500/50 transition-all font-medium"
                                 />
                             </div>
 
                             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                                 <div className="space-y-4">
                                     <div className="flex items-center justify-between">
-                                        <label className="text-sm font-bold text-slate-300">Maîtrise (%)</label>
-                                        <span className="text-blue-400 font-bold">{level}%</span>
+                                        <label className="text-sm font-bold text-slate-600 dark:text-slate-300">Maîtrise (%)</label>
+                                        <span className="text-blue-600 dark:text-blue-400 font-bold">{level}%</span>
                                     </div>
                                     <input
                                         type="range"
@@ -103,17 +103,17 @@ export default function EditSkillForm({ skill }: { skill: any }) {
                                         max="100"
                                         value={level}
                                         onChange={(e) => setLevel(parseInt(e.target.value))}
-                                        className="w-full h-2 bg-slate-800 rounded-lg appearance-none cursor-pointer accent-blue-500"
+                                        className="w-full h-2 bg-slate-200 dark:bg-slate-800 rounded-lg appearance-none cursor-pointer accent-blue-500"
                                     />
                                 </div>
 
                                 <div className="space-y-2">
-                                    <label htmlFor="domain" className="text-sm font-bold text-slate-300">Domaine global</label>
+                                    <label htmlFor="domain" className="text-sm font-bold text-slate-600 dark:text-slate-300">Domaine global</label>
                                     <select
                                         name="domain"
                                         id="domain"
                                         defaultValue={skill.domain}
-                                        className="w-full bg-black/20 border border-white/10 rounded-2xl py-3 px-4 text-white focus:outline-none focus:ring-2 focus:ring-blue-500/50 transition-all font-medium appearance-none"
+                                        className="w-full bg-slate-50 dark:bg-black/20 border border-slate-200 dark:border-white/10 rounded-2xl py-3 px-4 text-slate-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-blue-500/50 transition-all font-medium appearance-none"
                                     >
                                         <option value="Logiciel">Logiciel / Mobile</option>
                                         <option value="Web">Web / Fullstack</option>
@@ -125,7 +125,7 @@ export default function EditSkillForm({ skill }: { skill: any }) {
                             </div>
 
                             <div className="space-y-6">
-                                <label className="text-sm font-bold text-slate-300">Thème Visuel (Couleur)</label>
+                                <label className="text-sm font-bold text-slate-600 dark:text-slate-300">Thème Visuel (Couleur)</label>
                                 <div className="grid grid-cols-2 sm:grid-cols-4 gap-4">
                                     {[
                                         { name: 'Bleu', class: 'from-blue-500 to-cyan-400' },
@@ -137,19 +137,19 @@ export default function EditSkillForm({ skill }: { skill: any }) {
                                             key={c.name}
                                             type="button"
                                             onClick={() => setColor(c.class)}
-                                            className={`p-1 rounded-2xl border-2 transition-all ${color === c.class ? 'border-white' : 'border-transparent'}`}
+                                            className={`p-1 rounded-2xl border-2 transition-all ${color === c.class ? 'border-slate-900 dark:border-white' : 'border-transparent'}`}
                                         >
                                             <div className={`h-12 w-full rounded-xl bg-gradient-to-br ${c.class}`} />
-                                            <span className="text-[10px] uppercase font-black text-slate-500 mt-2 block">{c.name}</span>
+                                            <span className="text-[10px] uppercase font-black text-slate-500 dark:text-slate-400 mt-2 block">{c.name}</span>
                                         </button>
                                     ))}
                                 </div>
                             </div>
                         </div>
 
-                        <div className="pt-8 flex items-center justify-end gap-4 border-t border-white/10">
+                        <div className="pt-8 flex items-center justify-end gap-4 border-t border-slate-200 dark:border-white/10">
                             <Link href="/admin/experience">
-                                <Button type="button" className="bg-transparent hover:bg-white/5 text-slate-300 shadow-none border border-white/10 rounded-xl px-6 py-3 font-medium">
+                                <Button type="button" className="bg-transparent hover:bg-slate-100 dark:hover:bg-white/5 text-slate-600 dark:text-slate-300 shadow-none border border-slate-200 dark:border-white/10 rounded-xl px-6 py-3 font-medium">
                                     Annuler
                                 </Button>
                             </Link>

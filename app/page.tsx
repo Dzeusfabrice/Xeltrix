@@ -20,13 +20,17 @@ export default async function Home() {
     { count: projectsCount },
     { count: techCount },
     { count: articlesCount },
-    { data: testimonials }
+    { data: testimonials },
+    { data: services },
+    { data: products }
   ] = await Promise.all([
     supabase.from('projects').select('*').limit(3).order('created_at', { ascending: false }),
     supabase.from('projects').select('*', { count: 'exact', head: true }),
     supabase.from('technologies').select('*', { count: 'exact', head: true }),
     supabase.from('articles').select('*', { count: 'exact', head: true }),
-    supabase.from('testimonials').select('*').order('created_at', { ascending: false })
+    supabase.from('testimonials').select('*').order('created_at', { ascending: false }),
+    supabase.from('services').select('*').eq('status', 'published').order('sort_order', { ascending: true }),
+    supabase.from('products').select('*').eq('status', 'published').order('sort_order', { ascending: true }),
   ]);
 
   const statsCounts = {
@@ -40,8 +44,8 @@ export default async function Home() {
     <div className="bg-background text-foreground min-h-screen transition-colors duration-300">
       <Hero />
       <Stats counts={statsCounts} />
-      <ServicesOverview />
-      <ProductsPreview />
+      <ServicesOverview services={services || []} />
+      <ProductsPreview products={products || []} />
       <FeaturedProjects projects={projects || []} />
       <CaseStudiesSection />
       <Features />

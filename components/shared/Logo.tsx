@@ -8,7 +8,7 @@ export const Logo = ({ className = "" }: { className?: string }) => {
                 <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_left,rgba(255,255,255,0.4),transparent)]" />
                 <span className="relative text-white font-black text-2xl tracking-tighter italic">X</span>
             </div>
-            <span className="font-black text-2xl tracking-tighter text-white drop-shadow-md">
+            <span className="font-black text-2xl tracking-tighter text-slate-900 dark:text-white dark:drop-shadow-md">
                 ELTRIX<span className="text-purple-500 group-hover:animate-pulse">.</span>
             </span>
         </div>

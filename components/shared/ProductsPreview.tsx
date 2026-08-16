@@ -2,97 +2,32 @@
 
 import React, { useState } from 'react'
 import { Container, SectionHeader, Badge, Button } from '../ui'
-import { Database, Users, MessageSquare, Tablet, BarChart3, ArrowRight, Check, Sparkles } from 'lucide-react'
+import { ArrowRight, Check, Sparkles } from 'lucide-react'
 import Link from 'next/link'
 import { motion, AnimatePresence } from 'framer-motion'
+import { getProductIcon } from '@/lib/product-icons'
+import type { Product } from '@/types/database'
 
-const products = [
-    {
-        id: 'erp',
-        name: 'Xeltrix ERP',
-        tagline: 'Système de gestion intégrée nouvelle génération',
-        description: 'Solution complète pour orchestrer vos opérations : facturation automatisée, gestion des stocks multi-entrepôts, suivi des commandes et comptabilité analytique.',
-        icon: Database,
-        status: 'Disponible',
-        features: [
-            'Architecture modulaire et personnalisable',
-            'Gestion multi-devises et multi-sociétés',
-            'Workflows d&apos;approbation automatisés',
-            'Tableaux de bord financiers temps réel'
-        ],
-        highlightMetric: '40%',
-        highlightLabel: 'de gain de productivité opérationnelle'
-    },
-    {
-        id: 'crm',
-        name: 'Xeltrix CRM',
-        tagline: 'Pipeline commercial & relations clients automatisées',
-        description: 'Optimisez chaque interaction avec vos prospects et clients grâce à un pipeline de vente visuel, des relances automatisées et un scoring prédictif des leads.',
-        icon: Users,
-        status: 'Disponible',
-        features: [
-            'Pipeline commercial Kanban interactif',
-            'Synchronisation emails & appels',
-            'Scoring prédictif des leads par IA',
-            'Rapports d&apos;activité commerciale'
-        ],
-        highlightMetric: 'x2.5',
-        highlightLabel: 'd&apos;accélération sur le cycle de vente'
-    },
-    {
-        id: 'chatsdk',
-        name: 'Xeltrix Chat SDK',
-        tagline: 'Messagerie instantanée & support IA pour vos apps',
-        description: 'Intégrez en quelques minutes un moteur de chat temps réel ultra-sécurisé, avec support des salons de discussion, messages vocaux et assistant IA conversationnel.',
-        icon: MessageSquare,
-        status: 'Nouvelle version',
-        features: [
-            'WebSockets basse latence (< 50ms)',
-            'Chiffrement de bout en bout (E2EE)',
-            'Intégration d&apos;agents IA de support',
-            'SDK React, React Native & Flutter'
-        ],
-        highlightMetric: '< 50ms',
-        highlightLabel: 'de latence temps réel mondiale'
-    },
-    {
-        id: 'kiosk',
-        name: 'Xeltrix Kiosk',
-        tagline: 'Système interactif pour bornes et points de vente',
-        description: 'Interface tactile dédiée aux bornes interactives, commandes sur place, enregistrement des visiteurs et caisses autonomes, avec résistance aux pannes réseau.',
-        icon: Tablet,
-        status: 'Sur mesure',
-        features: [
-            'Fonctionnement 100% offline-first',
-            'Verrouillage système (Kiosk Lockdown)',
-            'Intégration terminaux de paiement (TPE)',
-            'Administration et télémétrie à distance'
-        ],
-        highlightMetric: '99.99%',
-        highlightLabel: 'de disponibilité en environnement physique'
-    },
-    {
-        id: 'analytics',
-        name: 'Xeltrix Analytics',
-        tagline: 'Observabilité business & intelligence décisionnelle',
-        description: 'Centralisez vos métriques clés, visualisez vos données métiers en direct et obtenez des prévisions automatisées pour guider vos choix stratégiques.',
-        icon: BarChart3,
-        status: 'Disponible',
-        features: [
-            'Connecteurs SQL, PostgreSQL & API',
-            'Visualisations graphiques interactives',
-            'Alerting intelligent sur anomalies',
-            'Export automatisé de rapports exécutifs'
-        ],
-        highlightMetric: '0 latence',
-        highlightLabel: 'sur les requêtes décisionnelles'
+export const ProductsPreview = ({ products = [] }: { products?: Product[] }) => {
+    const [selectedSlug, setSelectedSlug] = useState(products[0]?.slug ?? '')
+    const activeProduct = products.find((p) => p.slug === selectedSlug) || products[0]
+
+    if (!activeProduct) {
+        return (
+            <section className="py-20 bg-white dark:bg-slate-950 border-t border-slate-200 dark:border-white/[0.08]">
+                <Container>
+                    <SectionHeader
+                        badge="Catalogue Produits"
+                        title={<>L&apos;écosystème de produits logiciels <span className="text-gradient-primary">XELTRIX</span></>}
+                        description="Les produits seront bientôt listés ici."
+                    />
+                </Container>
+            </section>
+        )
     }
-]
 
-export const ProductsPreview = () => {
-    const [selectedTab, setSelectedTab] = useState(products[0].id)
-    const activeProduct = products.find(p => p.id === selectedTab) || products[0]
-    const Icon = activeProduct.icon
+    const Icon = getProductIcon(activeProduct.icon_name)
+    const features = (activeProduct.modules || []).slice(0, 4)
 
     return (
         <section className="py-20 bg-white dark:bg-slate-950 border-t border-slate-200 dark:border-white/[0.08] relative overflow-hidden transition-colors duration-300">
@@ -107,15 +42,15 @@ export const ProductsPreview = () => {
                     description="Des briques logicielles robustes et prêtes à l'emploi conçues par notre équipe technique pour accélérer la digitalisation de votre entreprise."
                 />
 
-                {/* Product Tabs Navigation */}
                 <div className="flex flex-wrap justify-center gap-2 mb-10">
                     {products.map((p) => {
-                        const TabIcon = p.icon
-                        const isActive = p.id === selectedTab
+                        const TabIcon = getProductIcon(p.icon_name)
+                        const isActive = p.slug === activeProduct.slug
                         return (
                             <button
                                 key={p.id}
-                                onClick={() => setSelectedTab(p.id)}
+                                type="button"
+                                onClick={() => setSelectedSlug(p.slug)}
                                 className={`flex items-center gap-2 px-4 py-2.5 rounded-xl text-xs sm:text-sm font-semibold transition-all duration-200 cursor-pointer ${
                                     isActive
                                         ? 'bg-blue-600 text-white shadow-md shadow-blue-600/20 border border-blue-500/30'
@@ -129,7 +64,6 @@ export const ProductsPreview = () => {
                     })}
                 </div>
 
-                {/* Active Product Showcase */}
                 <AnimatePresence mode="wait">
                     <motion.div
                         key={activeProduct.id}
@@ -140,51 +74,57 @@ export const ProductsPreview = () => {
                         className="rounded-3xl bg-slate-50 dark:bg-slate-900/50 border border-slate-200 dark:border-white/10 p-7 sm:p-12 backdrop-blur-xl shadow-sm dark:shadow-2xl"
                     >
                         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-10 items-center">
-                            {/* Left Content */}
                             <div className="lg:col-span-7 space-y-5">
                                 <div className="flex items-center gap-3.5">
                                     <div className="w-12 h-12 rounded-xl bg-blue-50 dark:bg-blue-500/10 border border-blue-200 dark:border-blue-500/20 flex items-center justify-center text-blue-600 dark:text-blue-400 shrink-0">
                                         <Icon size={24} />
                                     </div>
                                     <div>
-                                        <div className="flex items-center gap-2">
+                                        <div className="flex items-center gap-2 flex-wrap">
                                             <h3 className="text-2xl sm:text-3xl font-bold text-slate-900 dark:text-white tracking-tight">
                                                 {activeProduct.name}
                                             </h3>
-                                            <Badge variant="primary" className="text-[10px]">
-                                                {activeProduct.status}
-                                            </Badge>
+                                            {activeProduct.badge && (
+                                                <Badge variant="primary" className="text-[10px]">
+                                                    {activeProduct.badge}
+                                                </Badge>
+                                            )}
                                         </div>
-                                        <p className="text-xs sm:text-sm text-blue-600 dark:text-blue-400 font-medium">
-                                            {activeProduct.tagline}
-                                        </p>
+                                        {activeProduct.tagline && (
+                                            <p className="text-xs sm:text-sm text-blue-600 dark:text-blue-400 font-medium">
+                                                {activeProduct.tagline}
+                                            </p>
+                                        )}
                                     </div>
                                 </div>
 
-                                <p className="text-slate-600 dark:text-slate-300 text-sm sm:text-base leading-relaxed">
-                                    {activeProduct.description}
-                                </p>
+                                {activeProduct.description && (
+                                    <p className="text-slate-600 dark:text-slate-300 text-sm sm:text-base leading-relaxed">
+                                        {activeProduct.description}
+                                    </p>
+                                )}
 
-                                {/* Features List */}
-                                <div className="grid grid-cols-1 sm:grid-cols-2 gap-2.5 pt-1">
-                                    {activeProduct.features.map((feat, idx) => (
-                                        <div key={idx} className="flex items-start gap-2.5 text-xs sm:text-sm text-slate-700 dark:text-slate-300">
-                                            <div className="w-4 h-4 rounded-full bg-blue-100 dark:bg-blue-500/20 text-blue-600 dark:text-blue-400 flex items-center justify-center shrink-0 mt-0.5">
-                                                <Check size={11} />
+                                {features.length > 0 && (
+                                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-2.5 pt-1">
+                                        {features.map((feat) => (
+                                            <div key={feat} className="flex items-start gap-2.5 text-xs sm:text-sm text-slate-700 dark:text-slate-300">
+                                                <div className="w-4 h-4 rounded-full bg-blue-100 dark:bg-blue-500/20 text-blue-600 dark:text-blue-400 flex items-center justify-center shrink-0 mt-0.5">
+                                                    <Check size={11} />
+                                                </div>
+                                                <span>{feat}</span>
                                             </div>
-                                            <span>{feat}</span>
-                                        </div>
-                                    ))}
-                                </div>
+                                        ))}
+                                    </div>
+                                )}
 
                                 <div className="flex flex-wrap gap-3 pt-3">
-                                    <Link href="/contact?subject=Demande+de+d%C3%A9mo">
+                                    <Link href={`/contact?subject=Demo+${encodeURIComponent(activeProduct.name)}`}>
                                         <Button variant="primary" size="md">
                                             Demander une démonstration
                                             <ArrowRight size={15} />
                                         </Button>
                                     </Link>
-                                    <Link href={`/products#${activeProduct.id}`}>
+                                    <Link href={`/products#${activeProduct.slug}`}>
                                         <Button variant="outline" size="md">
                                             En savoir plus
                                         </Button>
@@ -192,15 +132,14 @@ export const ProductsPreview = () => {
                                 </div>
                             </div>
 
-                            {/* Right Metric & Visual Card */}
                             <div className="lg:col-span-5">
                                 <div className="rounded-2xl bg-white dark:bg-slate-950/80 border border-slate-200 dark:border-white/10 p-7 space-y-5 text-center shadow-sm">
                                     <div className="space-y-1.5">
                                         <div className="text-4xl sm:text-5xl font-black text-slate-900 dark:text-white tracking-tight font-mono text-gradient-primary">
-                                            {activeProduct.highlightMetric}
+                                            {activeProduct.highlight_metric || '—'}
                                         </div>
                                         <p className="text-xs sm:text-sm text-slate-600 dark:text-slate-400 font-medium">
-                                            {activeProduct.highlightLabel}
+                                            {activeProduct.highlight_label || 'Indicateur clé'}
                                         </p>
                                     </div>
 
