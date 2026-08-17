@@ -26,7 +26,7 @@ export default async function AdminProjectsPage() {
                             <span>Portfolio & Projets</span>
                         </h1>
                         <p className="text-xs sm:text-sm text-slate-500 dark:text-slate-400 mt-0.5">
-                            Gestion des études de cas et réalisations présentées sur le site.
+                            Gestion des réalisations présentées sur le site.
                         </p>
                     </div>
                 </div>

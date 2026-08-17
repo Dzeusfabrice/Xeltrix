@@ -195,7 +195,7 @@ export default async function AdminDashboardPage() {
                                     <span>Taux de conversion formulaire</span>
                                     <span className="text-blue-600 dark:text-blue-400 font-mono">14.2%</span>
                                 </div>
-                                <p className="text-slate-500 dark:text-slate-400 text-[11px]">Leads qualifiés via le simulateur de devis</p>
+                                <p className="text-slate-500 dark:text-slate-400 text-[11px]">Leads qualifiés via le formulaire de contact</p>
                             </div>
 
                             <div className="p-3.5 rounded-xl bg-slate-50 dark:bg-slate-900/60 border border-slate-200 dark:border-white/5 space-y-1">
@@ -210,7 +210,7 @@ export default async function AdminDashboardPage() {
                         <div className="pt-2">
                             <Link href="/admin/messages" className="block">
                                 <Button variant="outline" size="sm" className="w-full">
-                                    <span>Consulter tous les messages & devis</span>
+                                    <span>Consulter tous les messages</span>
                                     <ArrowRight size={14} />
                                 </Button>
                             </Link>

@@ -28,15 +28,15 @@ export const CTASection = () => {
                     </div>
 
                     <div className="flex flex-col sm:flex-row justify-center items-center gap-4 pt-2">
-                        <Link href="/quote" className="w-full sm:w-auto">
+                        <Link href="/contact" className="w-full sm:w-auto">
                             <Button variant="primary" size="lg" className="w-full sm:w-auto shadow-lg shadow-blue-600/25">
-                                <span>Simulateur de Devis Gratuit</span>
+                                <span>Demander un devis</span>
                                 <ArrowRight size={16} />
                             </Button>
                         </Link>
-                        <Link href="/contact" className="w-full sm:w-auto">
+                        <Link href="/projects" className="w-full sm:w-auto">
                             <Button variant="outline" size="lg" className="w-full sm:w-auto">
-                                Prendre contact avec l&apos;équipe
+                                Voir nos réalisations
                             </Button>
                         </Link>
                     </div>

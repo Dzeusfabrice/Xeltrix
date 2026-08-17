@@ -125,11 +125,6 @@ export const Footer = async () => {
                                     </Link>
                                 </li>
                             ))}
-                            <li>
-                                <Link href="/quote" className="text-blue-600 dark:text-blue-400 font-semibold inline-flex items-center gap-1">
-                                    Simulateur de Devis <ArrowUpRight size={12} />
-                                </Link>
-                            </li>
                         </ul>
                     </div>
 
@@ -171,7 +166,6 @@ export const Footer = async () => {
                         <ul className="space-y-3 text-sm">
                             <li><Link href="/about" className="hover:text-blue-600 dark:hover:text-white transition-colors">À propos</Link></li>
                             <li><Link href="/projects" className="hover:text-blue-600 dark:hover:text-white transition-colors">Portfolio</Link></li>
-                            <li><Link href="/case-studies" className="hover:text-blue-600 dark:hover:text-white transition-colors">Études de cas</Link></li>
                             <li><Link href="/blog" className="hover:text-blue-600 dark:hover:text-white transition-colors">Blog</Link></li>
                             <li><Link href="/contact" className="hover:text-blue-600 dark:hover:text-white transition-colors">Contact</Link></li>
                         </ul>

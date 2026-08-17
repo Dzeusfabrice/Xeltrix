@@ -2,12 +2,11 @@
 
 import React, { useState } from 'react'
 import { Container, Button, Card, Badge } from '@/components/ui'
-import { Mail, MapPin, Send, Clock, CheckCircle2, Sparkles } from 'lucide-react'
+import { Mail, MapPin, Send, Clock, CheckCircle2 } from 'lucide-react'
 import { useForm } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
 import * as z from 'zod'
 import { submitContactMessage } from './actions'
-import Link from 'next/link'
 
 const contactSchema = z.object({
     name: z.string().min(2, "Le nom doit contenir au moins 2 caractères"),
@@ -119,22 +118,6 @@ export default function ContactPage() {
                                         <div className="text-sm font-semibold text-emerald-600 dark:text-emerald-400">&lt; 24h ouvrées</div>
                                     </div>
                                 </div>
-                            </div>
-
-                            {/* Simulation shortcut */}
-                            <div className="p-5 rounded-2xl bg-gradient-to-br from-blue-50 to-indigo-50 dark:from-blue-900/20 dark:to-slate-900 border border-blue-200 dark:border-blue-500/20 space-y-2.5 shadow-sm">
-                                <div className="flex items-center gap-2 text-xs font-semibold text-blue-600 dark:text-blue-400">
-                                    <Sparkles size={14} />
-                                    <span>Besoin d&apos;une estimation budgétaire immédiate ?</span>
-                                </div>
-                                <p className="text-xs text-slate-600 dark:text-slate-300 leading-relaxed">
-                                    Utilisez notre simulateur de devis pour obtenir une fourchette tarifaire et un planning prévisionnel en 2 minutes.
-                                </p>
-                                <Link href="/quote" className="inline-block pt-0.5">
-                                    <Button variant="outline" size="sm">
-                                        Accéder au simulateur
-                                    </Button>
-                                </Link>
                             </div>
                         </div>
 

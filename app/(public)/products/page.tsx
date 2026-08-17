@@ -46,9 +46,9 @@ export default async function ProductsPage() {
                                 <ArrowRight size={16} />
                             </Button>
                         </Link>
-                        <Link href="/quote">
+                        <Link href="/contact">
                             <Button variant="outline" size="lg">
-                                Estimer les coûts de déploiement
+                                Demander un devis
                             </Button>
                         </Link>
                     </div>

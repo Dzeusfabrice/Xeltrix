@@ -40,7 +40,7 @@ export default async function ProjectDetailPage({ params }: { params: { slug: st
                             </div>
                             <div className="flex items-center gap-3 text-slate-500 text-[10px] font-black uppercase tracking-[0.3em]">
                                 <span className="w-1.5 h-1.5 rounded-full bg-slate-700" />
-                                Étude de cas ultra-détaillée
+                                Réalisation détaillée
                             </div>
                         </div>
 

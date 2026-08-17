@@ -69,15 +69,15 @@ export default async function ServicesPage() {
                         Du prototype rapide à l&apos;infrastructure d&apos;entreprise haute disponibilité, XELTRIX déploie des solutions pérennes conçues pour supporter votre passage à l&apos;échelle.
                     </p>
                     <div className="flex flex-wrap justify-center gap-3.5 pt-3">
-                        <Link href="/quote">
+                        <Link href="/contact">
                             <Button variant="primary" size="lg">
-                                <span>Estimer un projet en ligne</span>
+                                <span>Discuter avec un architecte logiciel</span>
                                 <ArrowRight size={16} />
                             </Button>
                         </Link>
-                        <Link href="/contact">
+                        <Link href="/projects">
                             <Button variant="outline" size="lg">
-                                Discuter avec un architecte logiciel
+                                Voir nos réalisations
                             </Button>
                         </Link>
                     </div>
@@ -197,7 +197,7 @@ export default async function ServicesPage() {
                                                 </div>
                                             )}
 
-                                            <Link href={`/quote?service=${service.slug}`} className="block">
+                                            <Link href={`/contact?service=${service.slug}`} className="block">
                                                 <Button variant="primary" size="md" className="w-full">
                                                     <span>Demander un devis pour ce service</span>
                                                     <ArrowRight size={15} />
@@ -260,9 +260,9 @@ export default async function ServicesPage() {
                                     Contact direct
                                 </Button>
                             </Link>
-                            <Link href="/quote">
+                            <Link href="/projects">
                                 <Button variant="outline" size="lg">
-                                    Calculateur de budget
+                                    Voir nos réalisations
                                 </Button>
                             </Link>
                         </div>

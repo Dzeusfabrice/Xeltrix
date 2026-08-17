@@ -222,12 +222,6 @@ export default function ProjectsClient({
                                             >
                                                 Détails du projet <ArrowUpRight size={14} />
                                             </Link>
-                                            <Link
-                                                href="/quote"
-                                                className="text-[11px] text-slate-500 dark:text-slate-400 hover:text-blue-600 dark:hover:text-slate-200 transition-colors"
-                                            >
-                                                Projet similaire ?
-                                            </Link>
                                         </div>
                                     </motion.div>
                                 ))}

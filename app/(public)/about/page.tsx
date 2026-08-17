@@ -135,9 +135,9 @@ export default function AboutPage() {
                                     Prendre contact
                                 </Button>
                             </Link>
-                            <Link href="/quote">
+                            <Link href="/projects">
                                 <Button variant="outline" size="lg">
-                                    Calculer mon devis
+                                    Voir nos réalisations
                                 </Button>
                             </Link>
                         </div>

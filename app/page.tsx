@@ -3,7 +3,6 @@ import { Stats } from "@/components/shared/Stats";
 import { ServicesOverview } from "@/components/shared/ServicesOverview";
 import { ProductsPreview } from "@/components/shared/ProductsPreview";
 import { FeaturedProjects } from "@/components/shared/FeaturedProjects";
-import { CaseStudiesSection } from "@/components/shared/CaseStudiesSection";
 import { Features } from "@/components/shared/Features";
 import { Testimonials } from "@/components/shared/Testimonials";
 import { CTASection } from "@/components/shared/CTASection";
@@ -47,7 +46,6 @@ export default async function Home() {
       <ServicesOverview services={services || []} />
       <ProductsPreview products={products || []} />
       <FeaturedProjects projects={projects || []} />
-      <CaseStudiesSection />
       <Features />
       <Testimonials testimonials={testimonials || []} />
       <CTASection />
