@@ -135,7 +135,7 @@ export default async function ProjectDetailPage({ params }: { params: Promise<{ 
                             </div>
                             <div className="pt-2 flex flex-wrap gap-2">
                                 {project.technologies?.map((tech: string) => (
-                                    <Badge key={tech} variant="secondary" className="px-3 py-1 text-[9px] font-black uppercase tracking-widest bg-slate-100 dark:bg-white/5 border-slate-200 dark:border-white/10 text-slate-500 dark:text-slate-300">
+                                    <Badge key={tech} variant="default" className="px-3 py-1 text-[9px] font-black uppercase tracking-widest bg-slate-100 dark:bg-white/5 border-slate-200 dark:border-white/10 text-slate-500 dark:text-slate-300">
                                         {tech}
                                     </Badge>
                                 ))}
