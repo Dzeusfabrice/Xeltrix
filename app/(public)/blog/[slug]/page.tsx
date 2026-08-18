@@ -8,13 +8,14 @@ import { fr } from 'date-fns/locale'
 
 export const revalidate = 3600;
 
-export default async function ArticleDetailPage({ params }: { params: { slug: string } }) {
+export default async function ArticleDetailPage({ params }: { params: Promise<{ slug: string }> }) {
+    const { slug } = await params;
     const supabase = await createClient()
 
     const { data: article } = await supabase
         .from('articles')
         .select('*')
-        .eq('slug', params.slug)
+        .eq('slug', slug)
         .single()
 
     if (!article) {
