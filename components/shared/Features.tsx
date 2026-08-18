@@ -40,7 +40,6 @@ export const Features = () => {
         <section className="py-20 bg-slate-50/50 dark:bg-slate-950/80 border-t border-slate-200 dark:border-white/[0.08] relative transition-colors duration-300">
             <Container>
                 <SectionHeader
-                    badge="Méthodologie & Exigences"
                     title={
                         <>
                             Pourquoi confier votre produit à <span className="text-gradient-primary">XELTRIX</span> ?

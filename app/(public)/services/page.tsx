@@ -215,7 +215,6 @@ export default async function ServicesPage() {
             <section className="py-16 bg-slate-50 dark:bg-slate-900/30 border-y border-slate-200 dark:border-white/[0.08]">
                 <Container>
                     <SectionHeader
-                        badge="Notre Processus"
                         title={
                             <>
                                 Une méthode de livraison <span className="text-gradient-primary">transparente et cadrée</span>

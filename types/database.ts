@@ -86,6 +86,7 @@ export type Product = {
     target?: string
     highlight_metric?: string
     highlight_label?: string
+    image_url?: string
     sort_order: number
     status: 'draft' | 'published'
     created_at: string

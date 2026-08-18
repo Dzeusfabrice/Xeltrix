@@ -54,9 +54,6 @@ export default function AboutPage() {
                 <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[700px] h-[300px] bg-blue-500/10 rounded-full blur-[130px] pointer-events-none" />
 
                 <Container className="relative z-10 text-center space-y-5 max-w-4xl">
-                    <Badge variant="primary" className="text-xs uppercase tracking-wider font-semibold">
-                        L&apos;Équipe & La Vision
-                    </Badge>
                     <h1 className="text-3xl sm:text-5xl md:text-6xl font-bold tracking-tight text-slate-900 dark:text-white leading-[1.1]">
                         Bâtisseurs de solutions logicielles <span className="text-gradient-primary">sans compromis</span>
                     </h1>
@@ -92,7 +89,6 @@ export default function AboutPage() {
             <section className="py-16 bg-slate-50 dark:bg-slate-900/40 border-y border-slate-200 dark:border-white/[0.08]">
                 <Container>
                     <SectionHeader
-                        badge="Culture d'Ingénierie"
                         title={
                             <>
                                 Les standards de développement <span className="text-gradient-primary">XELTRIX</span>

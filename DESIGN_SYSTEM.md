@@ -8,7 +8,7 @@
 - Framer
 - Raycast
 - Supabase
-
+-https://github.com/nextlevelbuilder/ui-ux-pro-max-skill/blob/main/README.zh.md#ui-ux-pro-max
 ## Style
 
 - Premium
@@ -45,7 +45,7 @@ Durée :
 
 ## Cartes
 
-- Glass Effect
+- not glass Effect
 - Border Subtle
 - Soft Shadow
 
