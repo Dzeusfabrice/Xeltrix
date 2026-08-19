@@ -54,7 +54,7 @@ export default async function ProductDetailPage({ params }: { params: Promise<{ 
                                 <div className="flex items-center gap-1.5">
                                     <span className="text-xs font-black text-slate-900 dark:text-white">{rating}</span>
                                     <div className="flex text-amber-400">
-                                        {[...Array(5)].map((_, i) => <Star key={i} size={10} className="fill-current" />)}
+                                        {[...Array(5)].map((_, i: number) => <Star key={i} size={10} className="fill-current" />)}
                                     </div>
                                     <span className="text-[10px] text-slate-500 dark:text-slate-400 font-medium">(12k avis)</span>
                                 </div>
@@ -102,7 +102,7 @@ export default async function ProductDetailPage({ params }: { params: Promise<{ 
                         <h3 className="text-xl font-black text-slate-900 dark:text-white tracking-tight">Captures d&apos;écran</h3>
                     </div>
                     <div className="flex gap-4 overflow-x-auto pb-4 scrollbar-hide snap-x">
-                        {screenshots.map((src, idx) => (
+                        {screenshots.map((src: string, idx: number) => (
                             <div key={idx} className="flex-shrink-0 w-[240px] h-[426px] rounded-[1.5rem] overflow-hidden border border-slate-200 dark:border-white/10 shadow-lg snap-start bg-slate-100 dark:bg-slate-900">
                                 <img
                                     src={src}
@@ -169,7 +169,7 @@ export default async function ProductDetailPage({ params }: { params: Promise<{ 
                                     <div className="text-[9px] text-slate-500 font-black uppercase mt-1">12k avis</div>
                                 </div>
                                 <div className="flex-grow space-y-1">
-                                    {[5, 4, 3, 2, 1].map((star) => (
+                                    {[5, 4, 3, 2, 1].map((star: number) => (
                                         <div key={star} className="flex items-center gap-2">
                                             <span className="text-[8px] font-bold text-slate-400 w-2">{star}</span>
                                             <div className="flex-grow h-1 rounded-full bg-slate-100 dark:bg-white/5 overflow-hidden">

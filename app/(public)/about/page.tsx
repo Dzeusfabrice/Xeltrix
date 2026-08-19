@@ -77,7 +77,7 @@ export default function AboutPage() {
             <section className="py-16">
                 <Container>
                     <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-                        {pillars.map((p, idx) => {
+                        {pillars.map((p: any, idx: number) => {
                             const Icon = p.icon
                             return (
                                 <Card key={idx} className="p-7 space-y-3.5">
@@ -108,7 +108,7 @@ export default function AboutPage() {
                     />
 
                     <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
-                        {engineeringStandards.map((std, i) => (
+                        {engineeringStandards.map((std: any, i: number) => (
                             <div key={i} className="p-6 rounded-2xl bg-white dark:bg-slate-950 border border-slate-200 dark:border-white/[0.08] space-y-2.5 shadow-sm dark:shadow-none hover:border-blue-500/30 transition-all">
                                 <div className="flex items-center gap-2.5">
                                     <div className="w-8 h-8 rounded-lg bg-blue-50 dark:bg-blue-500/10 flex items-center justify-center text-blue-600 dark:text-blue-400">

@@ -167,7 +167,7 @@ export default async function ArticleDetailPage({ params }: { params: Promise<{ 
                                 Exploration
                             </h4>
                             <div className="space-y-3">
-                                {['Technologie', 'Design', 'Cloud', 'Business'].map(tag => (
+                                {['Technologie', 'Design', 'Cloud', 'Business'].map((tag: string) => (
                                     <Link key={tag} href={`/blog?filter=${tag.toLowerCase()}`} className="block p-4 rounded-xl bg-slate-50 dark:bg-white/5 hover:bg-slate-200 dark:hover:bg-white/10 border border-slate-200 dark:border-white/5 text-slate-500 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white transition-all text-xs font-black uppercase tracking-widest group">
                                         <div className="flex justify-between items-center">
                                             {tag}

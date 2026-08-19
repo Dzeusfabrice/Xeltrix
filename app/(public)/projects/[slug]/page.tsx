@@ -21,8 +21,8 @@ export default async function ProjectDetailPage({ params }: { params: Promise<{ 
     }
 
     const rating = 4.9; 
-    const screenshots = project.gallery && project.gallery.length > 0 
-        ? project.gallery 
+    const screenshots: string[] = project.gallery && (project.gallery as string[]).length > 0 
+        ? (project.gallery as string[]) 
         : project.slug === 'fintech-saas-platform' 
             ? ['/assets/im2.jpg', '/assets/im3.jpg', '/assets/im4.jpg', '/assets/im5.jpg', '/assets/im6.jpg', '/assets/im7.jpg']
             : ['/assets/im2.jpg', '/assets/im3.jpg', '/assets/im4.jpg'];
@@ -51,7 +51,7 @@ export default async function ProjectDetailPage({ params }: { params: Promise<{ 
                                 <div className="flex items-center gap-1.5">
                                     <span className="text-xs font-black text-slate-900 dark:text-white">{rating}</span>
                                     <div className="flex text-amber-400">
-                                        {[...Array(5)].map((_, i) => <Star key={i} size={10} className="fill-current" />)}
+                                        {[...Array(5)].map((_, i: number) => <Star key={i} size={10} className="fill-current" />)}
                                     </div>
                                     <span className="text-[10px] text-slate-500 dark:text-slate-400 font-medium">(12k avis)</span>
                                 </div>

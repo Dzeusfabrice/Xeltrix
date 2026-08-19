@@ -69,7 +69,7 @@ export default function BlogClient({ articles }: { articles: any[] }) {
                 <Container>
                     {articles.length > 0 ? (
                         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-12">
-                            {articles.map((a, i) => (
+                            {articles.map((a: any, i: number) => (
                                 <motion.article
                                     initial={{ opacity: 0, scale: 0.95 }}
                                     whileInView={{ opacity: 1, scale: 1 }}

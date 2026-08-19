@@ -76,7 +76,7 @@ export default async function AdminTechnologiesPage() {
                                 </tr>
                             </thead>
                             <tbody className="divide-y divide-slate-100 dark:divide-white/5">
-                                {technologies?.map((tech) => (
+                                {technologies?.map((tech: any) => (
                                     <tr key={tech.id} className="hover:bg-slate-50 dark:hover:bg-white/[0.02] transition-colors">
                                         <td className="px-6 py-4 font-bold text-slate-900 dark:text-white flex items-center gap-3">
                                             {tech.logo_url && (
