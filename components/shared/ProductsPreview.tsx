@@ -12,8 +12,8 @@ export const ProductsPreview = ({ products = [] }: { products?: Product[] }) => 
     const displayProducts = products.length > 0 ? products : [
         {
             id: 'p1',
-            slug: 'xeltrix-erp',
-            name: 'Xeltrix ERP',
+            slug: 'zeltrix-erp',
+            name: 'zeltrix ERP',
             tagline: 'Gestion d\'entreprise intégrée',
             description: 'Solution complète pour automatiser vos processus métier, de la finance aux stocks.',
             icon_name: 'Layers',
@@ -22,8 +22,8 @@ export const ProductsPreview = ({ products = [] }: { products?: Product[] }) => 
         },
         {
             id: 'p2',
-            slug: 'xeltrix-crm',
-            name: 'Xeltrix CRM',
+            slug: 'zeltrix-crm',
+            name: 'zeltrix CRM',
             tagline: 'Relation client optimisée',
             description: 'Centralisez vos interactions clients et boostez votre force de vente avec l\'IA.',
             icon_name: 'Users',
@@ -32,7 +32,7 @@ export const ProductsPreview = ({ products = [] }: { products?: Product[] }) => 
         },
         {
             id: 'p3',
-            slug: 'xeltrix-chat',
+            slug: 'zeltrix-chat',
             name: 'Chat SDK',
             tagline: 'Messagerie temps réel',
             description: 'Intégrez une messagerie sécurisée et scalable directement dans vos applications.',

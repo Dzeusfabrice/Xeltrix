@@ -1,8 +1,8 @@
-# ARCHITECTURE TECHNIQUE - XELTRIX
+# ARCHITECTURE TECHNIQUE - zeltrix
 
 ## 1. Vue d'Ensemble
 
-La plateforme XELTRIX est conçue selon les meilleures pratiques du développement moderne avec Next.js 16 (App Router) et une architecture en couches étanche.
+La plateforme zeltrix est conçue selon les meilleures pratiques du développement moderne avec Next.js 16 (App Router) et une architecture en couches étanche.
 
 ```
                     ┌─────────────────────────┐

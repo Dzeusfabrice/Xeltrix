@@ -4,8 +4,8 @@ import { AdminSidebar } from '@/components/layout/AdminSidebar'
 import { logout } from './actions'
 
 export const metadata: Metadata = {
-    title: 'Administration | XELTRIX',
-    description: 'Panneau de contrôle et gestion centralisée de XELTRIX',
+    title: 'Administration | zeltrix',
+    description: 'Panneau de contrôle et gestion centralisée de zeltrix',
     robots: 'noindex, nofollow',
 }
 

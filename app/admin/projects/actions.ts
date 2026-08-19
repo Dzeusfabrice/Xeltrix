@@ -25,7 +25,7 @@ export async function createProject(formData: FormData) {
 
     if (imageFile && imageFile.size > 0) {
         try {
-            const uploadedUrl = await uploadFile(imageFile, 'xeltrix', 'projects')
+            const uploadedUrl = await uploadFile(imageFile, 'zeltrix', 'projects')
             if (uploadedUrl) image_url = uploadedUrl
         } catch (error) {
             console.error('Failed to upload image:', error)
@@ -86,7 +86,7 @@ export async function updateProject(id: string, formData: FormData) {
 
     if (imageFile && imageFile.size > 0) {
         try {
-            const uploadedUrl = await uploadFile(imageFile, 'xeltrix', 'projects')
+            const uploadedUrl = await uploadFile(imageFile, 'zeltrix', 'projects')
             if (uploadedUrl) image_url = uploadedUrl
         } catch (error) {
             console.error('Failed to upload image:', error)

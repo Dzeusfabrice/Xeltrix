@@ -2,7 +2,7 @@
 
 ## Vision
 
-Construire une plateforme SaaS premium pour présenter les services et produits XELTRIX.
+Construire une plateforme SaaS premium pour présenter les services et produits zeltrix.
 
 ## Fonctionnalités publiques
 
@@ -41,7 +41,7 @@ Construire une plateforme SaaS premium pour présenter les services et produits 
 
 ### Chatbot IA
 
-- Assistant XELTRIX
+- Assistant zeltrix
 
 ## Fonctionnalités Admin
 

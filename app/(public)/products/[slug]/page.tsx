@@ -1,29 +1,34 @@
 import { createClient } from '@/lib/supabase/server'
 import { Container, Button, Badge } from '@/components/ui'
-import { ArrowLeft, ArrowRight, ExternalLink, Smartphone, Globe, Layers, Zap, Shield, Cpu, Star, Download, ShieldCheck, Share2, Info, CheckCircle2 } from 'lucide-react'
+import { ArrowLeft, ArrowRight, ExternalLink, Zap, Shield, Cpu, Star, ShieldCheck, CheckCircle2, Share2, Info } from 'lucide-react'
 import Link from 'next/link'
 import { notFound } from 'next/navigation'
+import { getProductIcon } from '@/lib/product-icons'
 
 export const revalidate = 3600;
 
-export default async function ProjectDetailPage({ params }: { params: Promise<{ slug: string }> }) {
+export default async function ProductDetailPage({ params }: { params: Promise<{ slug: string }> }) {
     const { slug } = await params;
     const supabase = await createClient()
 
-    const { data: project } = await supabase
-        .from('projects')
+    const { data: product } = await supabase
+        .from('products')
         .select('*')
         .eq('slug', slug)
         .single()
 
-    if (!project) {
+    if (!product) {
         notFound()
     }
 
+    const Icon = getProductIcon(product.icon_name)
     const rating = 4.9; 
-    const screenshots = project.slug === 'fintech-saas-platform' 
-        ? ['/assets/im2.jpg', '/assets/im3.jpg', '/assets/im4.jpg', '/assets/im5.jpg', '/assets/im6.jpg', '/assets/im7.jpg']
-        : ['/assets/im2.jpg', '/assets/im3.jpg', '/assets/im4.jpg'];
+    const screenshots = [
+        '/assets/im2.jpg', 
+        '/assets/im3.jpg', 
+        '/assets/im4.jpg', 
+        '/assets/im5.jpg'
+    ];
 
     return (
         <div className="min-h-screen bg-white dark:bg-[#050811] pb-24 transition-colors duration-300">
@@ -31,10 +36,10 @@ export default async function ProjectDetailPage({ params }: { params: Promise<{ 
                 {/* Main Product Header - Play Store Style */}
                 <header className="grid grid-cols-1 md:grid-cols-12 gap-6 md:gap-10 items-start mb-12">
                     <div className="md:col-span-3 flex justify-center md:justify-start">
-                        <div className="relative w-32 h-32 sm:w-40 sm:h-40 rounded-[2rem] overflow-hidden shadow-xl border border-slate-100 dark:border-white/10 ring-4 ring-slate-50 dark:ring-white/5 animate-in fade-in zoom-in duration-700">
+                        <div className="relative w-32 h-32 sm:w-40 sm:h-40 rounded-[2.5rem] overflow-hidden shadow-xl border border-slate-100 dark:border-white/10 ring-4 ring-slate-50 dark:ring-white/5 animate-in fade-in zoom-in duration-700">
                             <img
-                                src={project.image_url || "/assets/im1.jpg"}
-                                alt={project.title}
+                                src={product.image_url || "/assets/im1.jpg"}
+                                alt={product.name}
                                 className="w-full h-full object-cover"
                             />
                         </div>
@@ -42,7 +47,7 @@ export default async function ProjectDetailPage({ params }: { params: Promise<{ 
                     <div className="md:col-span-9 flex flex-col justify-center space-y-4 text-center md:text-left">
                         <div className="space-y-1">
                             <h1 className="text-3xl sm:text-4xl md:text-5xl font-black text-slate-900 dark:text-white tracking-tight leading-tight">
-                                {project.title}
+                                {product.name}
                             </h1>
                             <div className="flex flex-wrap items-center justify-center md:justify-start gap-x-4 gap-y-1">
                                 <Link href="/about" className="text-blue-600 dark:text-blue-400 font-bold hover:underline text-sm">ZELTRIX Technologies</Link>
@@ -57,15 +62,15 @@ export default async function ProjectDetailPage({ params }: { params: Promise<{ 
                         </div>
 
                         <div className="flex flex-wrap items-center justify-center md:justify-start gap-3">
-                            <a href={project.project_url || "#"} target="_blank" rel="noopener noreferrer" className="w-full sm:w-auto">
+                            <Link href="/contact" className="w-full sm:w-auto">
                                 <Button className="w-full h-11 rounded-xl bg-blue-600 hover:bg-blue-700 text-white flex items-center justify-center gap-2 text-[10px] font-black uppercase tracking-widest shadow-lg shadow-blue-600/20 transition-all active:scale-95 px-8">
-                                    Découvrir
+                                    Installer maintenant
                                     <ExternalLink size={14} />
                                 </Button>
-                            </a>
+                            </Link>
                             <Link href="/contact" className="w-full sm:w-auto">
                                 <Button variant="outline" className="w-full h-11 rounded-xl border border-slate-200 dark:border-white/10 text-slate-900 dark:text-white font-black tracking-widest uppercase text-[10px] hover:bg-slate-50 dark:hover:bg-white/5 transition-all">
-                                    Audit personnalisé
+                                    Essai gratuit
                                 </Button>
                             </Link>
                         </div>
@@ -73,19 +78,19 @@ export default async function ProjectDetailPage({ params }: { params: Promise<{ 
                         <div className="grid grid-cols-2 sm:grid-cols-4 gap-4 pt-4 border-t border-slate-100 dark:border-white/5 max-w-xl mx-auto md:mx-0">
                             <div className="text-center md:text-left">
                                 <div className="text-[9px] font-black text-slate-400 dark:text-slate-500 uppercase tracking-widest mb-0.5">Catégorie</div>
-                                <div className="text-xs font-bold text-slate-900 dark:text-white">{project.category}</div>
+                                <div className="text-xs font-bold text-slate-900 dark:text-white">Logiciel SaaS</div>
                             </div>
                             <div className="text-center md:text-left">
-                                <div className="text-[9px] font-black text-slate-400 dark:text-slate-500 uppercase tracking-widest mb-0.5">Taille</div>
-                                <div className="text-xs font-bold text-slate-900 dark:text-white">64 MB</div>
+                                <div className="text-[9px] font-black text-slate-400 dark:text-slate-500 uppercase tracking-widest mb-0.5">Stabilité</div>
+                                <div className="text-xs font-bold text-slate-900 dark:text-white">Ultra-stable</div>
                             </div>
                             <div className="text-center md:text-left">
-                                <div className="text-[9px] font-black text-slate-400 dark:text-slate-500 uppercase tracking-widest mb-0.5">Âge</div>
-                                <div className="text-xs font-bold text-slate-900 dark:text-white">3+ ans</div>
+                                <div className="text-[9px] font-black text-slate-400 dark:text-slate-500 uppercase tracking-widest mb-0.5">Support</div>
+                                <div className="text-xs font-bold text-slate-900 dark:text-white">24/7 Premium</div>
                             </div>
                             <div className="text-center md:text-left">
-                                <div className="text-[9px] font-black text-slate-400 dark:text-slate-500 uppercase tracking-widest mb-0.5">Langue</div>
-                                <div className="text-xs font-bold text-slate-900 dark:text-white">FR +10</div>
+                                <div className="text-[9px] font-black text-slate-400 dark:text-slate-500 uppercase tracking-widest mb-0.5">Licence</div>
+                                <div className="text-xs font-bold text-slate-900 dark:text-white">Pro / Entreprise</div>
                             </div>
                         </div>
                     </div>
@@ -113,19 +118,22 @@ export default async function ProjectDetailPage({ params }: { params: Promise<{ 
                     {/* Left: About & Details */}
                     <div className="lg:col-span-8 space-y-12">
                         <section className="space-y-4">
-                            <h3 className="text-xl font-black text-slate-900 dark:text-white tracking-tight">À propos</h3>
+                            <h3 className="text-xl font-black text-slate-900 dark:text-white tracking-tight">À propos de ce produit</h3>
                             <div className="prose dark:prose-invert max-w-none">
                                 <p className="text-base text-slate-600 dark:text-slate-400 font-medium leading-relaxed">
-                                    {project.description}
+                                    {product.description}
                                 </p>
                             </div>
-                            <div className="pt-2 flex flex-wrap gap-2">
-                                {project.technologies?.map((tech: string) => (
-                                    <Badge key={tech} variant="default" className="px-3 py-1 text-[9px] font-black uppercase tracking-widest bg-slate-100 dark:bg-white/5 border-slate-200 dark:border-white/10 text-slate-500 dark:text-slate-300">
-                                        {tech}
-                                    </Badge>
-                                ))}
-                            </div>
+                            {product.modules && product.modules.length > 0 && (
+                                <div className="pt-4 grid grid-cols-1 sm:grid-cols-2 gap-4">
+                                    {product.modules.map((mod: string) => (
+                                        <div key={mod} className="flex items-center gap-2 text-sm font-bold text-slate-700 dark:text-slate-300">
+                                            <CheckCircle2 size={16} className="text-blue-500" />
+                                            <span>{mod}</span>
+                                        </div>
+                                    ))}
+                                </div>
+                            )}
                         </section>
 
                         <section className="space-y-6 p-8 rounded-[2rem] bg-slate-50 dark:bg-slate-900/40 border border-slate-200 dark:border-white/5">
@@ -134,18 +142,13 @@ export default async function ProjectDetailPage({ params }: { params: Promise<{ 
                                     <ShieldCheck size={20} />
                                 </div>
                                 <div>
-                                    <h4 className="text-lg font-black text-slate-900 dark:text-white">Sécurité</h4>
-                                    <p className="text-[9px] text-slate-400 font-bold uppercase tracking-widest">Audit ZELTRIX</p>
+                                    <h4 className="text-lg font-black text-slate-900 dark:text-white">Sécurité Maximale</h4>
+                                    <p className="text-[9px] text-slate-400 font-bold uppercase tracking-widest">Audit de sécurité ZELTRIX validé</p>
                                 </div>
                             </div>
-                            <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
-                                {['Authentification MFA', 'Chiffrement AES-256', 'Logs d’audit', 'Isolation des données'].map((feat) => (
-                                    <div key={feat} className="flex items-center gap-2.5 text-xs font-bold text-slate-600 dark:text-slate-300">
-                                        <CheckCircle2 size={14} className="text-emerald-500" />
-                                        <span>{feat}</span>
-                                    </div>
-                                ))}
-                            </div>
+                            <p className="text-xs text-slate-500 dark:text-slate-400 font-medium leading-relaxed">
+                                Toutes nos briques logicielles sont soumises à des tests d'intrusion rigoureux et respectent les normes RGPD et ISO 27001. Vos données sont chiffrées de bout en bout.
+                            </p>
                         </section>
                     </div>
 
@@ -185,17 +188,17 @@ export default async function ProjectDetailPage({ params }: { params: Promise<{ 
                                     <span className="text-[8px] text-slate-400">Il y a 2 j</span>
                                 </div>
                                 <p className="text-[10px] text-slate-500 dark:text-slate-400 leading-relaxed italic">
-                                    "Architecture exemplaire et temps de réponse instantané."
+                                    "La brique logicielle la plus robuste que nous ayons intégrée cette année."
                                 </p>
                             </div>
                          </div>
 
                          <div className="p-6 rounded-[2rem] bg-gradient-to-br from-blue-600 to-indigo-700 text-white shadow-xl relative overflow-hidden group">
-                            <h5 className="text-base font-black mb-1 relative z-10">Question technique ?</h5>
-                            <p className="text-white/70 text-xs font-medium mb-6 relative z-10">Nos architectes vous répondent en direct.</p>
+                            <h5 className="text-base font-black mb-1 relative z-10">Besoin d'aide ?</h5>
+                            <p className="text-white/70 text-xs font-medium mb-6 relative z-10">Contactez nos ingénieurs pour une intégration sur mesure.</p>
                             <Link href="/contact">
                                 <Button className="w-full h-11 rounded-xl bg-white text-blue-900 font-black tracking-widest uppercase text-[10px] shadow-lg active:scale-95 transition-all">
-                                    Chat en direct
+                                    Nous contacter
                                     <ArrowRight size={14} className="ml-1.5" />
                                 </Button>
                             </Link>

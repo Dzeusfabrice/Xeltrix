@@ -57,7 +57,17 @@ export default function ContactPage() {
     return (
         <div className="min-h-screen bg-background text-foreground pb-24 transition-colors duration-300">
             {/* Header Hero */}
-            <section className="relative py-14 md:py-20 overflow-hidden border-b border-slate-200 dark:border-white/[0.08] bg-grid-pattern">
+            <section className="relative py-14 md:py-20 overflow-hidden border-b border-slate-200 dark:border-white/[0.08]">
+                {/* Stealthy Background Image */}
+                <div className="absolute inset-0 z-0 overflow-hidden">
+                    <img 
+                        src="https://images.unsplash.com/photo-1523961131990-5ea7c61b2107?q=80&w=2000&auto=format&fit=crop" 
+                        alt="" 
+                        className="w-full h-full object-cover opacity-[0.05] dark:opacity-[0.1] grayscale"
+                    />
+                    <div className="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-background" />
+                </div>
+
                 <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[700px] h-[250px] bg-blue-500/10 rounded-full blur-[130px] pointer-events-none" />
 
                 <Container className="relative z-10 text-center space-y-3.5 max-w-3xl">
@@ -95,7 +105,7 @@ export default function ContactPage() {
                                     </div>
                                     <div>
                                         <div className="text-xs text-slate-500 dark:text-slate-400 font-medium">Email direct</div>
-                                        <div className="text-sm font-semibold text-slate-900 dark:text-white font-mono">contact@xeltrix.com</div>
+                                        <div className="text-sm font-semibold text-slate-900 dark:text-white font-mono">contact@zeltrix.com</div>
                                     </div>
                                 </div>
 

@@ -21,7 +21,7 @@ export async function createArticle(formData: FormData) {
 
     if (coverFile && coverFile.size > 0) {
         try {
-            const uploadedUrl = await uploadFile(coverFile, 'xeltrix', 'blog')
+            const uploadedUrl = await uploadFile(coverFile, 'zeltrix', 'blog')
             if (uploadedUrl) cover_url = uploadedUrl
         } catch (error) {
             console.error('Failed to upload cover image:', error)
@@ -86,7 +86,7 @@ export async function updateArticle(id: string, formData: FormData) {
 
     if (coverFile && coverFile.size > 0) {
         try {
-            const uploadedUrl = await uploadFile(coverFile, 'xeltrix', 'blog')
+            const uploadedUrl = await uploadFile(coverFile, 'zeltrix', 'blog')
             if (uploadedUrl) cover_url = uploadedUrl
         } catch (error) {
             console.error('Failed to upload cover image:', error)

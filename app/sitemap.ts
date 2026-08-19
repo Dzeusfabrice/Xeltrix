@@ -2,7 +2,7 @@ import { MetadataRoute } from 'next'
 import { createClient } from '@/lib/supabase/server'
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
-    const baseUrl = 'https://xeltrix.com'
+    const baseUrl = 'https://zeltrix.com'
 
     const staticRoutes = [
         '',

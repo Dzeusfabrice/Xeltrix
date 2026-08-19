@@ -10,7 +10,17 @@ import type { Service } from '@/types/database'
 
 export const ServicesOverview = ({ services = [] }: { services?: Service[] }) => {
     return (
-        <section className="py-20 bg-slate-50/50 dark:bg-slate-950 border-t border-slate-200 dark:border-white/[0.08] relative overflow-hidden transition-colors duration-300">
+        <section className="relative py-24 bg-slate-50 dark:bg-[#050811] border-t border-slate-200 dark:border-white/[0.08] transition-colors duration-300">
+            {/* Stealthy Background Image */}
+            <div className="absolute inset-0 z-0 overflow-hidden">
+                <img 
+                    src="https://images.unsplash.com/photo-1497366216548-37526070297c?q=80&w=2000&auto=format&fit=crop" 
+                    alt="" 
+                    className="w-full h-full object-cover opacity-[0.05] dark:opacity-[0.1] grayscale"
+                />
+                <div className="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-slate-50 dark:to-[#050811]" />
+            </div>
+
             <Container className="relative z-10">
                 <SectionHeader
                     title={
@@ -50,18 +60,16 @@ export const ServicesOverview = ({ services = [] }: { services?: Service[] }) =>
                                                 className="absolute inset-0 h-full w-full object-cover transition-transform duration-700 ease-out group-hover:scale-110"
                                             />
                                             <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent" />
-                                            
-                                            {/* Icon floating on image */}
-                                            <div className="absolute bottom-4 left-6 flex items-center gap-3">
-                                                <span className="flex h-10 w-10 items-center justify-center rounded-xl bg-white/10 backdrop-blur-md text-white ring-1 ring-inset ring-white/20 shadow-lg">
-                                                    <Icon size={20} />
-                                                </span>
-                                            </div>
                                         </div>
 
                                         {/* Content Area: Black text on White background */}
-                                        <div className="flex-grow p-6 sm:p-8 flex flex-col justify-between space-y-4">
-                                            <div className="space-y-3">
+                                        <div className="flex-grow p-6 sm:p-8 flex flex-col justify-between space-y-4 relative">
+                                            {/* Watermark Icon */}
+                                            <div className="absolute bottom-6 right-6 text-slate-100 dark:text-white/[0.03] pointer-events-none transform translate-x-4 translate-y-4 rotate-12">
+                                                <Icon size={120} strokeWidth={1} />
+                                            </div>
+
+                                            <div className="space-y-3 relative z-10">
                                                 <h3 className="text-xl font-bold leading-tight text-slate-900 dark:text-white group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors">
                                                     {service.title}
                                                 </h3>

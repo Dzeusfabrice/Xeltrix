@@ -58,7 +58,7 @@ export default function BlogClient({ articles }: { articles: any[] }) {
                             Blog & <span className="text-gradient">Actualités</span>.
                         </h1>
                         <p className="text-xl md:text-2xl text-slate-400 font-medium leading-relaxed max-w-2xl">
-                            Partage d'expertise, analyses technologiques et nouveautés de l'univers Xeltrix.
+                            Partage d'expertise, analyses technologiques et nouveautés de l'univers zeltrix.
                         </p>
                     </motion.div>
                 </Container>

@@ -2,7 +2,7 @@
 
 ## Brand Name
 
-XELTRIX
+zeltrix
 
 ## Tagline
 

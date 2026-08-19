@@ -3,10 +3,10 @@ import { createClient } from './supabase/server'
 /**
  * Uploads a file to a Supabase storage bucket and returns the public URL.
  * @param file The file to upload
- * @param bucket The bucket name (default: 'xeltrix')
+ * @param bucket The bucket name (default: 'zeltrix')
  * @param folder Optional folder path inside the bucket
  */
-export async function uploadFile(file: File, bucket: string = 'xeltrix', folder?: string) {
+export async function uploadFile(file: File, bucket: string = 'zeltrix', folder?: string) {
     if (!file || file.size === 0) return null
 
     const supabase = await createClient()

@@ -167,7 +167,7 @@ export default function ExperienceClient({ skills }: { skills: Skill[] }) {
                                     </p>
                                     <footer className="flex items-center gap-4">
                                         <div className="h-1px w-10 bg-purple-500" />
-                                        <p className="font-black text-sm italic uppercase tracking-[0.3em] text-purple-600 dark:text-purple-500">Xeltrix Engineering</p>
+                                        <p className="font-black text-sm italic uppercase tracking-[0.3em] text-purple-600 dark:text-purple-500">zeltrix Engineering</p>
                                     </footer>
                                 </blockquote>
                             </motion.div>

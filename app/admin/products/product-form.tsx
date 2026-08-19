@@ -96,7 +96,7 @@ export function ProductForm({ mode, product }: ProductFormProps) {
                                 name="name"
                                 required
                                 defaultValue={product?.name}
-                                placeholder="Ex: Xeltrix ERP"
+                                placeholder="Ex: zeltrix ERP"
                                 className="w-full rounded-xl border border-slate-200 dark:border-white/10 bg-slate-50 dark:bg-slate-950 px-4 py-3 text-sm text-slate-900 dark:text-white focus:outline-none focus:border-blue-500"
                             />
                         </div>

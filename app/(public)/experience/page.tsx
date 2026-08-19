@@ -3,7 +3,7 @@ import ExperienceClient from './experience-client'
 import { Metadata } from 'next'
 
 export const metadata: Metadata = {
-    title: 'Expertise Technique | Xeltrix',
+    title: 'Expertise Technique | zeltrix',
     description: 'Découvrez nos domaines d\'expertise et maîtrise technique. Nous utilisons les technologies les plus modernes pour garantir la performance de vos produits.',
 }
 

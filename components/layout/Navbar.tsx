@@ -33,48 +33,53 @@ export const Navbar = () => {
     return (
         <header
             className={cn(
-                'fixed top-0 left-0 right-0 z-50 transition-all duration-300 px-4 sm:px-6 lg:px-8',
+                'fixed top-0 left-0 right-0 z-50 transition-all duration-300 w-full border-b',
                 isScrolled
-                    ? 'bg-white/85 dark:bg-slate-950/85 backdrop-blur-xl border-b border-slate-200/80 dark:border-white/[0.08] py-3.5 shadow-sm dark:shadow-lg dark:shadow-black/30'
-                    : 'bg-transparent py-5'
+                    ? 'bg-white/80 dark:bg-slate-950/80 backdrop-blur-xl border-slate-200 dark:border-white/[0.06] py-3 shadow-sm'
+                    : 'bg-transparent border-transparent py-5'
             )}
         >
-            <div className="max-w-7xl mx-auto flex items-center justify-between">
-                <Link href="/" className="flex items-center">
-                    <Logo />
-                </Link>
+            <div className="w-full px-6 md:px-10 flex items-center justify-between">
+                <div className="flex items-center gap-12">
+                    <Link href="/" className="flex items-center shrink-0">
+                        <Logo />
+                    </Link>
 
-                {/* Desktop Navigation Links */}
-                <nav className="hidden lg:flex items-center gap-1 bg-slate-100/80 dark:bg-slate-900/50 border border-slate-200 dark:border-white/[0.06] rounded-full px-4 py-1.5 backdrop-blur-md">
-                    {navLinks.map((link) => {
-                        const isActive = pathname === link.href || (link.href !== '/' && pathname.startsWith(link.href))
-                        return (
-                            <Link
-                                key={link.href}
-                                href={link.href}
-                                className={cn(
-                                    'text-xs font-semibold px-3.5 py-1.5 rounded-full transition-all duration-200',
-                                    isActive
-                                        ? 'bg-white dark:bg-white/10 text-blue-600 dark:text-white shadow-sm'
-                                        : 'text-slate-600 dark:text-slate-400 hover:text-slate-950 dark:hover:text-white hover:bg-white/50 dark:hover:bg-white/5'
-                                )}
-                            >
-                                {link.name}
-                            </Link>
-                        )
-                    })}
-                </nav>
+                    {/* Desktop Navigation Links - Simple & Pro */}
+                    <nav className="hidden lg:flex items-center gap-8">
+                        {navLinks.map((link) => {
+                            const isActive = pathname === link.href || (link.href !== '/' && pathname.startsWith(link.href))
+                            return (
+                                <Link
+                                    key={link.href}
+                                    href={link.href}
+                                    className={cn(
+                                        'text-[13px] font-black uppercase tracking-[0.15em] transition-all duration-300 relative py-1 group',
+                                        isActive
+                                            ? 'text-blue-600 dark:text-blue-400'
+                                            : 'text-slate-500 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white'
+                                    )}
+                                >
+                                    {link.name}
+                                    <span className={cn(
+                                        "absolute bottom-0 left-0 w-full h-0.5 bg-blue-600 dark:bg-blue-400 transform origin-left transition-transform duration-300",
+                                        isActive ? "scale-x-100" : "scale-x-0 group-hover:scale-x-100"
+                                    )} />
+                                </Link>
+                            )
+                        })}
+                    </nav>
+                </div>
 
                 {/* CTA Buttons & Theme Toggle */}
-                <div className="hidden sm:flex items-center gap-3">
+                <div className="hidden sm:flex items-center gap-6">
                     <ThemeToggle />
 
                     <Link
                         href="/contact"
-                        className="bg-blue-600 hover:bg-blue-500 text-white text-xs font-semibold px-4 py-2 rounded-xl transition-all duration-200 flex items-center gap-1.5 shadow-sm shadow-blue-500/20 border border-blue-400/30"
+                        className="bg-slate-900 dark:bg-white text-white dark:text-slate-950 text-[10px] font-black uppercase tracking-[0.2em] px-6 py-3 rounded-full hover:bg-blue-600 dark:hover:bg-blue-400 dark:hover:text-white transition-all duration-300 shadow-xl"
                     >
                         Demander un devis
-                        <ArrowRight className="w-3.5 h-3.5" />
                     </Link>
                 </div>
 
@@ -94,11 +99,11 @@ export const Navbar = () => {
             {/* Mobile Dropdown Menu */}
             <div
                 className={cn(
-                    'lg:hidden fixed inset-x-0 top-[65px] bg-white/95 dark:bg-slate-950/95 backdrop-blur-2xl border-b border-slate-200 dark:border-white/10 shadow-2xl transition-all duration-300 overflow-hidden',
-                    isOpen ? 'max-h-[85vh] py-6 opacity-100' : 'max-h-0 py-0 opacity-0 pointer-events-none'
+                    'lg:hidden fixed inset-x-0 top-[70px] bg-white/98 dark:bg-slate-950/98 backdrop-blur-3xl border-b border-slate-200 dark:border-white/10 shadow-2xl transition-all duration-500 overflow-hidden',
+                    isOpen ? 'max-h-screen py-8 opacity-100' : 'max-h-0 py-0 opacity-0 pointer-events-none'
                 )}
             >
-                <div className="flex flex-col gap-1.5 px-6 max-w-lg mx-auto">
+                <div className="flex flex-col gap-4 px-8">
                     {navLinks.map((link) => {
                         const isActive = pathname === link.href || (link.href !== '/' && pathname.startsWith(link.href))
                         return (
@@ -106,10 +111,10 @@ export const Navbar = () => {
                                 key={link.href}
                                 href={link.href}
                                 className={cn(
-                                    'text-sm font-medium px-4 py-2.5 rounded-xl transition-colors',
+                                    'text-xl font-black uppercase tracking-[0.2em] transition-all',
                                     isActive
-                                        ? 'bg-blue-50 dark:bg-blue-600/10 text-blue-600 dark:text-blue-400 font-semibold'
-                                        : 'text-slate-700 dark:text-slate-300 hover:text-slate-950 dark:hover:text-white hover:bg-slate-100 dark:hover:bg-white/5'
+                                        ? 'text-blue-600 dark:text-blue-400 translate-x-2'
+                                        : 'text-slate-500 dark:text-slate-400'
                                 )}
                                 onClick={() => setIsOpen(false)}
                             >
@@ -118,14 +123,13 @@ export const Navbar = () => {
                         )
                     })}
                     
-                    <div className="pt-4 mt-2 border-t border-slate-200 dark:border-white/10 flex flex-col gap-2.5">
+                    <div className="pt-8 mt-4 border-t border-slate-200 dark:border-white/10">
                         <Link
                             href="/contact"
-                            className="bg-blue-600 hover:bg-blue-500 text-white text-center py-2.5 rounded-xl text-sm font-semibold flex items-center justify-center gap-2 shadow-lg shadow-blue-600/25"
+                            className="w-full bg-slate-900 dark:bg-white text-white dark:text-slate-950 py-4 rounded-2xl text-xs font-black uppercase tracking-[0.2em] flex items-center justify-center shadow-xl"
                             onClick={() => setIsOpen(false)}
                         >
-                            Prendre contact
-                            <ArrowRight className="w-4 h-4" />
+                            Demander un devis
                         </Link>
                     </div>
                 </div>

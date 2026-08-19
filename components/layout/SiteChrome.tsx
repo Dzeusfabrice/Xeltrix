@@ -12,7 +12,7 @@ type SiteChromeProps = {
 
 /** Masque la navigation publique sur tout l’espace admin. */
 function isChromelessPath(pathname: string) {
-    return pathname.startsWith('/admin')
+    return pathname.startsWith('/admin') || pathname.startsWith('/projects/')
 }
 
 export const SiteChrome = ({ navbar, footer, children }: SiteChromeProps) => {

@@ -3,8 +3,8 @@ import BlogClient from './blog-client'
 import { Metadata } from 'next'
 
 export const metadata: Metadata = {
-    title: 'Actualités & Blog | Xeltrix',
-    description: 'Partage d\'expertise, analyses technologiques et nouveautés de l\'univers Xeltrix.',
+    title: 'Actualités & Blog | zeltrix',
+    description: 'Partage d\'expertise, analyses technologiques et nouveautés de l\'univers zeltrix.',
 }
 
 export const revalidate = 3600;

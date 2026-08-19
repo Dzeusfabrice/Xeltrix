@@ -61,7 +61,7 @@ export const AuthShell = ({ children }: { children: React.ReactNode }) => (
 
                 <div className="relative max-w-md">
                     <p className="text-[10px] font-semibold uppercase tracking-[0.32em] text-amber-200/70">
-                        Xeltrix — Console privée
+                        zeltrix — Console privée
                     </p>
                     <h2 className="mt-5 font-display text-5xl font-light leading-[1.08] tracking-tight text-white xl:text-6xl">
                         L’excellence
@@ -92,7 +92,7 @@ export const AuthShell = ({ children }: { children: React.ReactNode }) => (
                 </div>
 
                 <p className="relative text-[11px] uppercase tracking-[0.2em] text-white/25">
-                    © {new Date().getFullYear()} Xeltrix Technologies
+                    © {new Date().getFullYear()} zeltrix Technologies
                 </p>
             </aside>
 

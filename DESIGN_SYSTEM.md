@@ -30,7 +30,7 @@ Secondary:
 
 ## Spacing
 
-- généreux
+- généreux  
 - aéré
 
 ## Animations

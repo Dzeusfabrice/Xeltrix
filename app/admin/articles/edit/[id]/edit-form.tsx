@@ -87,7 +87,7 @@ export default function EditArticleForm({ article }: { article: any }) {
                                         <option value="Design">Design</option>
                                         <option value="Business">Business</option>
                                         <option value="Tutoriel">Tutoriel</option>
-                                        <option value="Actualité">Actualité Xeltrix</option>
+                                        <option value="Actualité">Actualité zeltrix</option>
                                     </select>
                                 </div>
                             </div>

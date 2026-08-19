@@ -1,7 +1,7 @@
 # FUTURE PRODUCTS
 
-- Xeltrix ERP
-- Xeltrix CRM
-- Xeltrix Chat SDK
+- zeltrix ERP
+- zeltrix CRM
+- zeltrix Chat SDK
 
-- Xeltrix Analytics
+- zeltrix Analytics

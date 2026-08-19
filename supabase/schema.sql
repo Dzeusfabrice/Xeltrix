@@ -193,19 +193,19 @@ CREATE TRIGGER update_products_modtime BEFORE UPDATE ON products FOR EACH ROW EX
 
 -- Create the bucket for all site assets
 INSERT INTO storage.buckets (id, name, public) 
-VALUES ('xeltrix', 'xeltrix', true)
+VALUES ('zeltrix', 'zeltrix', true)
 ON CONFLICT (id) DO NOTHING;
 
 -- Allow public access to read files
 CREATE POLICY "Public Read Access"
 ON storage.objects FOR SELECT
-USING ( bucket_id = 'xeltrix' );
+USING ( bucket_id = 'zeltrix' );
 
 -- Allow authenticated users to upload files
 CREATE POLICY "Authenticated Insert Access"
 ON storage.objects FOR INSERT
 WITH CHECK (
-  bucket_id = 'xeltrix' 
+  bucket_id = 'zeltrix' 
   AND auth.role() = 'authenticated'
 );
 
@@ -213,13 +213,13 @@ WITH CHECK (
 CREATE POLICY "Authenticated Update Access"
 ON storage.objects FOR UPDATE
 USING (
-  bucket_id = 'xeltrix'
+  bucket_id = 'zeltrix'
   AND auth.role() = 'authenticated'
 );
 
 CREATE POLICY "Authenticated Delete Access"
 ON storage.objects FOR DELETE
 USING (
-  bucket_id = 'xeltrix'
+  bucket_id = 'zeltrix'
   AND auth.role() = 'authenticated'
 );

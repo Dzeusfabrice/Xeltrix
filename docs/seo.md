@@ -1,7 +1,7 @@
-# STRATÉGIE & OPTIMISATIONS SEO - XELTRIX
+# STRATÉGIE & OPTIMISATIONS SEO - zeltrix
 
 ## 1. Métadonnées & Balises Globales
-- **Titre dynamique** : `[Page] | XELTRIX` avec titre par défaut axé sur l'ingénierie logicielle et le développement sur mesure.
+- **Titre dynamique** : `[Page] | zeltrix` avec titre par défaut axé sur l'ingénierie logicielle et le développement sur mesure.
 - **Description & OpenGraph** : Cartes Twitter et Facebook intégrées avec prévisualisation enrichie.
 - **Indexation** : Directives strictes autorisant les moteurs de recherche tout en protégeant les routes d'administration (`/admin`).
 

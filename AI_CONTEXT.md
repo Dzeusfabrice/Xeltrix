@@ -1,8 +1,8 @@
-# XELTRIX AI CONTEXT
+# zeltrix AI CONTEXT
 
 ## Mission
 
-XELTRIX est une startup technologique spécialisée dans :
+zeltrix est une startup technologique spécialisée dans :
 
 - Développement Web
 - Développement Mobile
@@ -16,7 +16,7 @@ L'objectif de la plateforme est de servir simultanément comme :
 
 - Site vitrine professionnel
 - Portfolio technique
-- Présentation des produits XELTRIX
+- Présentation des produits zeltrix
 - Générateur de prospects (Leads)
 - Plateforme de démonstration
 - Outil de crédibilisation de la startup
@@ -31,7 +31,7 @@ L'objectif de la plateforme est de servir simultanément comme :
 
 ## Positionnement
 
-XELTRIX doit apparaître comme une entreprise technologique premium capable de concevoir des solutions digitales modernes.
+zeltrix doit apparaître comme une entreprise technologique premium capable de concevoir des solutions digitales modernes.
 
 Le rendu doit inspirer :
 
@@ -50,11 +50,11 @@ Le rendu doit inspirer :
 
 ## Produits
 
-- Xeltrix ERP
-- Xeltrix CRM
-- Xeltrix Chat SDK
-- Xeltrix Kiosk
-- Xeltrix Analytics
+- zeltrix ERP
+- zeltrix CRM
+- zeltrix Chat SDK
+- zeltrix Kiosk
+- zeltrix Analytics
 
 ## Services
 

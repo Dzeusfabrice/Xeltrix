@@ -7,6 +7,6 @@ export default function robots(): MetadataRoute.Robots {
             allow: '/',
             disallow: ['/admin', '/api/'],
         },
-        sitemap: 'https://xeltrix.com/sitemap.xml',
+        sitemap: 'https://zeltrix.com/sitemap.xml',
     }
 }

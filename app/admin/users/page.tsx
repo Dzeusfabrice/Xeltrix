@@ -10,7 +10,7 @@ export default async function AdminUsersPage() {
     const usersList = [
         {
             id: user?.id || 'admin-1',
-            email: user?.email || 'admin@xeltrix.com',
+            email: user?.email || 'admin@zeltrix.com',
             role: 'Super Admin',
             roleBadge: 'primary' as const,
             status: 'Actif',
@@ -19,7 +19,7 @@ export default async function AdminUsersPage() {
         },
         {
             id: 'dev-team-lead',
-            email: 'tech-lead@xeltrix.com',
+            email: 'tech-lead@zeltrix.com',
             role: 'Tech Lead / Éditeur',
             roleBadge: 'purple' as const,
             status: 'Actif',

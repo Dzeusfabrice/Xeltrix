@@ -69,7 +69,7 @@ export default async function ArticleDetailPage({ params }: { params: Promise<{ 
                                 <div className="w-8 h-8 rounded-full bg-purple-600/20 border border-purple-500/30 flex items-center justify-center text-purple-400 font-bold">
                                     X
                                 </div>
-                                <span className="text-white">L'équipe Xeltrix</span>
+                                <span className="text-white">L'équipe zeltrix</span>
                             </div>
                         </div>
                     </div>
@@ -120,7 +120,7 @@ export default async function ArticleDetailPage({ params }: { params: Promise<{ 
                                             <div className="w-full h-full rounded-[inherit] bg-white dark:bg-slate-900 flex items-center justify-center font-black text-4xl text-slate-900 dark:text-white">X</div>
                                         </div>
                                         <div className="space-y-2">
-                                            <h4 className="text-2xl font-black text-slate-900 dark:text-white">À propos de Xeltrix</h4>
+                                            <h4 className="text-2xl font-black text-slate-900 dark:text-white">À propos de zeltrix</h4>
                                             <p className="text-slate-500 dark:text-slate-400 font-medium max-w-xl">
                                                 Laboratoire d'innovation digitale spécialisé dans l'ingénierie logicielle et le design visionnaire. Nous créons les standards de demain.
                                             </p>

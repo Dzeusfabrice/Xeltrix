@@ -1,6 +1,6 @@
-# XELTRIX - Plateforme Web Officielle
+# zeltrix - Plateforme Web Officielle
 
-Bienvenue sur le dépôt officiel de **XELTRIX**, une startup technologique spécialisée dans le développement de solutions logicielles innovantes.
+Bienvenue sur le dépôt officiel de **zeltrix**, une startup technologique spécialisée dans le développement de solutions logicielles innovantes.
 
 ## 🚀 Technologies Utilisées
 
@@ -47,4 +47,4 @@ Le projet est optimisé pour les **Core Web Vitals** :
 - SEO sémantique (JSON-LD, Meta Tags)
 
 ---
-© 2025 Xeltrix - Direction Technique
+© 2025 zeltrix - Direction Technique

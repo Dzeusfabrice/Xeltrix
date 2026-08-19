@@ -4,7 +4,7 @@ import { Metadata } from 'next'
 import type { Technology } from '@/types/database'
 
 export const metadata: Metadata = {
-    title: 'Nos Réalisations | Xeltrix',
+    title: 'Nos Réalisations | zeltrix',
     description: 'Découvrez notre portfolio de projets innovants conçus avec passion pour répondre aux défis numériques.',
 }
 

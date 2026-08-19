@@ -91,7 +91,7 @@ export default async function AdminDashboardPage() {
             bg: 'bg-amber-50 dark:bg-amber-500/10 border-amber-200 dark:border-amber-500/20'
         },
         {
-            title: 'Produits SaaS Xeltrix',
+            title: 'Produits SaaS zeltrix',
             value: 5,
             icon: Package,
             href: '/admin/products',
@@ -109,7 +109,7 @@ export default async function AdminDashboardPage() {
                         Tableau de bord
                     </h1>
                     <p className="text-xs sm:text-sm text-slate-500 dark:text-slate-400 mt-1">
-                        Supervision et gestion centralisée de la plateforme XELTRIX.
+                        Supervision et gestion centralisée de la plateforme zeltrix.
                     </p>
                 </div>
 

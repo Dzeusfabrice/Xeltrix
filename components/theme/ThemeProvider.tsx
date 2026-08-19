@@ -4,7 +4,7 @@ import React, { createContext, useCallback, useContext, useEffect, useState } fr
 
 type Theme = 'light' | 'dark'
 
-const STORAGE_KEY = 'xeltrix-theme'
+const STORAGE_KEY = 'zeltrix-theme'
 
 interface ThemeContextType {
     theme: Theme

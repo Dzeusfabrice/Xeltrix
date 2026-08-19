@@ -55,7 +55,17 @@ export default async function ServicesPage() {
 
     return (
         <div className="min-h-screen bg-background text-foreground pb-24 transition-colors duration-300">
-            <section className="relative py-16 md:py-24 overflow-hidden border-b border-slate-200 dark:border-white/[0.08] bg-grid-pattern">
+            <section className="relative py-16 md:py-24 overflow-hidden border-b border-slate-200 dark:border-white/[0.08]">
+                {/* Stealthy Background Image */}
+                <div className="absolute inset-0 z-0 overflow-hidden">
+                    <img 
+                        src="https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?q=80&w=2000&auto=format&fit=crop" 
+                        alt="" 
+                        className="w-full h-full object-cover opacity-[0.05] dark:opacity-[0.1] grayscale"
+                    />
+                    <div className="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-background" />
+                </div>
+
                 <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[700px] h-[300px] bg-blue-500/10 rounded-full blur-[130px] pointer-events-none" />
 
                 <Container className="relative z-10 text-center space-y-5 max-w-4xl">
@@ -66,7 +76,7 @@ export default async function ServicesPage() {
                         Des expertises pointues pour chaque étape de votre <span className="text-gradient-primary">croissance technologique</span>
                     </h1>
                     <p className="text-slate-600 dark:text-slate-300 text-base sm:text-lg md:text-xl leading-relaxed max-w-2xl mx-auto">
-                        Du prototype rapide à l&apos;infrastructure d&apos;entreprise haute disponibilité, XELTRIX déploie des solutions pérennes conçues pour supporter votre passage à l&apos;échelle.
+                        Du prototype rapide à l&apos;infrastructure d&apos;entreprise haute disponibilité, zeltrix déploie des solutions pérennes conçues pour supporter votre passage à l&apos;échelle.
                     </p>
                     <div className="flex flex-wrap justify-center gap-3.5 pt-3">
                         <Link href="/contact">

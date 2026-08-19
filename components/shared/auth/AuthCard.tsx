@@ -72,7 +72,7 @@ export const AuthCard = () => {
                         name="email"
                         type="email"
                         autoComplete="email"
-                        placeholder="admin@xeltrix.com"
+                        placeholder="admin@zeltrix.com"
                     />
 
                     <AuthField
@@ -95,7 +95,7 @@ export const AuthCard = () => {
                 </form>
 
                 <p className="mt-8 border-t border-white/[0.06] pt-6 text-center text-[11px] leading-relaxed text-white/30">
-                    Espace strictement réservé aux administrateurs XELTRIX.
+                    Espace strictement réservé aux administrateurs zeltrix.
                     <br />
                     Toute tentative d’accès est enregistrée.
                 </p>

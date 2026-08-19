@@ -21,7 +21,7 @@ export async function createTestimonial(formData: FormData) {
 
     if (photoFile && photoFile.size > 0) {
         try {
-            const uploadedUrl = await uploadFile(photoFile, 'xeltrix', 'testimonials')
+            const uploadedUrl = await uploadFile(photoFile, 'zeltrix', 'testimonials')
             if (uploadedUrl) photo_url = uploadedUrl
         } catch (error) {
             console.error('Failed to upload photo:', error)
@@ -62,7 +62,7 @@ export async function updateTestimonial(id: string, formData: FormData) {
 
     if (photoFile && photoFile.size > 0) {
         try {
-            const uploadedUrl = await uploadFile(photoFile, 'xeltrix', 'testimonials')
+            const uploadedUrl = await uploadFile(photoFile, 'zeltrix', 'testimonials')
             if (uploadedUrl) photo_url = uploadedUrl
         } catch (error) {
             console.error('Failed to upload photo:', error)

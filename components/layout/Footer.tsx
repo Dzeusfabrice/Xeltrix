@@ -173,7 +173,7 @@ export const Footer = async () => {
                         <div className="mt-6 pt-5 border-t border-slate-200 dark:border-white/5 space-y-2 text-xs">
                             <div className="flex items-center gap-2 text-slate-600 dark:text-slate-400">
                                 <Mail size={13} className="text-blue-600 dark:text-blue-400" />
-                                <span>contact@xeltrix.com</span>
+                                <span>contact@zeltrix.com</span>
                             </div>
                             <div className="flex items-center gap-2 text-slate-600 dark:text-slate-400">
                                 <MapPin size={13} className="text-blue-600 dark:text-blue-400" />
@@ -185,12 +185,12 @@ export const Footer = async () => {
 
                 <div className="border-t border-slate-200 dark:border-white/[0.08] pt-8 flex flex-col sm:flex-row justify-between items-center gap-4 text-xs text-slate-500">
                     <p>
-                        © {currentYear} XELTRIX Technologies. Tous droits réservés.
+                        © {currentYear} ZELTRIX Technologies. Tous droits réservés.
                     </p>
                     <div className="flex items-center gap-6">
                         <Link href="/privacy" className="hover:text-slate-700 dark:hover:text-slate-300 transition-colors">Confidentialité</Link>
                         <Link href="/legal" className="hover:text-slate-700 dark:hover:text-slate-300 transition-colors">Mentions légales</Link>
-                        <Link href="/admin" className="text-blue-600 dark:text-slate-500 hover:text-blue-700 dark:hover:text-slate-300 font-medium transition-colors">Espace Administration</Link>
+                        {/* <Link href="/admin" className="text-blue-600 dark:text-slate-500 hover:text-blue-700 dark:hover:text-slate-300 font-medium transition-colors">Espace Administration</Link> */}
                     </div>
                 </div>
             </div>

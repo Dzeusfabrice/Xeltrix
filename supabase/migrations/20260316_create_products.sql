@@ -49,10 +49,10 @@ INSERT INTO products (
 VALUES
 (
     'erp',
-    'Xeltrix ERP',
+    'zeltrix ERP',
     'Enterprise Suite',
     'Progiciel de gestion intégrée agile, modulaire et ultra-performant',
-    'Xeltrix ERP centralise et automatise l''ensemble des processus opérationnels : achats, ventes, facturation électronique, gestion des stocks multi-entrepôts, suivi de trésorerie et conformité fiscale.',
+    'zeltrix ERP centralise et automatise l''ensemble des processus opérationnels : achats, ventes, facturation électronique, gestion des stocks multi-entrepôts, suivi de trésorerie et conformité fiscale.',
     'Database',
     ARRAY[
         'Facturation & Comptabilité analytique automatisée',
@@ -70,7 +70,7 @@ VALUES
 ),
 (
     'crm',
-    'Xeltrix CRM',
+    'zeltrix CRM',
     'Sales Acceleration',
     'Générateur de closing et fidélisation client assisté par IA',
     'Un CRM moderne conçu pour les équipes commerciales et support. Suivez chaque opportunité de vente, automatisez les relances par email et WhatsApp, et bénéficiez d''un scoring prédictif des leads.',
@@ -91,7 +91,7 @@ VALUES
 ),
 (
     'chatsdk',
-    'Xeltrix Chat SDK',
+    'zeltrix Chat SDK',
     'Developer Infrastructure',
     'Moteur de messagerie instantanée temps réel & assistant IA embarqué',
     'Intégrez en quelques lignes de code une expérience de chat complète (1-to-1, groupes, salons, vocaux, partage de fichiers) au sein de vos applications web et mobiles avec une latence mondiale < 50ms.',
@@ -112,7 +112,7 @@ VALUES
 ),
 (
     'kiosk',
-    'Xeltrix Kiosk',
+    'zeltrix Kiosk',
     'Hardware & Retail',
     'Système tactile et autonome pour bornes interactives et points de vente',
     'Une solution logicielle robuste conçue pour les bornes en libre-service, les caisses tactiles de restaurants/magasins et les bornes d''accueil. Fonctionne parfaitement en mode hors-ligne sans interruption.',
@@ -133,7 +133,7 @@ VALUES
 ),
 (
     'analytics',
-    'Xeltrix Analytics',
+    'zeltrix Analytics',
     'Business Intelligence',
     'Observabilité opérationnelle et tableaux de bord décisionnels en temps réel',
     'Plateforme d''ingestion et de visualisation de données d''entreprise. Connectez vos bases de données opérationnelles, définissez vos KPI stratégiques et recevez des alertes intelligentes sur les anomalies.',

@@ -9,7 +9,7 @@ import type { Product } from '@/types/database'
 
 export const metadata: Metadata = {
     title: 'Produits & Solutions Logicielles',
-    description: 'Explorez la gamme de produits XELTRIX : Xeltrix ERP, CRM, Chat SDK, Kiosk et Analytics. Des briques logicielles prêtes à accélérer votre entreprise.',
+    description: 'Explorez la gamme de produits zeltrix : zeltrix ERP, CRM, Chat SDK, Kiosk et Analytics. Des briques logicielles prêtes à accélérer votre entreprise.',
 }
 
 export const revalidate = 3600
@@ -26,7 +26,17 @@ export default async function ProductsPage() {
 
     return (
         <div className="min-h-screen bg-background text-foreground pb-24 transition-colors duration-300">
-            <section className="relative py-12 md:py-16 overflow-hidden border-b border-slate-200 dark:border-white/[0.08] bg-grid-pattern">
+            <section className="relative py-12 md:py-16 overflow-hidden border-b border-slate-200 dark:border-white/[0.08]">
+                {/* Stealthy Background Image */}
+                <div className="absolute inset-0 z-0 overflow-hidden">
+                    <img 
+                        src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?q=80&w=2000&auto=format&fit=crop" 
+                        alt="" 
+                        className="w-full h-full object-cover opacity-[0.05] dark:opacity-[0.1] grayscale"
+                    />
+                    <div className="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-background" />
+                </div>
+
                 <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[600px] h-[250px] bg-blue-500/10 rounded-full blur-[100px] pointer-events-none" />
 
                 <Container className="relative z-10 text-center space-y-4 max-w-3xl">
@@ -42,15 +52,11 @@ export default async function ProductsPage() {
                     <div className="flex flex-wrap justify-center gap-3 pt-2">
                         <Link href="/contact?subject=Demande+de+d%C3%A9mo">
                             <Button variant="primary" size="md" className="h-11 px-6 text-xs">
-                                <span>Demander une démo</span>
+                                <span>Demander une devis</span>
                                 <ArrowRight size={14} />
                             </Button>
                         </Link>
-                        <Link href="/contact">
-                            <Button variant="outline" size="md" className="h-11 px-6 text-xs">
-                                Demander un devis
-                            </Button>
-                        </Link>
+                       
                     </div>
                 </Container>
             </section>

@@ -20,7 +20,7 @@ export async function createTechnology(formData: FormData) {
 
     if (logoFile && logoFile.size > 0) {
         try {
-            const uploadedUrl = await uploadFile(logoFile, 'xeltrix', 'technologies')
+            const uploadedUrl = await uploadFile(logoFile, 'zeltrix', 'technologies')
             if (uploadedUrl) logo_url = uploadedUrl
         } catch (error) {
             console.error('Failed to upload logo:', error)
@@ -73,7 +73,7 @@ export async function updateTechnology(id: string, formData: FormData) {
 
     if (logoFile && logoFile.size > 0) {
         try {
-            const uploadedUrl = await uploadFile(logoFile, 'xeltrix', 'technologies')
+            const uploadedUrl = await uploadFile(logoFile, 'zeltrix', 'technologies')
             if (uploadedUrl) logo_url = uploadedUrl
         } catch (error) {
             console.error('Failed to upload logo:', error)

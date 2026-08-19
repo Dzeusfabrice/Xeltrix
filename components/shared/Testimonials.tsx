@@ -21,7 +21,7 @@ const defaultTestimonials: Testimonial[] = [
         name: 'Marc-Alexandre V.',
         position: 'CTO & Co-fondateur - PayAfrique',
         photo_url: null,
-        message: "L'équipe de XELTRIX a conçu notre passerelle de paiement avec une rigueur d'ingénierie rare. Temps de réponse divisé par trois et zéro interruption de service depuis la mise en production.",
+        message: "L'équipe de zeltrix a conçu notre passerelle de paiement avec une rigueur d'ingénierie rare. Temps de réponse divisé par trois et zéro interruption de service depuis la mise en production.",
         rating: 5,
         is_featured: true
     },
@@ -30,7 +30,7 @@ const defaultTestimonials: Testimonial[] = [
         name: 'Aminata Diallo',
         position: 'Directrice des Opérations - TransLogix',
         photo_url: null,
-        message: "L'ERP sur mesure développé par XELTRIX a totalement fluidifié notre gestion de flotte et de facturation. Le retour sur investissement a été atteint en moins de 6 mois.",
+        message: "L'ERP sur mesure développé par zeltrix a totalement fluidifié notre gestion de flotte et de facturation. Le retour sur investissement a été atteint en moins de 6 mois.",
         rating: 5,
         is_featured: true
     },
@@ -39,7 +39,7 @@ const defaultTestimonials: Testimonial[] = [
         name: 'Dr. David Nguemo',
         position: 'Fondateur - HealthSync Care',
         photo_url: null,
-        message: "Un travail remarquable sur l'interface et la sécurité des données médicales. La réactivité et la force de proposition technique de XELTRIX font toute la différence.",
+        message: "Un travail remarquable sur l'interface et la sécurité des données médicales. La réactivité et la force de proposition technique de zeltrix font toute la différence.",
         rating: 5,
         is_featured: true
     }
@@ -121,9 +121,9 @@ export function Testimonials({ testimonials }: { testimonials: Testimonial[] }) 
     return (
         <section className="py-20 bg-slate-50 dark:bg-slate-950 border-t border-slate-200 dark:border-white/[0.08] relative overflow-hidden transition-colors duration-300">
             <Container className="mb-10 text-center space-y-3.5">
-                <Badge variant="primary" className="text-xs uppercase tracking-wider font-semibold">
+                {/* <Badge variant="primary" className="text-xs uppercase tracking-wider font-semibold">
                     Confiance & Retours d&apos;expérience
-                </Badge>
+                </Badge> */}
                 <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold tracking-tight text-slate-900 dark:text-white leading-tight">
                     Recommandé par des <span className="text-gradient-primary">dirigeants & équipes techniques</span>
                 </h2>

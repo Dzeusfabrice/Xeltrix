@@ -5,8 +5,8 @@ import { Target, Eye, ShieldCheck, CheckCircle2 } from 'lucide-react'
 import Link from 'next/link'
 
 export const metadata: Metadata = {
-    title: 'À Propos de XELTRIX | Vision & Ingénierie',
-    description: 'Découvrez l\'histoire, la vision et les standards d\'ingénierie qui font de XELTRIX le partenaire de référence pour les projets logiciels ambitieux.',
+    title: 'À Propos de zeltrix | Vision & Ingénierie',
+    description: 'Découvrez l\'histoire, la vision et les standards d\'ingénierie qui font de zeltrix le partenaire de référence pour les projets logiciels ambitieux.',
 }
 
 const pillars = [
@@ -50,7 +50,17 @@ export default function AboutPage() {
     return (
         <div className="min-h-screen bg-background text-foreground pb-24 transition-colors duration-300">
             {/* Hero Section */}
-            <section className="relative py-16 md:py-24 overflow-hidden border-b border-slate-200 dark:border-white/[0.08] bg-grid-pattern">
+            <section className="relative py-16 md:py-24 overflow-hidden border-b border-slate-200 dark:border-white/[0.08]">
+                {/* Stealthy Background Image */}
+                <div className="absolute inset-0 z-0 overflow-hidden">
+                    <img 
+                        src="https://images.unsplash.com/photo-1522071820081-009f0129c71c?q=80&w=2000&auto=format&fit=crop" 
+                        alt="" 
+                        className="w-full h-full object-cover opacity-[0.05] dark:opacity-[0.1] grayscale"
+                    />
+                    <div className="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-background" />
+                </div>
+
                 <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[700px] h-[300px] bg-blue-500/10 rounded-full blur-[130px] pointer-events-none" />
 
                 <Container className="relative z-10 text-center space-y-5 max-w-4xl">
@@ -58,7 +68,7 @@ export default function AboutPage() {
                         Bâtisseurs de solutions logicielles <span className="text-gradient-primary">sans compromis</span>
                     </h1>
                     <p className="text-slate-600 dark:text-slate-300 text-base sm:text-lg md:text-xl leading-relaxed max-w-2xl mx-auto">
-                        XELTRIX rassemble des ingénieurs logiciels, architectes cloud et concepteurs UI/UX animés par la passion de l&apos;artisanat technique et de la valeur client.
+                        zeltrix rassemble des ingénieurs logiciels, architectes cloud et concepteurs UI/UX animés par la passion de l&apos;artisanat technique et de la valeur client.
                     </p>
                 </Container>
             </section>
@@ -91,7 +101,7 @@ export default function AboutPage() {
                     <SectionHeader
                         title={
                             <>
-                                Les standards de développement <span className="text-gradient-primary">XELTRIX</span>
+                                Les standards de développement <span className="text-gradient-primary">zeltrix</span>
                             </>
                         }
                         description="Nous traitons chaque ligne de code comme un actif stratégique pour votre entreprise."

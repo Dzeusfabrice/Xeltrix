@@ -3,7 +3,7 @@ import TechnologiesClient from './technologies-client'
 import { Metadata } from 'next'
 
 export const metadata: Metadata = {
-    title: 'Stack Technologique | Xeltrix',
+    title: 'Stack Technologique | zeltrix',
     description: 'Explorez notre stack technologique de pointe. Nous utilisons les meilleurs outils pour transformer vos idées en réalité numérique.',
 }
 

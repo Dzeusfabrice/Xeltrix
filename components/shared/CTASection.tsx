@@ -4,59 +4,97 @@ import React from 'react'
 import { Container, Button } from '../ui'
 import Link from 'next/link'
 import { ArrowRight, Sparkles, ShieldCheck, Clock } from 'lucide-react'
+import { motion } from 'framer-motion'
 
 export const CTASection = () => {
     return (
-        <section className="py-20 bg-white dark:bg-slate-950 border-t border-slate-200 dark:border-white/[0.08] relative overflow-hidden transition-colors duration-300">
-            {/* Ambient Lighting */}
-            <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[400px] bg-gradient-to-r from-blue-500/10 to-indigo-500/10 rounded-full blur-[140px] pointer-events-none" />
+        <section className="relative w-full overflow-hidden bg-white dark:bg-slate-950 border-t border-slate-200 dark:border-white/[0.08] transition-colors duration-300">
+            <div className="flex flex-col lg:flex-row min-h-[600px]">
+                {/* Text Content Area */}
+                <div className="flex-grow flex items-center justify-center py-16 px-6 lg:px-12 lg:w-1/2 relative z-10">
+                    <div className="max-w-xl space-y-8">
+                        <motion.div
+                            initial={{ opacity: 0, x: -20 }}
+                            whileInView={{ opacity: 1, x: 0 }}
+                            transition={{ duration: 0.6 }}
+                            className="space-y-6"
+                        >
+                            <h2 className="text-3xl sm:text-4xl md:text-5xl font-black tracking-tight text-slate-900 dark:text-white leading-[1.1]">
+                                Transformons votre vision en un <span className="text-gradient-primary">produit logiciel d&apos;exception</span>
+                            </h2>
+                            <p className="text-slate-600 dark:text-slate-400 text-lg md:text-xl leading-relaxed font-medium">
+                                Échangez directement avec nos ingénieurs pour cadrer vos besoins, évaluer l&apos;architecture cible et obtenir une estimation budgétaire sous 24h.
+                            </p>
+                        </motion.div>
 
-            <Container className="relative z-10">
-                <div className="rounded-3xl border border-slate-200 dark:border-white/10 bg-slate-50 dark:bg-slate-900/60 p-8 sm:p-14 lg:p-16 backdrop-blur-xl text-center space-y-7 max-w-5xl mx-auto shadow-lg dark:shadow-2xl">
-                    <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-blue-50 dark:bg-blue-500/10 border border-blue-200 dark:border-blue-500/20 text-blue-600 dark:text-blue-400 text-xs font-semibold">
-                        <Sparkles size={13} className="text-blue-500 animate-pulse" />
-                        <span>Prêt à accélérer votre feuille de route technique ?</span>
+                        <motion.div
+                            initial={{ opacity: 0, y: 20 }}
+                            whileInView={{ opacity: 1, y: 0 }}
+                            transition={{ duration: 0.6, delay: 0.2 }}
+                            className="flex flex-col sm:flex-row items-center gap-4"
+                        >
+                            <Link href="/contact" className="w-full sm:w-auto">
+                                <Button variant="primary" size="lg" className="w-full h-14 px-8 text-base shadow-lg shadow-blue-600/20 group">
+                                    <span>Demander un devis</span>
+                                    <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+                                </Button>
+                            </Link>
+                            <Link href="/projects" className="w-full sm:w-auto">
+                                <Button variant="outline" size="lg" className="w-full h-14 px-8 text-base border-2 font-bold hover:bg-slate-50 dark:hover:bg-white/5">
+                                    Voir nos réalisations
+                                </Button>
+                            </Link>
+                        </motion.div>
+
+                        <motion.div
+                            initial={{ opacity: 0 }}
+                            whileInView={{ opacity: 1 }}
+                            transition={{ duration: 0.6, delay: 0.4 }}
+                            className="grid grid-cols-1 sm:grid-cols-2 gap-y-4 gap-x-8 pt-8 border-t border-slate-100 dark:border-white/5"
+                        >
+                            <div className="flex items-center gap-3">
+                                <div className="w-8 h-8 rounded-lg bg-blue-50 dark:bg-blue-500/10 flex items-center justify-center text-blue-600 dark:text-blue-400">
+                                    <Clock size={16} />
+                                </div>
+                                <span className="text-xs font-bold text-slate-500 dark:text-slate-400 uppercase tracking-widest">Réponse &lt; 24h</span>
+                            </div>
+                            <div className="flex items-center gap-3">
+                                <div className="w-8 h-8 rounded-lg bg-emerald-50 dark:bg-emerald-500/10 flex items-center justify-center text-emerald-600 dark:text-emerald-400">
+                                    <ShieldCheck size={16} />
+                                </div>
+                                <span className="text-xs font-bold text-slate-500 dark:text-slate-400 uppercase tracking-widest">NDA & Confidentialité</span>
+                            </div>
+                        </motion.div>
                     </div>
+                </div>
 
-                    <div className="space-y-3.5 max-w-3xl mx-auto">
-                        <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold tracking-tight text-slate-900 dark:text-white leading-tight">
-                            Transformons votre vision en un produit logiciel d&apos;exception
-                        </h2>
-                        <p className="text-slate-600 dark:text-slate-300 text-base sm:text-lg leading-relaxed">
-                            Échangez directement avec nos ingénieurs pour cadrer vos besoins, évaluer l&apos;architecture cible et obtenir une estimation budgétaire détaillée sous 24h.
-                        </p>
-                    </div>
-
-                    <div className="flex flex-col sm:flex-row justify-center items-center gap-4 pt-2">
-                        <Link href="/contact" className="w-full sm:w-auto">
-                            <Button variant="primary" size="lg" className="w-full sm:w-auto shadow-lg shadow-blue-600/25">
-                                <span>Demander un devis</span>
-                                <ArrowRight size={16} />
-                            </Button>
-                        </Link>
-                        <Link href="/projects" className="w-full sm:w-auto">
-                            <Button variant="outline" size="lg" className="w-full sm:w-auto">
-                                Voir nos réalisations
-                            </Button>
-                        </Link>
-                    </div>
-
-                    <div className="pt-6 border-t border-slate-200 dark:border-white/[0.06] flex flex-wrap justify-center gap-6 sm:gap-8 text-xs text-slate-500 dark:text-slate-400">
-                        <div className="flex items-center gap-2">
-                            <Clock size={14} className="text-blue-600 dark:text-blue-400" />
-                            <span>Réponse garantie sous 24 heures</span>
-                        </div>
-                        <div className="flex items-center gap-2">
-                            <ShieldCheck size={14} className="text-emerald-600 dark:text-emerald-400" />
-                            <span>Confidentialité & NDA sur demande</span>
-                        </div>
-                        <div className="flex items-center gap-2">
-                            <Sparkles size={14} className="text-indigo-600 dark:text-indigo-400" />
-                            <span>Audit d&apos;architecture offert</span>
+                {/* Video Area */}
+                <div className="lg:w-1/2 relative min-h-[400px] lg:min-h-full overflow-hidden order-first lg:order-last">
+                    <video
+                        autoPlay
+                        loop
+                        muted
+                        playsInline
+                        className="absolute inset-0 w-full h-full object-cover grayscale-[0.2] brightness-[0.8] dark:brightness-[0.6]"
+                    >
+                        <source src="/videos/startup.mp4" type="video/mp4" />
+                    </video>
+                    
+                    {/* Overlays to blend with the layout */}
+                    <div className="absolute inset-0 bg-gradient-to-r from-white via-transparent to-transparent dark:from-slate-950 hidden lg:block" />
+                    <div className="absolute inset-0 bg-gradient-to-b from-white via-transparent to-transparent dark:from-slate-950 lg:hidden" />
+                    
+                    {/* Visual accent */}
+                    <div className="absolute inset-0 bg-blue-600/10 mix-blend-overlay pointer-events-none" />
+                    
+                    <div className="absolute bottom-10 left-10 z-20 hidden md:block">
+                        <div className="flex items-center gap-3 px-4 py-2 rounded-2xl bg-white/10 backdrop-blur-md border border-white/20">
+                            <div className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse" />
+                            <span className="text-[10px] font-black text-white uppercase tracking-[0.2em]">ZELTRIX Startup Studio</span>
                         </div>
                     </div>
                 </div>
-            </Container>
+            </div>
         </section>
     )
 }

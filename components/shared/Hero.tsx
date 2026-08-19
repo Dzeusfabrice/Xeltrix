@@ -9,7 +9,7 @@ import { VideoBackground } from './VideoBackground'
 
 export const Hero = () => {
     return (
-        <section className="relative min-h-[75vh] flex items-center pt-24 pb-16 overflow-hidden bg-grid-pattern transition-colors duration-300">
+        <section className="relative min-h-[75vh] flex items-center pt-24 pb-16 overflow-hidden transition-colors duration-300">
             <VideoBackground
                 sources="/videos/hero.mp4"
                 overlayClassName="bg-gradient-to-b from-white/70 via-white/50 to-white/80 dark:from-slate-950/70 dark:via-slate-950/50 dark:to-slate-950/80"

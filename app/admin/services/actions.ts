@@ -45,7 +45,7 @@ async function parseServicePayload(formData: FormData) {
     const imageFile = formData.get('image_file') as File | null
 
     if (imageFile && imageFile.size > 0) {
-        const uploadedUrl = await uploadFile(imageFile, 'xeltrix', 'services')
+        const uploadedUrl = await uploadFile(imageFile, 'zeltrix', 'services')
         if (uploadedUrl) image_url = uploadedUrl
     }
 

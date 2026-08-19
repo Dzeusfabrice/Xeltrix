@@ -1,7 +1,6 @@
 import { Hero } from "@/components/shared/Hero";
 import { Stats } from "@/components/shared/Stats";
 import { ServicesOverview } from "@/components/shared/ServicesOverview";
-import { ProductsPreview } from "@/components/shared/ProductsPreview";
 import { FeaturedProjects } from "@/components/shared/FeaturedProjects";
 import { Features } from "@/components/shared/Features";
 import { Testimonials } from "@/components/shared/Testimonials";
@@ -13,7 +12,7 @@ export const revalidate = 3600; // Revalidate every hour
 export default async function Home() {
   const supabase = await createClient();
 
-  // Fetch stats, featured projects and testimonials safely
+  // Fetch stats, featured projects, products and testimonials safely
   const [
     { data: projects },
     { count: projectsCount },
@@ -29,7 +28,7 @@ export default async function Home() {
     supabase.from('articles').select('*', { count: 'exact', head: true }),
     supabase.from('testimonials').select('*').order('created_at', { ascending: false }),
     supabase.from('services').select('*').eq('status', 'published').order('sort_order', { ascending: true }),
-    supabase.from('products').select('*').eq('status', 'published').order('sort_order', { ascending: true }),
+    supabase.from('products').select('*').eq('status', 'published').order('sort_order', { ascending: true }).limit(3),
   ]);
 
   const statsCounts = {
@@ -44,8 +43,7 @@ export default async function Home() {
       <Hero />
       <Stats counts={statsCounts} />
       <ServicesOverview services={services || []} />
-      <ProductsPreview products={products || []} />
-      <FeaturedProjects projects={projects || []} />
+      <FeaturedProjects products={products || []} />
       <Features />
       <Testimonials testimonials={testimonials || []} />
       <CTASection />
