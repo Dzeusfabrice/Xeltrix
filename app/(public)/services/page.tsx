@@ -101,7 +101,7 @@ export default async function ServicesPage() {
                             Les services seront bientôt disponibles. Revenez un peu plus tard.
                         </div>
                     ) : (
-                        services.map((service) => {
+                        services.map((service: Service) => {
                             const Icon = getServiceIcon(service.icon_name)
                             const features = service.features || []
                             const stack = service.stack || []
@@ -157,7 +157,7 @@ export default async function ServicesPage() {
                                                         Ce que comprend la prestation :
                                                     </h4>
                                                     <div className="grid grid-cols-1 sm:grid-cols-2 gap-2.5">
-                                                        {features.map((feat) => (
+                                                        {features.map((feat: string) => (
                                                             <div key={feat} className="flex items-start gap-2 text-xs sm:text-sm text-slate-700 dark:text-slate-300">
                                                                 <CheckCircle2 size={15} className="text-blue-600 dark:text-blue-400 shrink-0 mt-0.5" />
                                                                 <span>{feat}</span>
@@ -173,7 +173,7 @@ export default async function ServicesPage() {
                                                         Technologies privilégiées :
                                                     </span>
                                                     <div className="flex flex-wrap gap-1.5">
-                                                        {stack.map((s) => (
+                                                        {stack.map((s: string) => (
                                                             <span key={s} className="text-xs font-mono px-2.5 py-1 rounded bg-slate-100 dark:bg-slate-800 border border-slate-200 dark:border-white/10 text-slate-700 dark:text-slate-200">
                                                                 {s}
                                                             </span>
@@ -190,7 +190,7 @@ export default async function ServicesPage() {
                                                         Livrables types
                                                     </div>
                                                     <ul className="space-y-2 text-xs sm:text-sm text-slate-700 dark:text-slate-300">
-                                                        {deliverables.map((del) => (
+                                                        {deliverables.map((del: string) => (
                                                             <li key={del} className="flex items-center gap-2">
                                                                 <span className="w-1.5 h-1.5 rounded-full bg-blue-600 dark:bg-blue-400" />
                                                                 <span>{del}</span>
@@ -234,7 +234,7 @@ export default async function ServicesPage() {
                     />
 
                     <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-5 gap-5">
-                        {steps.map((step) => (
+                        {steps.map((step: { num: string, title: string, desc: string }) => (
                             <div
                                 key={step.num}
                                 className="p-6 rounded-2xl bg-white dark:bg-slate-950 border border-slate-200 dark:border-white/[0.08] space-y-2.5 relative shadow-sm dark:shadow-none hover:border-blue-500/30 transition-all"

@@ -110,7 +110,7 @@ export default function ProjectsClient({
                             >
                                 Toutes
                             </button>
-                            {technologies.map((tech) => {
+                            {technologies.map((tech: Technology) => {
                                 const isActive = activeTech === tech.name
                                 return (
                                     <button
@@ -143,7 +143,7 @@ export default function ProjectsClient({
                 <Container>
                     <div className="flex flex-col sm:flex-row justify-between items-center gap-4">
                         <div className="flex flex-wrap items-center gap-1.5 bg-slate-100 dark:bg-slate-900/80 p-1 rounded-xl border border-slate-200 dark:border-white/10 w-full sm:w-auto">
-                            {categories.map((cat) => (
+                            {categories.map((cat: string) => (
                                 <button
                                     key={cat}
                                     type="button"
@@ -179,7 +179,7 @@ export default function ProjectsClient({
                     <AnimatePresence mode="popLayout">
                         {filteredProjects.length > 0 ? (
                             <motion.div layout className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                                {filteredProjects.map((p) => (
+                                {filteredProjects.map((p: ProjectRow) => (
                                     <motion.div
                                         layout
                                         key={p.id}
@@ -226,7 +226,7 @@ export default function ProjectsClient({
                                                             Stack Technique
                                                         </div>
                                                         <div className="flex flex-wrap gap-1.5">
-                                                            {p.technologies!.map((t) => (
+                                                            {p.technologies!.map((t: string) => (
                                                                 <span
                                                                     key={t}
                                                                     className="px-2 py-0.5 bg-blue-50 dark:bg-blue-500/10 border border-blue-100 dark:border-blue-500/20 rounded text-[10px] font-bold text-blue-700 dark:text-blue-300"

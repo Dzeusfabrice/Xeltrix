@@ -68,7 +68,7 @@ export default async function ProductsPage() {
                             Les produits seront bientôt disponibles.
                         </div>
                     ) : (
-                        products.map((product) => {
+                        products.map((product: Product) => {
                             const Icon = getProductIcon(product.icon_name)
                             const modules = product.modules || []
                             const specs = product.specs || {}
@@ -137,7 +137,7 @@ export default async function ProductsPage() {
                                                         Fonctionnalités clés
                                                     </h4>
                                                     <div className="grid grid-cols-1 sm:grid-cols-2 gap-x-6 gap-y-2">
-                                                        {modules.map((mod) => (
+                                                        {modules.map((mod: string) => (
                                                             <div key={mod} className="flex items-start gap-2 text-xs text-slate-600 dark:text-slate-300 font-medium">
                                                                 <CheckCircle2 size={14} className="text-blue-600 dark:text-blue-400 shrink-0 mt-0.5" />
                                                                 <span>{mod}</span>
@@ -155,7 +155,7 @@ export default async function ProductsPage() {
                                             </div>
 
                                             <div className="grid grid-cols-2 gap-2">
-                                                {Object.entries(specs).slice(0, 4).map(([key, val]) => (
+                                                {Object.entries(specs).slice(0, 4).map(([key, val]: [string, string]) => (
                                                     <div key={key} className="p-2.5 rounded-xl bg-white dark:bg-white/[0.02] border border-slate-200 dark:border-white/5 space-y-0.5 shadow-sm">
                                                         <div className="text-slate-400 dark:text-slate-500 font-mono capitalize text-[9px]">
                                                             {key}
