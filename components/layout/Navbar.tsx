@@ -72,12 +72,12 @@ export const Navbar = () => {
                 </div>
 
                 {/* CTA Buttons & Theme Toggle */}
-                <div className="hidden sm:flex items-center gap-6">
+                <div className="hidden sm:flex items-center gap-8">
                     <ThemeToggle />
 
                     <Link
                         href="/contact"
-                        className="bg-slate-900 dark:bg-white text-white dark:text-slate-950 text-[10px] font-black uppercase tracking-[0.2em] px-6 py-3 rounded-full hover:bg-blue-600 dark:hover:bg-blue-400 dark:hover:text-white transition-all duration-300 shadow-xl"
+                        className="text-blue-600 dark:text-blue-400 text-[13px] font-black uppercase tracking-[0.2em] hover:opacity-80 transition-all duration-300"
                     >
                         Demander un devis
                     </Link>
@@ -126,7 +126,7 @@ export const Navbar = () => {
                     <div className="pt-8 mt-4 border-t border-slate-200 dark:border-white/10">
                         <Link
                             href="/contact"
-                            className="w-full bg-slate-900 dark:bg-white text-white dark:text-slate-950 py-4 rounded-2xl text-xs font-black uppercase tracking-[0.2em] flex items-center justify-center shadow-xl"
+                            className="text-blue-600 dark:text-blue-400 text-sm font-black uppercase tracking-[0.2em] flex items-center justify-center py-2 hover:opacity-80 transition-all"
                             onClick={() => setIsOpen(false)}
                         >
                             Demander un devis
