@@ -6,7 +6,7 @@ import { createClient } from './supabase/server'
  * @param bucket The bucket name (default: 'zeltrix')
  * @param folder Optional folder path inside the bucket
  */
-export async function uploadFile(file: File, bucket: string = 'zeltrix', folder?: string) {
+export async function uploadFile(file: File, bucket: string = 'xeltrix', folder?: string) {
     if (!file || file.size === 0) return null
 
     const supabase = await createClient()
@@ -16,11 +16,15 @@ export async function uploadFile(file: File, bucket: string = 'zeltrix', folder?
     const fileName = `${Math.random().toString(36).substring(2, 10)}-${Date.now()}.${fileExt}`
     const path = folder ? `${folder}/${fileName}` : fileName
 
+    // Convert File to ArrayBuffer to avoid "fetch failed" issues with some Node.js versions
+    const arrayBuffer = await file.arrayBuffer()
+
     const { error: uploadError } = await supabase.storage
         .from(bucket)
-        .upload(path, file, {
+        .upload(path, arrayBuffer, {
             cacheControl: '3600',
-            upsert: false
+            upsert: false,
+            contentType: file.type // Explicitly set content type
         })
 
     if (uploadError) {

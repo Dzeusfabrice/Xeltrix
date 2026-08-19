@@ -111,6 +111,18 @@ export default async function ProductsPage() {
                                         </Link>
                                     </div>
 
+                                    {product.image_url && (
+                                        <div className="relative w-full aspect-[21/9] rounded-2xl overflow-hidden border border-slate-100 dark:border-white/10 shadow-sm">
+                                            {/* eslint-disable-next-line @next/next/no-img-element */}
+                                            <img 
+                                                src={product.image_url} 
+                                                alt={product.name} 
+                                                className="w-full h-full object-cover grayscale-[0.2] hover:grayscale-0 transition-all duration-700" 
+                                            />
+                                            <div className="absolute inset-0 bg-gradient-to-t from-slate-900/20 to-transparent" />
+                                        </div>
+                                    )}
+
                                     <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 lg:gap-8 items-start">
                                         <div className="lg:col-span-7 space-y-4">
                                             {product.description && (

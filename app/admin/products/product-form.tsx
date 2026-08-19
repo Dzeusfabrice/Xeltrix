@@ -2,7 +2,7 @@
 
 import { useState, useTransition } from 'react'
 import Link from 'next/link'
-import { AlertCircle, ArrowLeft, Save } from 'lucide-react'
+import { AlertCircle, ArrowLeft, Save, Image as ImageIcon } from 'lucide-react'
 import { Button, Container } from '@/components/ui'
 import { PRODUCT_ICON_OPTIONS } from '@/lib/product-icons'
 import type { Product } from '@/types/database'
@@ -209,6 +209,50 @@ export function ProductForm({ mode, product }: ProductFormProps) {
                             />
                         </div>
 
+                        <div className="md:col-span-2 space-y-6 pt-6 border-t border-slate-200 dark:border-white/10">
+                            <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
+                                <div className="space-y-2">
+                                    <label htmlFor="image_file" className="text-sm font-bold text-slate-700 dark:text-slate-300 flex items-center gap-2">
+                                        <ImageIcon size={16} className="text-blue-600 dark:text-blue-400" />
+                                        Image de couverture (Upload)
+                                    </label>
+                                    <input
+                                        type="file"
+                                        id="image_file"
+                                        name="image_file"
+                                        accept="image/*"
+                                        className="w-full bg-slate-50 dark:bg-slate-950 border border-slate-200 dark:border-white/10 rounded-xl py-2 px-3 text-sm text-slate-900 dark:text-white file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-xs file:font-bold file:bg-blue-600 file:text-white hover:file:bg-blue-700 transition-all cursor-pointer"
+                                    />
+                                    <p className="text-[10px] text-slate-500 dark:text-slate-400">Recommandé : 1200x800px</p>
+                                </div>
+
+                                <div className="space-y-2">
+                                    <label htmlFor="image_url" className="text-sm font-bold text-slate-700 dark:text-slate-300 flex items-center gap-2">
+                                        <ImageIcon size={16} className="text-blue-600 dark:text-blue-400" />
+                                        Ou URL de l&apos;image
+                                    </label>
+                                    <input
+                                        type="url"
+                                        id="image_url"
+                                        name="image_url"
+                                        defaultValue={product?.image_url || ''}
+                                        placeholder="https://images.unsplash.com/..."
+                                        className="w-full rounded-xl border border-slate-200 dark:border-white/10 bg-slate-50 dark:bg-slate-950 px-4 py-3 text-sm text-slate-900 dark:text-white focus:outline-none focus:border-blue-500"
+                                    />
+                                </div>
+                            </div>
+
+                            {product?.image_url && (
+                                <div className="mt-4">
+                                    <p className="text-xs font-bold text-slate-500 uppercase tracking-widest mb-2">Aperçu actuel :</p>
+                                    <div className="relative aspect-video w-48 rounded-xl overflow-hidden border border-slate-200 dark:border-white/10">
+                                        {/* eslint-disable-next-line @next/next/no-img-element */}
+                                        <img src={product.image_url} alt="" className="object-cover w-full h-full" />
+                                    </div>
+                                </div>
+                            )}
+                        </div>
+
                         <div className="grid grid-cols-2 gap-4 md:col-span-2">
                             <div className="space-y-2">
                                 <label htmlFor="status" className="text-sm font-semibold text-slate-700 dark:text-slate-300">
@@ -240,25 +284,40 @@ export function ProductForm({ mode, product }: ProductFormProps) {
 
                         <div className="space-y-2">
                             <label htmlFor="modules" className="text-sm font-semibold text-slate-700 dark:text-slate-300">
-                                Modules (1 par ligne)
+                                Modules fonctionnels (1 par ligne)
                             </label>
                             <textarea
                                 id="modules"
                                 name="modules"
                                 rows={6}
                                 defaultValue={linesFromArray(product?.modules)}
+                                placeholder="Authentification MFA&#10;Cloud Sync&#10;API REST"
                                 className="w-full rounded-xl border border-slate-200 dark:border-white/10 bg-slate-50 dark:bg-slate-950 px-4 py-3 text-sm font-mono text-slate-900 dark:text-white focus:outline-none focus:border-blue-500 resize-y"
                             />
                         </div>
 
                         <div className="space-y-2">
+                            <label htmlFor="technologies" className="text-sm font-semibold text-slate-700 dark:text-slate-300">
+                                Stack Technique (1 par ligne)
+                            </label>
+                            <textarea
+                                id="technologies"
+                                name="technologies"
+                                rows={6}
+                                defaultValue={linesFromArray(product?.technologies)}
+                                placeholder="Next.js&#10;PostgreSQL&#10;TailwindCSS"
+                                className="w-full rounded-xl border border-slate-200 dark:border-white/10 bg-slate-50 dark:bg-slate-950 px-4 py-3 text-sm font-mono text-slate-900 dark:text-white focus:outline-none focus:border-blue-500 resize-y"
+                            />
+                        </div>
+
+                        <div className="space-y-2 md:col-span-2">
                             <label htmlFor="specs" className="text-sm font-semibold text-slate-700 dark:text-slate-300">
-                                Specs (clé: valeur, 1 par ligne)
+                                Spécifications techniques (clé: valeur, 1 par ligne)
                             </label>
                             <textarea
                                 id="specs"
                                 name="specs"
-                                rows={6}
+                                rows={4}
                                 defaultValue={specsToLines(product?.specs)}
                                 placeholder={'deployment: Cloud SaaS\nsecurity: AES-256'}
                                 className="w-full rounded-xl border border-slate-200 dark:border-white/10 bg-slate-50 dark:bg-slate-950 px-4 py-3 text-sm font-mono text-slate-900 dark:text-white focus:outline-none focus:border-blue-500 resize-y"

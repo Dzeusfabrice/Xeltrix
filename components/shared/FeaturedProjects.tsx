@@ -9,38 +9,9 @@ import { motion } from 'framer-motion'
 import { getProductIcon } from '@/lib/product-icons'
 
 export const FeaturedProjects = ({ products }: { products: any[] }) => {
-    const displayProducts = products && products.length > 0 ? products : [
-        {
-            id: 'demo-1',
-            slug: 'zeltrix-erp',
-            name: 'Zeltrix ERP Enterprise',
-            category: 'ERP',
-            rating: 5.0,
-            description: 'Solution complète de gestion d\'entreprise : finance, stocks et RH automatisés.',
-            image_url: '/assets/im1.jpg',
-            tagline: 'L\'épine dorsale de votre business'
-        },
-        {
-            id: 'demo-2',
-            slug: 'zeltrix-crm',
-            name: 'Zeltrix CRM Pro',
-            category: 'CRM',
-            rating: 4.9,
-            description: 'Optimisez votre relation client et boostez vos ventes avec l\'intelligence artificielle.',
-            image_url: '/assets/im2.jpg',
-            tagline: 'Vendez plus, plus intelligemment'
-        },
-        {
-            id: 'demo-3',
-            slug: 'zeltrix-chat',
-            name: 'Zeltrix Chat SDK',
-            category: 'SDK',
-            rating: 4.8,
-            description: 'Intégrez une messagerie temps réel sécurisée dans n\'importe quelle application.',
-            image_url: '/assets/im3.jpg',
-            tagline: 'La communication sans limites'
-        }
-    ]
+    const displayProducts = products || []
+
+    if (displayProducts.length === 0) return null;
 
     return (
         <section className="relative py-16 bg-white dark:bg-slate-950 border-t border-slate-200 dark:border-white/[0.08] transition-colors duration-300">

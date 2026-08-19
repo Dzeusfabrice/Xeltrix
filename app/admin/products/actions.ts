@@ -3,6 +3,7 @@
 import { createClient } from '@/lib/supabase/server'
 import { revalidatePath } from 'next/cache'
 import { redirect } from 'next/navigation'
+import { uploadFile } from '@/lib/storage'
 
 function parseLines(value: FormDataEntryValue | null): string[] {
     return String(value ?? '')
@@ -45,6 +46,7 @@ function parseProductPayload(formData: FormData) {
     const highlight_label = (formData.get('highlight_label') as string)?.trim() || null
     const status = (formData.get('status') as string) === 'draft' ? 'draft' : 'published'
     const sort_order = Number.parseInt(String(formData.get('sort_order') || '0'), 10) || 0
+    const image_url = (formData.get('image_url') as string)?.trim() || null
 
     if (!name) {
         throw new Error('Le nom du produit est obligatoire')
@@ -62,7 +64,9 @@ function parseProductPayload(formData: FormData) {
         tagline,
         description,
         icon_name,
+        image_url,
         modules: parseLines(formData.get('modules')),
+        technologies: parseLines(formData.get('technologies')),
         specs: parseSpecs(formData.get('specs')),
         target,
         highlight_metric,
@@ -82,6 +86,12 @@ export async function createProduct(formData: FormData) {
     const supabase = await createClient()
     const payload = parseProductPayload(formData)
 
+    // Handle file upload
+    const imageFile = formData.get('image_file') as File
+    if (imageFile && imageFile.size > 0) {
+        payload.image_url = await uploadFile(imageFile, 'xeltrix', 'products')
+    }
+
     const { error } = await supabase.from('products').insert(payload)
 
     if (error) {
@@ -99,6 +109,12 @@ export async function createProduct(formData: FormData) {
 export async function updateProduct(id: string, formData: FormData) {
     const supabase = await createClient()
     const payload = parseProductPayload(formData)
+
+    // Handle file upload
+    const imageFile = formData.get('image_file') as File
+    if (imageFile && imageFile.size > 0) {
+        payload.image_url = await uploadFile(imageFile, 'xeltrix', 'products')
+    }
 
     const { error } = await supabase
         .from('products')

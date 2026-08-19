@@ -21,9 +21,11 @@ export default async function ProjectDetailPage({ params }: { params: Promise<{ 
     }
 
     const rating = 4.9; 
-    const screenshots = project.slug === 'fintech-saas-platform' 
-        ? ['/assets/im2.jpg', '/assets/im3.jpg', '/assets/im4.jpg', '/assets/im5.jpg', '/assets/im6.jpg', '/assets/im7.jpg']
-        : ['/assets/im2.jpg', '/assets/im3.jpg', '/assets/im4.jpg'];
+    const screenshots = project.gallery && project.gallery.length > 0 
+        ? project.gallery 
+        : project.slug === 'fintech-saas-platform' 
+            ? ['/assets/im2.jpg', '/assets/im3.jpg', '/assets/im4.jpg', '/assets/im5.jpg', '/assets/im6.jpg', '/assets/im7.jpg']
+            : ['/assets/im2.jpg', '/assets/im3.jpg', '/assets/im4.jpg'];
 
     return (
         <div className="min-h-screen bg-white dark:bg-[#050811] pb-24 transition-colors duration-300">

@@ -3,11 +3,11 @@
 import React, { useState } from 'react'
 import { Container, Button, Badge } from '@/components/ui'
 import { motion, AnimatePresence } from 'framer-motion'
-import { Search, Smartphone, Globe, Monitor, ArrowUpRight, Cpu } from 'lucide-react'
+import { Search, Smartphone, Globe, Monitor, ArrowUpRight, Cpu, Package } from 'lucide-react'
 import Link from 'next/link'
 import type { Technology } from '@/types/database'
 
-const categories = ['Tous', 'Web', 'Mobile', 'Desktop', 'API']
+const categories = ['Tous', 'Produit', 'Web', 'Mobile', 'Desktop', 'API']
 
 type ProjectRow = {
     id: string
@@ -15,8 +15,9 @@ type ProjectRow = {
     title: string
     category?: string
     description?: string
-    image_url?: string
+    image_url?: string | null
     technologies?: string[] | null
+    is_product?: boolean
 }
 
 export default function ProjectsClient({
@@ -33,7 +34,7 @@ export default function ProjectsClient({
     const projectsList = initialProjects || []
 
     const filteredProjects = projectsList.filter((p) => {
-        const matchesCategory = activeCategory === 'Tous' || p.category === activeCategory
+        const matchesCategory = activeCategory === 'Tous' || p.category === activeCategory || (activeCategory === 'Produit' && p.is_product)
         const matchesTech =
             !activeTech ||
             (p.technologies || []).some((t) => t.toLowerCase() === activeTech.toLowerCase())
@@ -48,6 +49,7 @@ export default function ProjectsClient({
 
     return (
         <div className="min-h-screen bg-background text-foreground pb-24 transition-colors duration-300">
+            {/* Header Hero */}
             <section className="relative py-16 md:py-24 overflow-hidden border-b border-slate-200 dark:border-white/[0.08]">
                 {/* Stealthy Background Image */}
                 <div className="absolute inset-0 z-0 overflow-hidden">
@@ -63,13 +65,14 @@ export default function ProjectsClient({
 
                 <Container className="relative z-10 text-center space-y-5 max-w-4xl">
                     <Badge variant="primary" className="text-xs uppercase tracking-wider font-semibold">
-                        Portfolio Technique
+                        Écosystème Technologique
                     </Badge>
                     <h1 className="text-3xl sm:text-5xl md:text-6xl font-bold tracking-tight text-slate-900 dark:text-white leading-[1.1]">
-                        Nos réalisations et <span className="text-gradient-primary">projets déployés</span>
+                        L&apos;art de l&apos;ingénierie, du <span className="text-gradient-primary">sur-mesure</span> au <span className="text-gradient-primary">SaaS</span>.
                     </h1>
-                    <p className="text-slate-600 dark:text-slate-300 text-base sm:text-lg md:text-xl leading-relaxed max-w-2xl mx-auto">
-                        Explorez nos applications web, mobiles, logiciels desktop et intégrations logicielles sur mesure conçus pour des clients ambitieux.
+                    <p className="text-slate-600 dark:text-slate-300 text-base sm:text-lg md:text-xl leading-relaxed max-w-3xl mx-auto font-medium">
+                        Découvrez notre double expertise : des projets stratégiques déployés pour nos partenaires et nos propres solutions logicielles prêtes à l&apos;emploi. 
+                        <strong> Du service d&apos;exception au produit d&apos;impact.</strong>
                     </p>
                 </Container>
             </section>
@@ -135,6 +138,7 @@ export default function ProjectsClient({
                 </section>
             )}
 
+            {/* Filters Bar */}
             <section className="sticky top-16 z-30 py-4 bg-white/85 dark:bg-slate-950/80 backdrop-blur-xl border-b border-slate-200 dark:border-white/[0.08] shadow-sm">
                 <Container>
                     <div className="flex flex-col sm:flex-row justify-between items-center gap-4">
@@ -169,6 +173,7 @@ export default function ProjectsClient({
                 </Container>
             </section>
 
+            {/* Projects/Products Grid */}
             <section className="py-14">
                 <Container>
                     <AnimatePresence mode="popLayout">
@@ -188,19 +193,23 @@ export default function ProjectsClient({
                                             <div className="relative aspect-[16/10] overflow-hidden bg-slate-100 dark:bg-slate-900">
                                                 {/* eslint-disable-next-line @next/next/no-img-element */}
                                                 <img
-                                                    src={p.image_url || 'https://images.unsplash.com/photo-1522252234503-e356532cafd5?q=80&w=800&auto=format&fit=crop'}
+                                                    src={p.image_url || (p.is_product ? '/assets/im1.jpg' : 'https://images.unsplash.com/photo-1522252234503-e356532cafd5?q=80&w=800&auto=format&fit=crop')}
                                                     alt={p.title}
                                                     className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500 ease-out"
                                                 />
                                                 <div className="absolute top-4 left-4 px-3 py-1 bg-white/90 dark:bg-slate-950/80 backdrop-blur-md rounded-full text-[11px] font-semibold text-blue-600 dark:text-blue-400 border border-slate-200 dark:border-white/10 flex items-center gap-1.5 shadow-sm">
-                                                    {p.category === 'Mobile' && <Smartphone size={12} />}
-                                                    {p.category === 'Web' && <Globe size={12} />}
-                                                    {p.category === 'Desktop' && <Monitor size={12} />}
+                                                    {p.is_product ? <Package size={12} /> : (
+                                                        <>
+                                                            {p.category === 'Mobile' && <Smartphone size={12} />}
+                                                            {p.category === 'Web' && <Globe size={12} />}
+                                                            {p.category === 'Desktop' && <Monitor size={12} />}
+                                                        </>
+                                                    )}
                                                     <span>{p.category}</span>
                                                 </div>
                                             </div>
 
-                                            <div className="p-6 space-y-3.5">
+                                            <div className="p-6 space-y-4">
                                                 <div className="space-y-1.5">
                                                     <h3 className="text-xl font-bold text-slate-900 dark:text-white group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors">
                                                         {p.title}
@@ -211,15 +220,21 @@ export default function ProjectsClient({
                                                 </div>
 
                                                 {(p.technologies || []).length > 0 && (
-                                                    <div className="flex flex-wrap gap-1.5 pt-1">
-                                                        {p.technologies!.map((t) => (
-                                                            <span
-                                                                key={t}
-                                                                className="px-2.5 py-0.5 bg-slate-100 dark:bg-slate-800 border border-slate-200 dark:border-white/10 rounded text-[11px] font-mono text-slate-700 dark:text-slate-300"
-                                                            >
-                                                                {t}
-                                                            </span>
-                                                        ))}
+                                                    <div className="pt-3 border-t border-slate-100 dark:border-white/5">
+                                                        <div className="text-[9px] font-black uppercase tracking-widest text-slate-400 dark:text-slate-500 mb-2 flex items-center gap-1.5">
+                                                            <Cpu size={10} className="text-blue-500" />
+                                                            Stack Technique
+                                                        </div>
+                                                        <div className="flex flex-wrap gap-1.5">
+                                                            {p.technologies!.map((t) => (
+                                                                <span
+                                                                    key={t}
+                                                                    className="px-2 py-0.5 bg-blue-50 dark:bg-blue-500/10 border border-blue-100 dark:border-blue-500/20 rounded text-[10px] font-bold text-blue-700 dark:text-blue-300"
+                                                                >
+                                                                    {t}
+                                                                </span>
+                                                            ))}
+                                                        </div>
                                                     </div>
                                                 )}
                                             </div>
@@ -227,10 +242,10 @@ export default function ProjectsClient({
 
                                         <div className="p-6 pt-0 border-t border-slate-100 dark:border-white/5 mt-4 flex items-center justify-between">
                                             <Link
-                                                href={`/projects/${p.slug}`}
+                                                href={p.is_product ? `/products#${p.slug}` : `/projects/${p.slug}`}
                                                 className="text-xs font-semibold text-slate-900 dark:text-white group-hover:text-blue-600 dark:group-hover:text-blue-400 inline-flex items-center gap-1.5 transition-colors"
                                             >
-                                                Détails du projet <ArrowUpRight size={14} />
+                                                {p.is_product ? 'Voir le produit' : 'Détails du projet'} <ArrowUpRight size={14} />
                                             </Link>
                                         </div>
                                     </motion.div>
