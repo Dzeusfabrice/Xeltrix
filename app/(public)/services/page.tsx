@@ -69,9 +69,7 @@ export default async function ServicesPage() {
                 <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[700px] h-[300px] bg-blue-500/10 rounded-full blur-[130px] pointer-events-none" />
 
                 <Container className="relative z-10 text-center space-y-5 max-w-4xl">
-                    <Badge variant="primary" className="text-xs uppercase tracking-wider font-semibold">
-                        Ingénierie & Services
-                    </Badge>
+                   
                     <h1 className="text-3xl sm:text-5xl md:text-6xl font-bold tracking-tight text-slate-900 dark:text-white leading-[1.1]">
                         Des expertises pointues pour chaque étape de votre <span className="text-gradient-primary">croissance technologique</span>
                     </h1>

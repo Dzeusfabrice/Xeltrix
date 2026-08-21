@@ -52,18 +52,7 @@ export const CTASection = () => {
                             transition={{ duration: 0.6, delay: 0.4 }}
                             className="grid grid-cols-1 sm:grid-cols-2 gap-y-4 gap-x-8 pt-8 border-t border-slate-100 dark:border-white/5"
                         >
-                            <div className="flex items-center gap-3">
-                                <div className="w-8 h-8 rounded-lg bg-blue-50 dark:bg-blue-500/10 flex items-center justify-center text-blue-600 dark:text-blue-400">
-                                    <Clock size={16} />
-                                </div>
-                                <span className="text-xs font-bold text-slate-500 dark:text-slate-400 uppercase tracking-widest">Réponse &lt; 24h</span>
-                            </div>
-                            <div className="flex items-center gap-3">
-                                <div className="w-8 h-8 rounded-lg bg-emerald-50 dark:bg-emerald-500/10 flex items-center justify-center text-emerald-600 dark:text-emerald-400">
-                                    <ShieldCheck size={16} />
-                                </div>
-                                <span className="text-xs font-bold text-slate-500 dark:text-slate-400 uppercase tracking-widest">NDA & Confidentialité</span>
-                            </div>
+                           
                         </motion.div>
                     </div>
                 </div>
@@ -87,12 +76,7 @@ export const CTASection = () => {
                     {/* Visual accent */}
                     <div className="absolute inset-0 bg-blue-600/10 mix-blend-overlay pointer-events-none" />
                     
-                    <div className="absolute bottom-10 left-10 z-20 hidden md:block">
-                        <div className="flex items-center gap-3 px-4 py-2 rounded-2xl bg-white/10 backdrop-blur-md border border-white/20">
-                            <div className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse" />
-                            <span className="text-[10px] font-black text-white uppercase tracking-[0.2em]">ZELTRIX Startup Studio</span>
-                        </div>
-                    </div>
+                  
                 </div>
             </div>
         </section>

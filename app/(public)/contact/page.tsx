@@ -71,9 +71,7 @@ export default function ContactPage() {
                 <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[700px] h-[250px] bg-blue-500/10 rounded-full blur-[130px] pointer-events-none" />
 
                 <Container className="relative z-10 text-center space-y-3.5 max-w-3xl">
-                    <Badge variant="primary" className="text-xs uppercase tracking-wider font-semibold">
-                        Échange Technique & Cadrage
-                    </Badge>
+                   
                     <h1 className="text-3xl sm:text-4xl md:text-5xl font-bold tracking-tight text-slate-900 dark:text-white leading-[1.15]">
                         Parlons de votre prochain <span className="text-gradient-primary">défi logiciel</span>
                     </h1>
